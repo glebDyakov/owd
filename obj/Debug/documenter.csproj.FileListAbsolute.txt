@@ -1,0 +1,15 @@
+C:\wpfprojects\documenter\bin\Debug\documenter.exe.config
+C:\wpfprojects\documenter\bin\Debug\documenter.exe
+C:\wpfprojects\documenter\bin\Debug\documenter.pdb
+C:\wpfprojects\documenter\obj\Debug\documenter.csprojAssemblyReference.cache
+C:\wpfprojects\documenter\obj\Debug\MainWindow.g.cs
+C:\wpfprojects\documenter\obj\Debug\App.g.cs
+C:\wpfprojects\documenter\obj\Debug\documenter_MarkupCompile.cache
+C:\wpfprojects\documenter\obj\Debug\documenter_MarkupCompile.lref
+C:\wpfprojects\documenter\obj\Debug\MainWindow.baml
+C:\wpfprojects\documenter\obj\Debug\documenter.g.resources
+C:\wpfprojects\documenter\obj\Debug\documenter.Properties.Resources.resources
+C:\wpfprojects\documenter\obj\Debug\documenter.csproj.GenerateResource.cache
+C:\wpfprojects\documenter\obj\Debug\documenter.csproj.CoreCompileInputs.cache
+C:\wpfprojects\documenter\obj\Debug\documenter.exe
+C:\wpfprojects\documenter\obj\Debug\documenter.pdb
