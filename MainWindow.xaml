@@ -34,15 +34,15 @@
                 <MenuItem Header="Малый регистр"></MenuItem>
                 <MenuItem Header="Регистр"></MenuItem>
                 <MenuItem Header="Очистить форматирование"></MenuItem>
-                <MenuItem Header="Жирный текст"></MenuItem>
-                <MenuItem Header="Курсивный текст"></MenuItem>
-                <MenuItem Header="Подчёркнутый текст"></MenuItem>
-                <MenuItem Header="Зачёркнутый текст"></MenuItem>
+                <MenuItem Click="fontWeightBolderHandler" Header="Жирный текст"></MenuItem>
+                <MenuItem Click="fontStyleItalicHandler" Header="Курсивный текст"></MenuItem>
+                <MenuItem Click="textDecorationUnderlineHandler" Header="Подчёркнутый текст"></MenuItem>
+                <MenuItem Click="textDecorationStrikethroughHandler" Header="Зачёркнутый текст"></MenuItem>
                 <MenuItem Header="Подстрочный текст"></MenuItem>
                 <MenuItem Header="Надстрочный текст"></MenuItem>
                 <MenuItem Header="Тень текста"></MenuItem>
-                <MenuItem Header="Фон текста"></MenuItem>
-                <MenuItem Header="Цвет текста"></MenuItem>
+                <MenuItem Click="textDecorationBackgroundHandler" Header="Фон текста"></MenuItem>
+                <MenuItem Click="textDecorationForegroundHandler" Header="Цвет текста"></MenuItem>
             </MenuItem>
             <MenuItem Header="Вставка">
                 <MenuItem Header="Страницы"></MenuItem>
@@ -199,7 +199,7 @@
         </Menu>
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
             <Canvas Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
-                <TextBox BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40"></TextBox>
+                <TextBox x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40"></TextBox>
             </Canvas>
         </Canvas>
     </Grid>
