@@ -24,23 +24,28 @@
                 </Menu>
             </MenuItem>
             <MenuItem Header="Главная">
-                <MenuItem Header="Вставить"></MenuItem>
-                <MenuItem Header="Вырезать"></MenuItem>
-                <MenuItem Header="Копировать"></MenuItem>
+                <MenuItem Command="ApplicationCommands.Paste" Header="Вставить"></MenuItem>
+                <MenuItem Command="ApplicationCommands.Cut" Header="Вырезать"></MenuItem>
+                <MenuItem Command="ApplicationCommands.Copy" Header="Копировать"></MenuItem>
                 <MenuItem Header="Формат по образцу"></MenuItem>
-                <MenuItem Header="Шрифт"></MenuItem>
-                <MenuItem Header="Размер шрифта"></MenuItem>
-                <MenuItem Header="Верхний регистр"></MenuItem>
-                <MenuItem Header="Малый регистр"></MenuItem>
+                <MenuItem Header="Шрифт">
+                    <MenuItem Click="fontFamilyChangeToTimesNewRoman" Header="Times New Roman"></MenuItem>
+                    <MenuItem Click="fontFamilyChangeToArial" Header="Arial"></MenuItem>
+                    <MenuItem Click="fontFamilyChangeToCalibri" Header="Calibri"></MenuItem>
+                    <MenuItem Click="fontFamilyChangeToVerdana" Header="Verdana"></MenuItem>
+                </MenuItem>
+                <MenuItem Click="fontSizeHandler"  Header="Размер шрифта"></MenuItem>
+                <MenuItem Click="upperCaseHandler" Header="Верхний регистр"></MenuItem>
+                <MenuItem Click="lowerCaseHandler" Header="Малый регистр"></MenuItem>
                 <MenuItem Header="Регистр"></MenuItem>
-                <MenuItem Header="Очистить форматирование"></MenuItem>
+                <MenuItem Click="clearStylesHandler" Header="Очистить форматирование"></MenuItem>
                 <MenuItem Click="fontWeightBolderHandler" Header="Жирный текст"></MenuItem>
                 <MenuItem Click="fontStyleItalicHandler" Header="Курсивный текст"></MenuItem>
                 <MenuItem Click="textDecorationUnderlineHandler" Header="Подчёркнутый текст"></MenuItem>
                 <MenuItem Click="textDecorationStrikethroughHandler" Header="Зачёркнутый текст"></MenuItem>
-                <MenuItem Header="Подстрочный текст"></MenuItem>
-                <MenuItem Header="Надстрочный текст"></MenuItem>
-                <MenuItem Header="Тень текста"></MenuItem>
+                <MenuItem Click="textSubscriptHandler" Header="Подстрочный текст"></MenuItem>
+                <MenuItem Click="textSuperscriptHandler" Header="Надстрочный текст"></MenuItem>
+                <MenuItem Click="textShadowHandler" Header="Тень текста"></MenuItem>
                 <MenuItem Click="textDecorationBackgroundHandler" Header="Фон текста"></MenuItem>
                 <MenuItem Click="textDecorationForegroundHandler" Header="Цвет текста"></MenuItem>
             </MenuItem>
@@ -199,7 +204,9 @@
         </Menu>
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
             <Canvas Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
-                <TextBox x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40"></TextBox>
+                <TextBox x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40">
+                    
+                </TextBox>
             </Canvas>
         </Canvas>
     </Grid>
