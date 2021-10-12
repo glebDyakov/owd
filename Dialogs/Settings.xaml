@@ -1,0 +1,117 @@
+﻿<Window x:Class="documenter.Dialogs.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:documenter.Dialogs"
+        mc:Ignorable="d"
+        Title="Параметры" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="Общие"></TextBlock>
+            <TextBlock Text="Отображение"></TextBlock>
+            <TextBlock Text="Правописание"></TextBlock>
+            <TextBlock Text="Сохранение"></TextBlock>
+            <TextBlock Text="Язык"></TextBlock>
+            <TextBlock Text="Специальные возможности"></TextBlock>
+            <TextBlock Text="Дополнительно"></TextBlock>
+            <TextBlock Text="Натсроить ленту"></TextBlock>
+            <TextBlock Text="Панель быстрого доступа"></TextBlock>
+            <TextBlock Text="Надстройки"></TextBlock>
+            <TextBlock Text="Центр управления безопасностью"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <TextBlock Text="Основные параметры для работы с Office ware documents"></TextBlock>
+            <TextBlock Text="Параметры Пользовательского интерфейса"></TextBlock>
+            <TextBlock Text="При использовании нескольких дисплеев:"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton IsChecked="True"></RadioButton>
+                <TextBlock Text="Обеспечить наилучший вид"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton IsChecked="True"></RadioButton>
+                <TextBlock Text="Обеспечить наилучшую совместимость (требуется перезапуск приложения)"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True"></CheckBox>
+                <TextBlock Text="Показывать мини панельинструментов при выдлении"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True"></CheckBox>
+                <TextBlock Text="Включить динамический просмотр"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True"></CheckBox>
+                <TextBlock Text="Обновлять содержимое документа во время перетаскивания"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="False"></CheckBox>
+                <TextBlock Text="Автоматически сворачивать ленту"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Автоматически сворачивать ленту"></TextBlock>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="Показывать расширенные всплывающие подсказки"></ComboBoxItem>
+                    <ComboBoxItem Content="Не показывать расширенные всплывающие подсказки"></ComboBoxItem>
+                    <ComboBoxItem Content="Не показывать всплывающие подсказки"></ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <TextBlock Text="Личная настройка Office ware"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Имя пользователя"></TextBlock>
+                <TextBox Text="Сергей"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Инициалы"></TextBlock>
+                <TextBox Text="С"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="False"></CheckBox>
+                <TextBlock Text="Всегда использовать эти значения независимо от состояния входа в Office ware documents"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Фон Office ware"></TextBlock>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="Разные цвета"></ComboBoxItem>
+                    <ComboBoxItem Content="Тёмно-серая"></ComboBoxItem>
+                    <ComboBoxItem Content="Чёрная"></ComboBoxItem>
+                    <ComboBoxItem Content="Белая"></ComboBoxItem>
+                    <ComboBoxItem Content="Использовать системные настройки"></ComboBoxItem>
+                    <ComboBoxItem Content="Разные цвета"></ComboBoxItem>
+                    <ComboBoxItem Content="Тёмно-серая"></ComboBoxItem>
+                    <ComboBoxItem Content="Чёрная"></ComboBoxItem>
+                    <ComboBoxItem Content="Белая"></ComboBoxItem>
+                    <ComboBoxItem Content="Использовать системные настройки"></ComboBoxItem>
+                    <ComboBoxItem Content="Разные цвета"></ComboBoxItem>
+                    <ComboBoxItem Content="Тёмно-серая"></ComboBoxItem>
+                    <ComboBoxItem Content="Чёрная"></ComboBoxItem>
+                    <ComboBoxItem Content="Белая"></ComboBoxItem>
+                    <ComboBoxItem Content="Использовать системные настройки"></ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Тема Office Ware"></TextBlock>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="Разные цвета"></ComboBoxItem>
+                    <ComboBoxItem Content="Тёмно-серая"></ComboBoxItem>
+                    <ComboBoxItem Content="Чёрная"></ComboBoxItem>
+                    <ComboBoxItem Content="Белая"></ComboBoxItem>
+                    <ComboBoxItem Content="Использовать системные настройки"></ComboBoxItem>
+                </ComboBox>
+                <CheckBox IsChecked="False"></CheckBox>
+                <TextBlock Text="Отключить тёмный режим"></TextBlock>
+            </StackPanel>
+            <TextBlock Text="Натсроить ленту"></TextBlock>
+            <TextBlock Text="Панель быстрого доступа"></TextBlock>
+            <TextBlock Text="Надстройки"></TextBlock>
+            <TextBlock Text="Центр управления безопасностью"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -19,9 +19,20 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.Column="0" Grid.Row="0">
             <MenuItem Header="Файл">
-                <Menu>
-                    <MenuItem Header="Вставить"></MenuItem>
-                </Menu>
+                <MenuItem Header="Главная"></MenuItem>
+                <MenuItem Click="createOWDHandler" Header="Создать"></MenuItem>
+                <MenuItem Click="openOWDHandler" Header="Открыть"></MenuItem>
+                <MenuItem Header="Сведения"></MenuItem>
+                <MenuItem Header="Сохранить"></MenuItem>
+                <MenuItem Header="Сохранить как"></MenuItem>
+                <MenuItem Header="Журнал"></MenuItem>
+                <MenuItem Header="Печать"></MenuItem>
+                <MenuItem Header="Общий доступ"></MenuItem>
+                <MenuItem Header="Экспорт"></MenuItem>
+                <MenuItem Header="Закрыть"></MenuItem>
+                <MenuItem Header="Учетная запись"></MenuItem>
+                <MenuItem Header="Отзывы и предложения"></MenuItem>
+                <MenuItem Header="Параметры"></MenuItem>
             </MenuItem>
             <MenuItem Header="Главная">
                 <MenuItem Command="ApplicationCommands.Paste" Header="Вставить"></MenuItem>
@@ -95,34 +106,63 @@
                 <MenuItem Header="Полотно"></MenuItem>
             </MenuItem>
             <MenuItem Header="Конструктор">
-                <MenuItem Header="Полотно"></MenuItem>
+                <MenuItem Header="Темы"></MenuItem>
+                <MenuItem Header="Цвета"></MenuItem>
+                <MenuItem Header="Шрифты"></MenuItem>
+                <MenuItem Header="интервал между абзацами"></MenuItem>
+                <MenuItem Header="Эффекты"></MenuItem>
+                <MenuItem Header="По умолчанию"></MenuItem>
+                <MenuItem Header="Подложка"></MenuItem>
+                <MenuItem Header="Цвет страниц"></MenuItem>
+                <MenuItem Header="Границы страниц"></MenuItem>
             </MenuItem>
             <MenuItem Header="Макет">
+                <MenuItem Header="Поля"></MenuItem>
+                <MenuItem Header="Ориентация"></MenuItem>
+                <MenuItem Header="Размер"></MenuItem>
+                <MenuItem Header="Колонки"></MenuItem>
+                <MenuItem Header="Разрывы"></MenuItem>
+                <MenuItem Header="Номера строк"></MenuItem>
+                <MenuItem Header="расстановка переносов"></MenuItem>
+                <MenuItem Header="Отступ слева"></MenuItem>
+                <MenuItem Header="Отступ справа"></MenuItem>
+                <MenuItem Header="Интервал до"></MenuItem>
+                <MenuItem Header="Интервал после"></MenuItem>
+                <MenuItem Header="Положение"></MenuItem>
+                <MenuItem Header="Обтекание текстом"></MenuItem>
+                <MenuItem Header="Переместить вперёд"></MenuItem>
+                <MenuItem Header="Переместить назад"></MenuItem>
+                <MenuItem Header="Область выделения"></MenuItem>
+                <MenuItem Header="Выровнять"></MenuItem>
+                <MenuItem Header="Группировать"></MenuItem>
+                <MenuItem Header="Повернуть"></MenuItem>
                 <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
-                <MenuItem Header="Полотно"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Ссылки">
+                <MenuItem Header="Оглавление"></MenuItem>
+                <MenuItem Header="Добавить текст"></MenuItem>
+                <MenuItem Header="Обновить таблицу"></MenuItem>
+                <MenuItem Header="Вставить сноску"></MenuItem>
+                <MenuItem Header="Вставить концевую сноску"></MenuItem>
+                <MenuItem Header="Следующая сноска"></MenuItem>
+                <MenuItem Header="Показать сноски"></MenuItem>
+                <MenuItem Header="Поиск"></MenuItem>
+                <MenuItem Header="Вставить ссылку"></MenuItem>
+                <MenuItem Header="Управление источниками"></MenuItem>
+                <MenuItem Header="Стиль"></MenuItem>
+                <MenuItem Header="Список литературы"></MenuItem>
+                <MenuItem Header="Вставить название"></MenuItem>
+                <MenuItem Header="Список иллюстраций"></MenuItem>
+                <MenuItem Header="Обновить таблицу"></MenuItem>
+                <MenuItem Header="Перекрёстная ссылка"></MenuItem>
+                <MenuItem Header="Пометить элемент"></MenuItem>
+                <MenuItem Header="Предметный указатель"></MenuItem>
+                <MenuItem Header="Обновить указатель"></MenuItem>
                 <MenuItem Header="Поместить ссылку"></MenuItem>
                 <MenuItem Header="Таблица ссылок"></MenuItem>
                 <MenuItem Header="Обновить таблицу ссылок"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Ссылки">
+            <MenuItem Header="Рассылки">
                 <MenuItem Header="Конверты"></MenuItem>
                 <MenuItem Header="Наклейки"></MenuItem>
                 <MenuItem Header="Начать слияние"></MenuItem>
@@ -144,9 +184,6 @@
                 <MenuItem Header="Найти получателя"></MenuItem>
                 <MenuItem Header="Поиск ошибок"></MenuItem>
                 <MenuItem Header="Найти и объединить"></MenuItem>
-            </MenuItem>
-            <MenuItem Header="Рассылки">
-                <MenuItem Header="Полотно"></MenuItem>
             </MenuItem>
             <MenuItem Header="Рецензирование">
                 <MenuItem Header="Правописание"></MenuItem>
@@ -212,6 +249,7 @@
         </Menu>
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
             <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
+                
                 <TextBox x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40">
                     
                 </TextBox>

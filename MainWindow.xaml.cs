@@ -1,6 +1,8 @@
 ﻿
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -177,6 +179,45 @@ namespace documenter
         {
             Dialogs.TableDialog tableDialog = new Dialogs.TableDialog();
             tableDialog.Show();
+        }
+
+        private void createOWDHandler(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "Новый документ";
+            sfd.DefaultExt = ".owd";
+            sfd.Filter = "Office ware documents (.owd)|*.owd";
+            bool? res = sfd.ShowDialog();
+            if (res != false)
+            {
+
+                using (Stream s = File.Open(sfd.FileName, FileMode.OpenOrCreate))
+                {
+                    using (StreamWriter sw = new StreamWriter(s))
+                    {
+                        sw.Write("office ware documents");
+                    }
+                }
+            }
+        }
+
+        private void openOWDHandler(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FileName = "Новый документ";
+            ofd.DefaultExt = ".owd";
+            ofd.Filter = "Office ware documents (.owd)|*.owd";
+            bool? res = ofd.ShowDialog();
+            if (res != false)
+            {
+                Stream myStream;
+                if ((myStream = ofd.OpenFile()) != null)
+                {
+                    string file_name = ofd.FileName;
+                    string file_text = File.ReadAllText(file_name);
+                    fontWeightBolder.Text = file_text;
+                }
+            }
         }
     }
 }
