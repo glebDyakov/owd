@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -132,6 +133,50 @@ namespace documenter
         private void fontFamilyChangeToVerdana(object sender, RoutedEventArgs e)
         {
             fontWeightBolder.FontFamily = new FontFamily("Verdana");
+        }
+
+        private void drawFigureLine(object sender, RoutedEventArgs e)
+        {
+            Line myLine = new Line();
+            myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+            myLine.X1 = 1;
+            myLine.X2 = 50;
+            myLine.Y1 = 1;
+            myLine.Y2 = 50;
+            myLine.HorizontalAlignment = HorizontalAlignment.Left;
+            myLine.VerticalAlignment = VerticalAlignment.Center;
+            myLine.StrokeThickness = 2;
+            page.Children.Add(myLine);
+        }
+
+        private void drawFigureCircle(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Shapes.Ellipse myCircle = new System.Windows.Shapes.Ellipse();
+            myCircle.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+            myCircle.Width = 25;
+            myCircle.Height = 50;
+            myCircle.HorizontalAlignment = HorizontalAlignment.Left;
+            myCircle.VerticalAlignment = VerticalAlignment.Center;
+            myCircle.StrokeThickness = 2;
+            page.Children.Add(myCircle);
+        }
+
+        private void drawFigureRect(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Shapes.Rectangle myRect = new System.Windows.Shapes.Rectangle();
+            myRect.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+            myRect.Width = 25;
+            myRect.Height = 50;
+            myRect.HorizontalAlignment = HorizontalAlignment.Left;
+            myRect.VerticalAlignment = VerticalAlignment.Center;
+            myRect.StrokeThickness = 2;
+            page.Children.Add(myRect);
+        }
+
+        private void insertTable(object sender, RoutedEventArgs e)
+        {
+            Dialogs.TableDialog tableDialog = new Dialogs.TableDialog();
+            tableDialog.Show();
         }
     }
 }

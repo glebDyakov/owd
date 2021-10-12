@@ -13,3 +13,5 @@ C:\wpfprojects\documenter\obj\Debug\documenter.csproj.GenerateResource.cache
 C:\wpfprojects\documenter\obj\Debug\documenter.csproj.CoreCompileInputs.cache
 C:\wpfprojects\documenter\obj\Debug\documenter.exe
 C:\wpfprojects\documenter\obj\Debug\documenter.pdb
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TableDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TableDialog.baml

@@ -51,8 +51,16 @@
             </MenuItem>
             <MenuItem Header="Вставка">
                 <MenuItem Header="Страницы"></MenuItem>
+                <MenuItem Click="insertTable" Header="Таблица"></MenuItem>
                 <MenuItem Header="Рисунки"></MenuItem>
-                <MenuItem Header="Фигуры"></MenuItem>
+                <MenuItem Header="Фигуры">
+                    <MenuItem Click="drawFigureLine" Header="Линия">
+                    </MenuItem>
+                    <MenuItem Click="drawFigureCircle" Header="Овал">
+                    </MenuItem>
+                    <MenuItem Click="drawFigureRect" Header="Прямоугольник">
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Header="Значки"></MenuItem>
                 <MenuItem Header="Трёхмерные модели"></MenuItem>
                 <MenuItem Header="Smart art"></MenuItem>
@@ -203,7 +211,7 @@
             </MenuItem>
         </Menu>
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
-            <Canvas Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
+            <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
                 <TextBox x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40">
                     
                 </TextBox>
