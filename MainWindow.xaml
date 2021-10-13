@@ -59,6 +59,37 @@
                 <MenuItem Click="textShadowHandler" Header="Тень текста"></MenuItem>
                 <MenuItem Click="textDecorationBackgroundHandler" Header="Фон текста"></MenuItem>
                 <MenuItem Click="textDecorationForegroundHandler" Header="Цвет текста"></MenuItem>
+                <MenuItem Click="markersHandler" Header="Макреры"></MenuItem>
+                <MenuItem Click="numberHandler" Header="Нумерация"></MenuItem>
+                <MenuItem Click="multiLevelListHandler" Header="Многоуровневый список"></MenuItem>
+                <MenuItem Click="decreaseIndentHandler" Header="Уменьшить отступ"></MenuItem>
+                <MenuItem Click="increaseIndentHandler" Header="Увеличить отступ"></MenuItem>
+                <MenuItem Click="sortHandler" Header="Сортировка"></MenuItem>
+                <MenuItem Click="showAllCharsHandler" Header="Отобразить все знаки"></MenuItem>
+                <MenuItem Click="alignLeftHandler" Header="Выровнять по левому краю"></MenuItem>
+                <MenuItem Click="alignCenterHandler" Header="Выровнять по центру"></MenuItem>
+                <MenuItem Click="alignRightHandler" Header="Выровнять по правому краю"></MenuItem>
+                <MenuItem Click="alignJustifyHandler" Header="Выровнять по ширине"></MenuItem>
+                <MenuItem Click="intervalHandler" Header="Интервал"></MenuItem>
+                <MenuItem Click="fillHandler" Header="Заливка"></MenuItem>
+                <MenuItem Header="Границы">
+                    <MenuItem Click="downBorderHandler" Header="Нижняя граница"></MenuItem>
+                    <MenuItem Click="upBorderHandler" Header="Верхняя граница"></MenuItem>
+                    <MenuItem Click="leftBorderHandler" Header="Левая граница"></MenuItem>
+                    <MenuItem Click="rightBorderHandler" Header="Правая граница"></MenuItem>
+                    <MenuItem Click="noneBordersHandler" Header="Нет границы"></MenuItem>
+                    <MenuItem Click="allBordersHandler" Header="Все границы"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Заготовки">
+                    <MenuItem Header="Обычный"></MenuItem>
+                    <MenuItem Header="Без интервала"></MenuItem>
+                    <MenuItem Header="Заголовок 1"></MenuItem>
+                    <MenuItem Header="Заголовок"></MenuItem>
+                    <MenuItem Header="Подзаголовок"></MenuItem>
+                </MenuItem>
+                <MenuItem Click="findHandler" Header="Найти"></MenuItem>
+                <MenuItem Click="replaceHandler" Header="Заменить"></MenuItem>
+                <MenuItem Click="selectHandler" Header="Выделить"></MenuItem>
             </MenuItem>
             <MenuItem Header="Вставка">
                 <MenuItem Header="Страницы"></MenuItem>
@@ -274,10 +305,8 @@
         </Menu>
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
             <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
-                
-                <TextBox x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" Text="" TextWrapping="Wrap" Width="450" MinLines="40">
-                    
-                </TextBox>
+
+                <TextBox TextChanged="inputHander" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
             </Canvas>
         </Canvas>
     </Grid>

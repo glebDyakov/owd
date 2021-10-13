@@ -26,6 +26,7 @@ namespace documenter
     {
 
         public Style dropShadowScrollViewerStyle = null;
+        public TextBox textBox = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -310,6 +311,187 @@ namespace documenter
             Dialogs.Settings settingsDialog = new Dialogs.Settings();
             settingsDialog.Show();
         }
-        
+
+        private void alignLeftHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Left;
+        }
+
+        private void alignCenterHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Center;
+        }
+        private void alignRightHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Right;
+        }
+        private void alignJustifyHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Stretch;
+        }
+
+        private void intervalHandler(object sender, RoutedEventArgs e)
+        {
+            TextBlock.SetLineHeight(fontWeightBolder, 25);
+        }
+
+        private void allBordersHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.BorderThickness = new Thickness(5.0);
+        }
+
+        private void noneBordersHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.BorderThickness = new Thickness(0);
+        }
+
+        private void upBorderHandler(object sender, RoutedEventArgs e)
+        {
+            Thickness border = new Thickness();
+            border.Top = 5;
+            fontWeightBolder.BorderThickness = border;
+        }
+
+        private void downBorderHandler(object sender, RoutedEventArgs e)
+        {
+            Thickness border = new Thickness();
+            border.Bottom = 5;
+            fontWeightBolder.BorderThickness = border;
+        }
+
+        private void leftBorderHandler(object sender, RoutedEventArgs e)
+        {
+            Thickness border = new Thickness();
+            border.Left = 5;
+            fontWeightBolder.BorderThickness = border;
+        }
+
+        private void rightBorderHandler(object sender, RoutedEventArgs e)
+        {
+            Thickness border = new Thickness();
+            border.Right = 5;
+            fontWeightBolder.BorderThickness = border;
+        }
+
+        private void markersHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void numberHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void multiLevelListHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void decreaseIndentHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void increaseIndentHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void sortHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void showAllCharsHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void fillHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void findHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void replaceHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void selectHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /*delegate void CursorChangedDelegate(RoutedEvent re, Delegate handler);
+        void CursorChangedHandler(RoutedEvent re, Delegate handler)
+        {
+            if (fontWeightBolder.Text.Length >= 75)
+            {
+                textBox = new TextBox();
+                textBox.BorderThickness = new Thickness(0);
+                textBox.MaxLines = 1;
+                textBox.BorderBrush = Brushes.Transparent;
+                page.Children.Add(textBox);
+                Canvas.SetTop(textBox, page.Children.Count * 35);
+                Canvas.SetLeft(textBox, 50);
+                textBox.Focus();
+                fontWeightBolder = textBox;
+            }
+            else if (fontWeightBolder.Text.Length <= 0)
+            {
+                page.Children[page.Children.Count - 2].Focus();
+                fontWeightBolder = (TextBox)page.Children[page.Children.Count - 2];
+                page.Children.Remove(textBox);
+            }
+        }*/
+
+        private void inputHander(object sender, TextChangedEventArgs e)
+        {
+            if (fontWeightBolder.Text.Length >= 75)
+            {
+                TextBox textBox = new TextBox();
+                textBox.BorderThickness = new Thickness(0);
+                textBox.MaxLines = 1;
+                textBox.BorderBrush = Brushes.Transparent;
+                page.Children.Add(textBox);
+                Canvas.SetTop(textBox, page.Children.Count * 35);
+                Canvas.SetLeft(textBox, 50);
+                textBox.Focus();
+                fontWeightBolder = textBox;
+                textBox.AddHandler(TextBox.TextChangedEvent,
+                    new RoutedEventHandler(
+                        delegate {
+                            if (fontWeightBolder.Text.Length >= 75)
+                            {
+                                textBox = new TextBox();
+                                textBox.BorderThickness = new Thickness(0);
+                                textBox.MaxLines = 1;
+                                textBox.BorderBrush = Brushes.Transparent;
+                                page.Children.Add(textBox);
+                                Canvas.SetTop(textBox, page.Children.Count * 35);
+                                Canvas.SetLeft(textBox, 50);
+                                textBox.Focus();
+                                fontWeightBolder = textBox;
+                            }
+                            else if (fontWeightBolder.Text.Length <= 0)
+                            {
+                                page.Children[page.Children.Count - 2].Focus();
+                                fontWeightBolder = (TextBox)page.Children[page.Children.Count - 2];
+                                page.Children.Remove(textBox);
+                            }
+                        }
+                    )
+                );
+                /*textBox.AddHandler(TextBox.TextChangedEvent,
+                    new CursorChangedDelegate(CursorChangedHandler)
+                );*/
+            }
+        }
     }
 }
