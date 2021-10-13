@@ -32,7 +32,7 @@
                 <MenuItem Header="Закрыть"></MenuItem>
                 <MenuItem Header="Учетная запись"></MenuItem>
                 <MenuItem Header="Отзывы и предложения"></MenuItem>
-                <MenuItem Header="Параметры"></MenuItem>
+                <MenuItem Click="openSettings" Header="Параметры"></MenuItem>
             </MenuItem>
             <MenuItem Header="Главная">
                 <MenuItem Command="ApplicationCommands.Paste" Header="Вставить"></MenuItem>
@@ -92,7 +92,32 @@
                 <MenuItem Header="Добавить строки подписи"></MenuItem>
                 <MenuItem Header="Дата и время"></MenuItem>
                 <MenuItem Header="Объект"></MenuItem>
-                <MenuItem Header="Символы"></MenuItem>
+                <MenuItem Header="Символы">
+                    <MenuItem Header="Уравнение"></MenuItem>
+                    <MenuItem Header="Символ">
+                        <MenuItem Click="insertSpecialCharEuro"  Header="€"></MenuItem>
+                        <MenuItem Click="insertSpecialCharPoud" Header="£"></MenuItem>
+                        <MenuItem Click="insertSpecialCharYen" Header="¥"></MenuItem>
+                        <MenuItem  Click="insertSpecialCharCopyright" Header="©"></MenuItem>
+                        <MenuItem  Click="insertSpecialCharRegistered" Header="®"></MenuItem>
+                        <MenuItem Click="insertSpecialCharTM" Header="™"></MenuItem>
+                        <MenuItem Click="insertSpecialCharPlusOrMinus" Header="±"></MenuItem>
+                        <MenuItem Click="insertSpecialCharNotEqual" Header="≠"></MenuItem>
+                        <MenuItem Click="insertSpecialCharAll" Header="∑"></MenuItem>
+                        <MenuItem Click="insertSpecialCharPoud" Header="£"></MenuItem>
+                        <MenuItem Click="insertSpecialCharBeta" Header="β"></MenuItem>
+                        <MenuItem Click="insertSpecialCharPi" Header="π"></MenuItem>
+                        <MenuItem Click="insertSpecialCharInfinity" Header="∞"></MenuItem>
+                        <MenuItem Click="insertSpecialCharLessAndEqual" Header="≤"></MenuItem>
+                        <MenuItem Click="insertSpecialCharGratherAndEqual" Header="≥"></MenuItem>
+                        <MenuItem Click="insertSpecialCharAlpha" Header="α"></MenuItem>
+                        <MenuItem Click="insertSpecialCharU" Header="µ"></MenuItem>
+                        <MenuItem Click="insertSpecialCharFrequency" Header="Ω"></MenuItem>
+                        <MenuItem Click="insertSpecialCharMultiply" Header="×"></MenuItem>
+                        <MenuItem Click="insertSpecialCharDivide" Header="÷"></MenuItem>
+                        <MenuItem Click="insertSpecialCharArrow" Header="↑"></MenuItem>
+                    </MenuItem>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Рисование">
                 <MenuItem Header="Ластик"></MenuItem>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\wpfprojects\documenter\App.xaml
-2-855339138
+3-824230527
 
-6644626911
+71553047021
 13-1505183044
-Dialogs\TableDialog.xaml;MainWindow.xaml;
+Dialogs\Settings.xaml;Dialogs\TableDialog.xaml;MainWindow.xaml;
 
 False
 

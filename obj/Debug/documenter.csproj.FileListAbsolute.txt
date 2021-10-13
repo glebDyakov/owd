@@ -15,3 +15,5 @@ C:\wpfprojects\documenter\obj\Debug\documenter.exe
 C:\wpfprojects\documenter\obj\Debug\documenter.pdb
 C:\wpfprojects\documenter\obj\Debug\Dialogs\TableDialog.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\TableDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\Settings.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\Settings.baml

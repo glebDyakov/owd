@@ -219,5 +219,97 @@ namespace documenter
                 }
             }
         }
+
+        private void insertSpecialCharEuro(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "€";
+        }
+
+        private void insertSpecialCharPoud(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "£";
+        }
+
+        private void insertSpecialCharYen(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "¥";
+        }
+
+        private void insertSpecialCharCopyright(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "©";
+        }
+
+        private void insertSpecialCharRegistered(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "®";
+        }
+        private void insertSpecialCharTM(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "™";
+        }
+        private void insertSpecialCharPlusOrMinus(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "±";
+        }
+        private void insertSpecialCharNotEqual(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "≠";
+        }
+        private void insertSpecialCharAll(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "∑";
+        }
+        private void insertSpecialCharBeta(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "β";
+        }
+        private void insertSpecialCharPi(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "π";
+        }
+        private void insertSpecialCharInfinity(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "∞";
+        }
+        private void insertSpecialCharLessAndEqual(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "≤";
+        }
+        private void insertSpecialCharGratherAndEqual(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "≥";
+        }
+        private void insertSpecialCharAlpha(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "α";
+        }
+        private void insertSpecialCharU(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "µ";
+        }
+        private void insertSpecialCharFrequency(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "Ω";
+        }
+        private void insertSpecialCharMultiply(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "×";
+        }
+        private void insertSpecialCharDivide(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "÷";
+        }
+        private void insertSpecialCharArrow(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.Text += "↑";
+        }
+
+        private void openSettings(object sender, RoutedEventArgs e)
+        {
+            Dialogs.Settings settingsDialog = new Dialogs.Settings();
+            settingsDialog.Show();
+        }
+        
     }
 }
