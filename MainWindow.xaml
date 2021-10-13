@@ -306,7 +306,7 @@
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
             <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
 
-                <TextBox TextChanged="inputHander" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
+                <TextBox PreviewMouseUp="changeLineFromCursor" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
             </Canvas>
         </Canvas>
     </Grid>
