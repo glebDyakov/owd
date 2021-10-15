@@ -429,77 +429,7 @@ namespace documenter
 
         }
 
-        /*delegate void CursorChangedDelegate(RoutedEvent re, Delegate handler);
-        void CursorChangedHandler(RoutedEvent re, Delegate handler)
-        {
-            if (fontWeightBolder.Text.Length >= 75)
-            {
-                textBox = new TextBox();
-                textBox.BorderThickness = new Thickness(0);
-                textBox.MaxLines = 1;
-                textBox.BorderBrush = Brushes.Transparent;
-                page.Children.Add(textBox);
-                Canvas.SetTop(textBox, page.Children.Count * 35);
-                Canvas.SetLeft(textBox, 50);
-                textBox.Focus();
-                fontWeightBolder = textBox;
-            }
-            else if (fontWeightBolder.Text.Length <= 0)
-            {
-                page.Children[page.Children.Count - 2].Focus();
-                fontWeightBolder = (TextBox)page.Children[page.Children.Count - 2];
-                page.Children.Remove(textBox);
-            }
-        }*/
-
-        public String TextInputHandle(TextCompositionEventArgs e) {
-
-            if (fontWeightBolder.Text.Length >= 60)
-            {
-                textBox = new TextBox();
-                textBox.Width = 450;
-                textBox.BorderThickness = new Thickness(0);
-                textBox.MaxLines = 1;
-                textBox.BorderBrush = Brushes.Transparent;
-                page.Children.Add(textBox);
-                page.Children[lineCursor].Focus();
-                lineCursor++;
-                Canvas.SetTop(textBox, page.Children.Count * 35);
-                Canvas.SetLeft(textBox, 50);
-                textBox.Focus();
-                fontWeightBolder = textBox;
-                textBox.AddHandler(TextBox.TextChangedEvent,
-                    new RoutedEventHandler(
-                        delegate {
-                            String response = TextInputHandle(e);
-                            if (response.Contains("newline"))
-                            {
-                                //fontWeightBolder.Text = e.Text;
-                                e.Handled = true;
-                            }
-                        }
-                    )
-                );
-                return "newline";
-            } else if (fontWeightBolder.Text.Length <= 0 && lineCursor >= 2) {
-                lineCursor--;
-                //page.Children[page.Children.Count - 2].Focus();
-                page.Children[lineCursor - 1].Focus();
-                //fontWeightBolder = (TextBox)page.Children[page.Children.Count - 2];
-                fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                //page.Children.Remove(textBox);
-                page.Children.Remove((TextBox)page.Children[lineCursor]);
-            }
-            return "no-break string";
-
-        }
-
-        public void CursorChangeHandle()
-        {
-
-        }
-
-            private void inputHandler(object sender, TextCompositionEventArgs e)
+        public void inputHandler(object sender, TextCompositionEventArgs e)
         {
             if (fontWeightBolder.Text.Length >= 60)
             {
@@ -514,27 +444,9 @@ namespace documenter
                 Canvas.SetTop(textBox, page.Children.Count * 35);
                 Canvas.SetLeft(textBox, 50);
                 fontWeightBolder = textBox;
-                textBox.AddHandler(TextBox.TextChangedEvent,
-                    new RoutedEventHandler(
-                        delegate
-                        {
-                            String response = TextInputHandle(e);
-                            if (response.Contains("newline"))
-                            {
-                                //fontWeightBolder.Text = e.Text;
-                                e.Handled = true;
-                            }
-                        }
-                    )
-                );
-            } else if (fontWeightBolder.Text.Length <= 0 && lineCursor >= 2) {
-                lineCursor--;
-                //page.Children[page.Children.Count - 2].Focus();
-                page.Children[lineCursor - 1].Focus();
-                //fontWeightBolder = (TextBox)page.Children[page.Children.Count - 2];
-                fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                //page.Children.Remove(textBox);
-                page.Children.Remove((TextBox)page.Children[lineCursor]);
+                textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
             }
         }
 
@@ -542,7 +454,67 @@ namespace documenter
         {
             fontWeightBolder = (TextBox)sender;
             lineCursor = page.Children.IndexOf(fontWeightBolder) + 1;
-            fontWeightBolder.Text = lineCursor.ToString();
+            //page.Children[lineCursor - 1].Focus();
+        }
+
+        private void specialInputHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back)
+            {
+                if (fontWeightBolder.Text.Length <= 0 && lineCursor >= 2)
+                {
+                    lineCursor--;
+                    page.Children[lineCursor - 1].Focus();
+                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    page.Children.Remove((TextBox)page.Children[lineCursor]);
+                }
+            }
+             else if (e.Key == Key.Enter)
+            {
+                TextBox textBox = new TextBox();
+                textBox.Width = 450;
+                textBox.BorderThickness = new Thickness(0);
+                textBox.MaxLines = 1;
+                textBox.BorderBrush = Brushes.Transparent;
+                page.Children.Add(textBox);
+                page.Children[lineCursor].Focus();
+                lineCursor++;
+                Canvas.SetTop(textBox, page.Children.Count * 35);
+                Canvas.SetLeft(textBox, 50);
+                fontWeightBolder = textBox;
+                textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+            }
+        }
+
+        private void openImage(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.DefaultExt = ".png";
+            ofd.Filter = "images (.png)|*.png";
+            bool? res = ofd.ShowDialog();
+            if (res != false)
+            {
+                Stream myStream;
+                if ((myStream = ofd.OpenFile()) != null)
+                {
+                    Image img = new Image();
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    //bitmapImage.UriSource = new Uri(ofd.FileName, UriKind.Relative);
+                    bitmapImage.UriSource = new Uri(ofd.FileName, UriKind.Absolute);
+                    bitmapImage.EndInit();
+                    img.Source = bitmapImage;
+                    img.Width = 450;
+                    img.Height = 450;
+                    page.Children.Add(img);
+                    page.Children[lineCursor].Focus();
+                    lineCursor++;
+                    Canvas.SetTop(img, page.Children.Count * 35);
+                    Canvas.SetLeft(img, 50);
+                }
+            }
         }
     }
 }
