@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Speech.Synthesis;
+
 namespace documenter
 {
     /// <summary>
@@ -643,19 +645,50 @@ namespace documenter
         {
             zoom.Width = initialWidth * 0.75;
             zoom.Height = initialHeight * 0.75;
+
+             mainScroll.Content = pages;
+
         }
 
         private void newWindow(object sender, RoutedEventArgs e)
         {
-            MainWindow tableDialog = new MainWindow();
-            tableDialog.Show();
+            MainWindow newWindow = new MainWindow();
+            newWindow.Title = "Новый документ " + Application.Current.Windows.OfType<Window>().ToList().Count.ToString();
+            newWindow.Show();
         }
 
         private void goToAnotherWindow(object sender, RoutedEventArgs e)
         {
             //Window otherWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => !x.IsActive);
-            Window otherWindow = Application.Current.Windows.OfType<Window>().ToList()[0];
+            //Window otherWindow = Application.Current.Windows.OfType<Window>().ToList()[0];
+            
+            MenuItem currentMenuItem = (MenuItem)sender;
+            //goToAnotherWindowMenuItem.Items.IndexOf(currentMenuItem);
+            Window otherWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.Title.Contains(currentMenuItem.Header.ToString()));
             otherWindow.Focus();
+        }
+
+        private void showPossibleWindows(object sender, MouseEventArgs e)
+        {
+            goToAnotherWindowMenuItem.Items.Clear();
+            foreach (Window window in Application.Current.Windows.OfType<Window>().Where(wndw => wndw.Title.Length >= 1))
+            {
+                MenuItem newMenuItem = new MenuItem();
+                newMenuItem.Header = window.Title;
+                goToAnotherWindowMenuItem.Items.Add(newMenuItem);
+                newMenuItem.Click += goToAnotherWindow;
+            }
+        }
+
+        private void TTS(object sender, RoutedEventArgs e)
+        {
+            SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
+            speechSynthesizer.Speak(fontWeightBolder.Text);
+        }
+
+        private void grammaticCheck(object sender, RoutedEventArgs e)
+        {
+            SpellCheck.SetIsEnabled(fontWeightBolder, true);
         }
     }
 }

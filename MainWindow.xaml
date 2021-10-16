@@ -250,10 +250,10 @@
                 <MenuItem Header="Найти и объединить"></MenuItem>
             </MenuItem>
             <MenuItem Header="Рецензирование">
-                <MenuItem Header="Правописание"></MenuItem>
+                <MenuItem Click="grammaticCheck" Header="Правописание"></MenuItem>
                 <MenuItem Header="Тезарус"></MenuItem>
                 <MenuItem Header="Статистика"></MenuItem>
-                <MenuItem Header="Прочесть вслух"></MenuItem>
+                <MenuItem Click="TTS" Header="Прочесть вслух"></MenuItem>
                 <MenuItem Header="Проверить читаемость"></MenuItem>
                 <MenuItem Header="Язык"></MenuItem>
                 <MenuItem Header="Создать примечание"></MenuItem>
@@ -297,7 +297,9 @@
                 <MenuItem Header="Рядом"></MenuItem>
                 <MenuItem Header="Синхронизированная прокрутка"></MenuItem>
                 <MenuItem Header="Восстановить окно"></MenuItem>
-                <MenuItem Click="goToAnotherWindow" x:Name="goToAnotherWindowMenuItem" Header="Перейти в другое окно"></MenuItem>
+                <MenuItem MouseEnter="showPossibleWindows" x:Name="goToAnotherWindowMenuItem" Header="Перейти в другое окно">
+                    
+                </MenuItem>
                 <MenuItem Header="Макросы"></MenuItem>
                 <MenuItem Header="Свойства"></MenuItem>
             </MenuItem>
@@ -315,12 +317,18 @@
                 <MenuItem Header="Сохранить в облаке"></MenuItem>
             </MenuItem>
         </Menu>
-        <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
-            <Viewbox Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Stretch="Fill" x:Name="zoom">
-                <Canvas x:Name="page" ClipToBounds="True" Width="540" Height="800" Background="White">
-                    <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
-                </Canvas>
-            </Viewbox>
-        </Canvas>
+        <ScrollViewer x:Name="mainScroll"  IsEnabled="True" CanContentScroll="True" Grid.Column="0" Grid.Row="1">
+            <Canvas x:Name="backdrop" Background="Lavender">
+                <Viewbox Canvas.Top="25" Canvas.Left="50" Stretch="Fill" x:Name="zoom">
+                    <StackPanel x:Name="pages" Orientation="Vertical">
+                        <Canvas x:Name="page" ClipToBounds="True" Width="540" Height="800" Background="White">
+                            <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
+                        </Canvas>
+                        <Canvas ClipToBounds="True" Width="540" Height="800" Background="White">
+                        </Canvas>
+                    </StackPanel>
+                </Viewbox>
+            </Canvas>
+        </ScrollViewer>
     </Grid>
 </Window>
