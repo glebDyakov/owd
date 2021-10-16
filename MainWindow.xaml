@@ -176,11 +176,17 @@
             </MenuItem>
             <MenuItem Header="Макет">
                 <MenuItem Header="Поля"></MenuItem>
-                <MenuItem Header="Ориентация"></MenuItem>
+                <MenuItem Header="Ориентация">
+                    <MenuItem Click="setLandscapeOrientation" Header="Книжняя"></MenuItem>
+                    <MenuItem Click="setPortraitOrientation" Header="Альбомная"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Размер"></MenuItem>
                 <MenuItem Header="Колонки"></MenuItem>
                 <MenuItem Header="Разрывы"></MenuItem>
-                <MenuItem Header="Номера строк"></MenuItem>
+                <MenuItem Header="Номера строк">
+                    <MenuItem Click="noneNumberOfStrokes" Header="Нет"></MenuItem>
+                    <MenuItem Click="mustNumberOfStrokes" Header="Непрерывно"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="расстановка переносов"></MenuItem>
                 <MenuItem Header="Отступ слева"></MenuItem>
                 <MenuItem Header="Отступ справа"></MenuItem>
@@ -276,18 +282,22 @@
                 <MenuItem Header="Линейка"></MenuItem>
                 <MenuItem Header="Сетка"></MenuItem>
                 <MenuItem Header="область навигации"></MenuItem>
-                <MenuItem Header="Масштаб"></MenuItem>
+                <MenuItem Header="Масштаб">
+                    <MenuItem Click="setZoomTwiHandrid" Header="200%"></MenuItem>
+                    <MenuItem Click="setZoomOneHandrid" Header="100%"></MenuItem>
+                    <MenuItem Click="setZoomSeventyFive" Header="75%"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="100%"></MenuItem>
                 <MenuItem Header="Одна страница"></MenuItem>
                 <MenuItem Header="Несколько страниц"></MenuItem>
                 <MenuItem Header="По ширине страницы"></MenuItem>
-                <MenuItem Header="Новое окно"></MenuItem>
+                <MenuItem Click="newWindow" Header="Новое окно"></MenuItem>
                 <MenuItem Header="Упорядочить всё"></MenuItem>
                 <MenuItem Header="Разделить"></MenuItem>
                 <MenuItem Header="Рядом"></MenuItem>
                 <MenuItem Header="Синхронизированная прокрутка"></MenuItem>
                 <MenuItem Header="Восстановить окно"></MenuItem>
-                <MenuItem Header="Перейти в другое окно"></MenuItem>
+                <MenuItem Click="goToAnotherWindow" x:Name="goToAnotherWindowMenuItem" Header="Перейти в другое окно"></MenuItem>
                 <MenuItem Header="Макросы"></MenuItem>
                 <MenuItem Header="Свойства"></MenuItem>
             </MenuItem>
@@ -306,9 +316,11 @@
             </MenuItem>
         </Menu>
         <Canvas x:Name="backdrop" Grid.Column="0" Grid.Row="1" Background="Lavender">
-            <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Background="White">
-                <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
-            </Canvas>
+            <Viewbox Canvas.Top="25" Canvas.Left="50" Width="540" Height="800" Stretch="Fill" x:Name="zoom">
+                <Canvas x:Name="page" ClipToBounds="True" Width="540" Height="800" Background="White">
+                    <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
+                </Canvas>
+            </Viewbox>
         </Canvas>
     </Grid>
 </Window>

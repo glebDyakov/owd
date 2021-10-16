@@ -28,9 +28,16 @@ namespace documenter
         public Style dropShadowScrollViewerStyle = null;
         public TextBox textBox = null;
         public int lineCursor = 1;
+        public bool numberOfStrokes = false;
+        public double initialWidth = 0;
+        public double initialHeight = 0;
         public MainWindow()
         {
             InitializeComponent();
+
+            initialWidth = page.Width;
+            initialHeight = page.Height;
+
         }
 
         private void fontWeightBolderHandler(object sender, RoutedEventArgs e)
@@ -433,12 +440,27 @@ namespace documenter
         {
             if (fontWeightBolder.Text.Length >= 60)
             {
+                
+                /*
+                    незаконченная логика добавления новой строки с номером строки  
+                    StackPanel paragraph = new StackPanel();
+                    paragraph.Orientation = Orientation.Horizontal;
+                    TextBox strokeNumber = new TextBox();
+                    strokeNumber.Text = (lineCursor + 1).ToString();
+                    paragraph.Children.Add(strokeNumber);
+                    paragraph.Children.Add(textBox);
+                    page.Children.Add(paragraph);
+                    Canvas.SetTop(paragraph, 25);
+                    Canvas.SetTop(paragraph, page.Children.Count * 35);
+                */
+
                 TextBox textBox = new TextBox();
                 textBox.Width = 450;
                 textBox.BorderThickness = new Thickness(0);
                 textBox.MaxLines = 1;
                 textBox.BorderBrush = Brushes.Transparent;
                 page.Children.Add(textBox);
+
                 page.Children[lineCursor].Focus();
                 lineCursor++;
                 Canvas.SetTop(textBox, page.Children.Count * 35);
@@ -447,6 +469,7 @@ namespace documenter
                 textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                 textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                 textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+
             }
         }
 
@@ -469,22 +492,85 @@ namespace documenter
                     page.Children.Remove((TextBox)page.Children[lineCursor]);
                 }
             }
-             else if (e.Key == Key.Enter)
+            else if (e.Key == Key.Enter)
             {
-                TextBox textBox = new TextBox();
-                textBox.Width = 450;
-                textBox.BorderThickness = new Thickness(0);
-                textBox.MaxLines = 1;
-                textBox.BorderBrush = Brushes.Transparent;
-                page.Children.Add(textBox);
-                page.Children[lineCursor].Focus();
-                lineCursor++;
-                Canvas.SetTop(textBox, page.Children.Count * 35);
-                Canvas.SetLeft(textBox, 50);
-                fontWeightBolder = textBox;
-                textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
-                textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
-                textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                if (lineCursor == page.Children.Count && fontWeightBolder.SelectionStart >= fontWeightBolder.Text.Length - 1) {
+                    TextBox textBox = new TextBox();
+                    textBox.Width = 450;
+                    textBox.BorderThickness = new Thickness(0);
+                    textBox.MaxLines = 1;
+                    textBox.BorderBrush = Brushes.Transparent;
+                    page.Children.Add(textBox);
+                    page.Children[lineCursor].Focus();
+                    lineCursor++;
+                    Canvas.SetTop(textBox, page.Children.Count * 35);
+                    Canvas.SetLeft(textBox, 50);
+                    fontWeightBolder = textBox;
+                    textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                    textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                    textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                }
+                else
+                {
+                    TextBox textBox = new TextBox();
+                    textBox.Width = 450;
+                    textBox.BorderThickness = new Thickness(0);
+                    textBox.MaxLines = 1;
+                    textBox.BorderBrush = Brushes.Transparent;
+                    int caretIndex = fontWeightBolder.SelectionStart;
+                    string caretText = fontWeightBolder.Text.Substring(caretIndex, fontWeightBolder.Text.Length - fontWeightBolder.Text.Substring(0, caretIndex).Length);
+                    fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);
+                    textBox.Text = caretText;
+                    lineCursor++;
+                    page.Children.Insert(lineCursor - 1, textBox);
+                    page.Children[lineCursor - 1].Focus();
+                    foreach (UIElement child in page.Children)
+                    {
+                        if(page.Children.IndexOf(child) >= lineCursor - 1) { 
+                             Canvas.SetTop(child, page.Children.IndexOf(child) * 35);
+                        }
+                    }
+                    Canvas.SetLeft(textBox, 50);
+                    fontWeightBolder = textBox;
+                    textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                    textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                    textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                }
+            }
+            else if (e.Key == Key.Up)
+            {
+                if (lineCursor >= 2) {
+                    lineCursor--;
+                    fontWeightBolder = (TextBox) page.Children[lineCursor - 1];
+                    page.Children[lineCursor - 1].Focus();
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                if (lineCursor < page.Children.Count)
+                {
+                    lineCursor++;
+                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    page.Children[lineCursor - 1].Focus();
+                }
+            }
+            else if (e.Key == Key.Left)
+            {
+                if (lineCursor >= 2 && fontWeightBolder.SelectionStart <= 0)
+                {
+                    lineCursor--;
+                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    page.Children[lineCursor - 1].Focus();
+                }
+            }
+            else if (e.Key == Key.Right && fontWeightBolder.SelectionStart > fontWeightBolder.Text.Length - 1)
+            {
+                if (lineCursor < page.Children.Count)
+                {
+                    lineCursor++;
+                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    page.Children[lineCursor - 1].Focus();
+                }
             }
         }
 
@@ -515,6 +601,61 @@ namespace documenter
                     Canvas.SetLeft(img, 50);
                 }
             }
+        }
+
+        private void setPortraitOrientation(object sender, RoutedEventArgs e)
+        {
+            page.Height = 540;
+            page.Width = 480;
+        }
+
+        private void setLandscapeOrientation(object sender, RoutedEventArgs e)
+        {
+            page.Height = 480;
+            page.Width = 2500;
+        }
+
+        private void mustNumberOfStrokes(object sender, RoutedEventArgs e)
+        {
+            numberOfStrokes = true;
+        }
+
+        private void noneNumberOfStrokes(object sender, RoutedEventArgs e)
+        {
+            numberOfStrokes = false;
+        }
+
+        private void setZoomTwiHandrid(object sender, RoutedEventArgs e)
+        {
+            
+            zoom.Width = initialWidth * 2;
+            zoom.Height = initialHeight * 2;
+            
+        }
+
+        private void setZoomOneHandrid(object sender, RoutedEventArgs e)
+        {
+            zoom.Width = initialWidth;
+            zoom.Height = initialHeight;
+        }
+
+        private void setZoomSeventyFive(object sender, RoutedEventArgs e)
+        {
+            zoom.Width = initialWidth * 0.75;
+            zoom.Height = initialHeight * 0.75;
+        }
+
+        private void newWindow(object sender, RoutedEventArgs e)
+        {
+            MainWindow tableDialog = new MainWindow();
+            tableDialog.Show();
+        }
+
+        private void goToAnotherWindow(object sender, RoutedEventArgs e)
+        {
+            //Window otherWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => !x.IsActive);
+            Window otherWindow = Application.Current.Windows.OfType<Window>().ToList()[0];
+            otherWindow.Focus();
         }
     }
 }
