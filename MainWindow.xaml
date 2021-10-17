@@ -92,7 +92,9 @@
                 <MenuItem Click="selectHandler" Header="Выделить"></MenuItem>
             </MenuItem>
             <MenuItem Header="Вставка">
-                <MenuItem Header="Страницы"></MenuItem>
+                <MenuItem Header="Страницы">
+                    <MenuItem Click="createPageHandler" Header="Пустая страница"></MenuItem>
+                </MenuItem>
                 <MenuItem Click="insertTable" Header="Таблица"></MenuItem>
                 <MenuItem Header="Рисунки">
                     <MenuItem Click="openImage" Header="Это устройство"></MenuItem>
@@ -109,12 +111,16 @@
                 <MenuItem Header="Трёхмерные модели"></MenuItem>
                 <MenuItem Header="Smart art"></MenuItem>
                 <MenuItem Header="Диаграмма"></MenuItem>
-                <MenuItem Header="Снимок"></MenuItem>
+                <MenuItem Click="screenCaptureHandler" Header="Снимок"></MenuItem>
                 <MenuItem Header="Получить надстройки"></MenuItem>
                 <MenuItem Header="Мои надстройки"></MenuItem>
                 <MenuItem Header="Википедия"></MenuItem>
-                <MenuItem Header="Видео из Интернета"></MenuItem>
-                <MenuItem Header="Ссылки"></MenuItem>
+                <MenuItem Click="videoFromInternerHandler" Header="Видео из Интернета"></MenuItem>
+                <MenuItem Header="Ссылки">
+                    <MenuItem Click="createLinkHandler" Header="Ссылка"></MenuItem>
+                    <MenuItem Click="videoFromInternerHandler" Header="Закладка"></MenuItem>
+                    <MenuItem Click="videoFromInternerHandler" Header="Перекрёстная ссылка"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Примечание"></MenuItem>
                 <MenuItem Header="Верхний колонтитул"></MenuItem>
                 <MenuItem Header="Нижний колонтитул"></MenuItem>
@@ -124,7 +130,10 @@
                 <MenuItem Header="Добавить буквицу"></MenuItem>
                 <MenuItem Header="Добавить строки подписи"></MenuItem>
                 <MenuItem Header="Дата и время"></MenuItem>
-                <MenuItem Header="Объект"></MenuItem>
+                <MenuItem Header="Объект">
+                    <MenuItem Header="Объект"></MenuItem>
+                    <MenuItem Click="textFromFileHandler" Header="Текст из файла"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Символы">
                     <MenuItem Header="Уравнение"></MenuItem>
                     <MenuItem Header="Символ">
@@ -318,13 +327,11 @@
             </MenuItem>
         </Menu>
         <ScrollViewer x:Name="mainScroll"  IsEnabled="True" CanContentScroll="True" Grid.Column="0" Grid.Row="1">
-            <Canvas x:Name="backdrop" Background="Lavender">
-                <Viewbox Canvas.Top="25" Canvas.Left="50" Stretch="Fill" x:Name="zoom">
+            <Canvas x:Name="backdrop" Height="800" Background="Lavender">
+                <Viewbox Canvas.Top="25" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
                     <StackPanel x:Name="pages" Orientation="Vertical">
-                        <Canvas x:Name="page" ClipToBounds="True" Width="540" Height="800" Background="White">
+                        <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
                             <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
-                        </Canvas>
-                        <Canvas ClipToBounds="True" Width="540" Height="800" Background="White">
                         </Canvas>
                     </StackPanel>
                 </Viewbox>

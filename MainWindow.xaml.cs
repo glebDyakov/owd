@@ -18,6 +18,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using System.Speech.Synthesis;
+using System.Drawing;
+using System.Windows.Interop;
 
 namespace documenter
 {
@@ -64,12 +66,12 @@ namespace documenter
 
         private void textDecorationBackgroundHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Background = Brushes.Red;
+            fontWeightBolder.Background = System.Windows.Media.Brushes.Red;
         }
 
         private void textDecorationForegroundHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Foreground = Brushes.Red;
+            fontWeightBolder.Foreground = System.Windows.Media.Brushes.Red;
         }
 
         private void fontSizeHandler(object sender, RoutedEventArgs e)
@@ -121,31 +123,31 @@ namespace documenter
             fontWeightBolder.FontWeight = FontWeights.Normal;
             fontWeightBolder.FontStyle = FontStyles.Normal;
             fontWeightBolder.TextDecorations = null;
-            fontWeightBolder.Background = Brushes.Transparent;
-            fontWeightBolder.Foreground = Brushes.Black;
-            fontWeightBolder.FontFamily = new FontFamily("Times New Roman");
+            fontWeightBolder.Background = System.Windows.Media.Brushes.Transparent;
+            fontWeightBolder.Foreground = System.Windows.Media.Brushes.Black;
+            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
             fontWeightBolder.Resources.Clear();
 
         }
 
         private void fontFamilyChangeToTimesNewRoman(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new FontFamily("Times New Roman");
+            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
         }
 
         private void fontFamilyChangeToArial(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new FontFamily("Arial");
+            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Arial");
         }
 
         private void fontFamilyChangeToCalibri(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new FontFamily("Calibri");
+            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Calibri");
         }
 
         private void fontFamilyChangeToVerdana(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new FontFamily("Verdana");
+            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Verdana");
         }
 
         private void drawFigureLine(object sender, RoutedEventArgs e)
@@ -460,7 +462,7 @@ namespace documenter
                 textBox.Width = 450;
                 textBox.BorderThickness = new Thickness(0);
                 textBox.MaxLines = 1;
-                textBox.BorderBrush = Brushes.Transparent;
+                textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
                 page.Children.Add(textBox);
 
                 page.Children[lineCursor].Focus();
@@ -492,25 +494,39 @@ namespace documenter
                     page.Children[lineCursor - 1].Focus();
                     fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
                     page.Children.Remove((TextBox)page.Children[lineCursor]);
+                } else if (fontWeightBolder.Text.Length <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
+                {
+                    pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
+                    page = (Canvas)pages.Children[pages.Children.Count - 1];
+                    fontWeightBolder = (TextBox)page.Children[page.Children.Count - 1];
+                    page.Children[page.Children.Count - 1].Focus();
+                    lineCursor = page.Children.Count;
+                    backdrop.Height -= 650;
                 }
             }
             else if (e.Key == Key.Enter)
             {
-                if (lineCursor == page.Children.Count && fontWeightBolder.SelectionStart >= fontWeightBolder.Text.Length - 1) {
-                    TextBox textBox = new TextBox();
-                    textBox.Width = 450;
-                    textBox.BorderThickness = new Thickness(0);
-                    textBox.MaxLines = 1;
-                    textBox.BorderBrush = Brushes.Transparent;
-                    page.Children.Add(textBox);
-                    page.Children[lineCursor].Focus();
-                    lineCursor++;
-                    Canvas.SetTop(textBox, page.Children.Count * 35);
-                    Canvas.SetLeft(textBox, 50);
-                    fontWeightBolder = textBox;
-                    textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
-                    textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
-                    textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                if (lineCursor == page.Children.Count) {
+                    if (lineCursor <= 16)
+                    {
+                        TextBox textBox = new TextBox();
+                        textBox.Width = 450;
+                        textBox.BorderThickness = new Thickness(0);
+                        textBox.MaxLines = 1;
+                        textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                        page.Children.Add(textBox);
+                        page.Children[lineCursor].Focus();
+                        lineCursor++;
+                        Canvas.SetTop(textBox, page.Children.Count * 35);
+                        Canvas.SetLeft(textBox, 50);
+                        fontWeightBolder = textBox;
+                        textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                        textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                        textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                    } else
+                    {
+                        createNewPage();
+                    }
                 }
                 else
                 {
@@ -518,7 +534,7 @@ namespace documenter
                     textBox.Width = 450;
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
-                    textBox.BorderBrush = Brushes.Transparent;
+                    textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
                     int caretIndex = fontWeightBolder.SelectionStart;
                     string caretText = fontWeightBolder.Text.Substring(caretIndex, fontWeightBolder.Text.Length - fontWeightBolder.Text.Substring(0, caretIndex).Length);
                     fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);
@@ -587,7 +603,7 @@ namespace documenter
                 Stream myStream;
                 if ((myStream = ofd.OpenFile()) != null)
                 {
-                    Image img = new Image();
+                    System.Windows.Controls.Image img = new System.Windows.Controls.Image();
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
                     //bitmapImage.UriSource = new Uri(ofd.FileName, UriKind.Relative);
@@ -689,6 +705,152 @@ namespace documenter
         private void grammaticCheck(object sender, RoutedEventArgs e)
         {
             SpellCheck.SetIsEnabled(fontWeightBolder, true);
+        }
+
+        private void screenCaptureHandler(object sender, RoutedEventArgs e)
+        {
+            Bitmap bitmap;
+
+            bitmap = new Bitmap((int)SystemParameters.PrimaryScreenWidth, (int)SystemParameters.PrimaryScreenHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
+            }
+            IntPtr handle = IntPtr.Zero;
+            try
+            {
+                handle = bitmap.GetHbitmap();
+                System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                img.Source = Imaging.CreateBitmapSourceFromHBitmap(handle, IntPtr.Zero, Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
+                page.Children.Add(img);
+                page.Children[lineCursor].Focus();
+                lineCursor++;
+                Canvas.SetTop(img, page.Children.Count * 35);
+                Canvas.SetLeft(img, 50);
+                
+                // сохранение в файл не нужно
+                //bitmap.Save("C:\\officewaredocuments\\captures\\1.jpg");
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void createPageHandler(object sender, RoutedEventArgs e)
+        {
+            createNewPage();
+        }
+
+        public void createNewPage() {
+
+            Canvas newPage = new Canvas();
+            newPage.Width = 540;
+            newPage.Height = 650;
+            Thickness margins = new Thickness();
+            margins.Top = 25;
+            newPage.Margin = margins;
+            pages.Children.Add(newPage);
+            Canvas.SetTop(newPage, pages.Children.Count - 1 * 800);
+            Canvas.SetLeft(newPage, 40);
+            newPage.Background = System.Windows.Media.Brushes.White;
+            page = newPage;
+            TextBox textBox = new TextBox();
+            newPage.Children.Add(textBox);
+            Canvas.SetTop(textBox, 25);
+            Canvas.SetLeft(textBox, 50);
+            textBox.Width = 450;
+            textBox.BorderThickness = new Thickness(0);
+            textBox.MaxLines = 1;
+            textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+            textBox.Focus();
+            fontWeightBolder = textBox;
+            textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+            textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+            textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+            lineCursor = 1;
+            backdrop.Height += newPage.Height;
+
+        }
+
+        private void videoFromInternerHandler(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вставка видео", "Введите URL-адресс для видео из интернета", MessageBoxButton.OKCancel);
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    MediaElement mediaElement = new MediaElement();
+                    lineCursor++;
+                    page.Children.Add(mediaElement);
+                    mediaElement.Width = 200;
+                    mediaElement.Height = 200;
+
+                    //ниже ссылка не работает возможно не работает https
+                    //mediaElement.Source = new Uri("https://r2---sn-4g5e6nzl.googlevideo.com/videoplayback?expire=1634501533&ei=PS9sYZa8F4TsW_mVksAJ&ip=5.154.174.53&id=o-ADtYJdmhuKQ3OC8BWFECJous-wC31ZZmjE9HSlTCj5cI&itag=243&aitags=133%2C134%2C135%2C136%2C137%2C160%2C242%2C243%2C244%2C247%2C248%2C271%2C278%2C313&source=youtube&requiressl=yes&vprv=1&mime=video%2Fwebm&ns=7e2yGJwl6ElunVoaQVoYOcAG&gir=yes&clen=8100960&dur=471.203&lmt=1626169534952244&keepalive=yes&fexp=24001373,24007246&c=WEB&txp=5316224&n=cTsn60Hl9d6kmXD6Z&sparams=expire%2Cei%2Cip%2Cid%2Caitags%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cdur%2Clmt&sig=AOq0QJ8wRgIhAJEDcfHKdDqBfnjYXs34S06pyp2aSQdWT_QFsW7T-zC1AiEA6jf3NJ7BcK9zUJ27LkGns0mSYi1ugPx2y_mR_pTOFm4%3D&redirect_counter=1&cm2rm=sn-apnl7l&req_id=31a9c7e0777ca3ee&cms_redirect=yes&mh=23&mip=178.167.29.8&mm=34&mn=sn-4g5e6nzl&ms=ltu&mt=1634479483&mv=m&mvi=2&pl=20&lsparams=mh,mip,mm,mn,ms,mv,mvi,pl&lsig=AG3C_xAwRQIgVQkZgvHBKQeHxSYjesB3EOI4dViXfUHlnSUUpubzn-wCIQDYb_EqktWDHkgMmCXHOmF_744w9KBNvaFnSIGGlD9FdA%3D%3D");
+                    //ниже ссылка работает
+                    mediaElement.Source = new Uri("file:///C:/Users/%D0%A1%D0%95%D0%A0%D0%93%D0%95%D0%99/Documents/Bandicam/metaplatform(activeTab).mp4");
+                    
+                    Canvas.SetTop(mediaElement, page.Children.Count * 35);
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+            }
+
+        }
+
+        private void createLinkHandler(object sender, RoutedEventArgs e)
+        {
+        /*
+            гиперссылки возможно работаю только с TextBlock, наверное нужно
+            переделать все тексты с TextBox на TextBlock
+            TextBlock textBlock = new TextBlock();
+            textBlock.Width = 450;
+            page.Children.Add(textBlock);
+
+            page.Children[lineCursor].Focus();
+            lineCursor++;
+            Canvas.SetTop(textBlock, page.Children.Count * 35);
+            Canvas.SetLeft(textBlock, 50);
+            fontWeightBolder = (TextBlock)textBlock;
+            textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+            textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+            textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+        */
+        }
+
+        private void textFromFileHandler(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            bool? res = ofd.ShowDialog();
+            if (res != false)
+            {
+                Stream myStream;
+                if ((myStream = ofd.OpenFile()) != null)
+                {
+                    string file_name = ofd.FileName;
+                    string file_text = File.ReadAllText(file_name);
+                    
+                    TextBox textBox = new TextBox();
+                    textBox.Width = 450;
+                    textBox.BorderThickness = new Thickness(0);
+                    textBox.MaxLines = 1;
+                    textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    page.Children.Add(textBox);
+                    page.Children[lineCursor].Focus();
+                    lineCursor++;
+                    Canvas.SetTop(textBox, page.Children.Count * 35);
+                    Canvas.SetLeft(textBox, 50);
+                    fontWeightBolder = textBox;
+                    textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                    textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                    textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+
+                    fontWeightBolder.Text = file_text;
+                }
+            }
         }
     }
 }
