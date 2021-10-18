@@ -17,3 +17,9 @@ C:\wpfprojects\documenter\obj\Debug\Dialogs\TableDialog.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\TableDialog.baml
 C:\wpfprojects\documenter\obj\Debug\Dialogs\Settings.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\Settings.baml
+C:\wpfprojects\documenter\bin\Debug\Syncfusion.Licensing.dll
+C:\wpfprojects\documenter\bin\Debug\Syncfusion.Shared.WPF.dll
+C:\wpfprojects\documenter\bin\Debug\Syncfusion.Shared.WPF.xml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\ColorDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\ColorDialog.baml
+C:\wpfprojects\documenter\obj\Debug\documenter.csproj.CopyComplete

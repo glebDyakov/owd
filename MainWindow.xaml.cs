@@ -459,6 +459,7 @@ namespace documenter
                 */
 
                 TextBox textBox = new TextBox();
+                textBox.Background = System.Windows.Media.Brushes.Transparent;
                 textBox.Width = 450;
                 textBox.BorderThickness = new Thickness(0);
                 textBox.MaxLines = 1;
@@ -510,6 +511,7 @@ namespace documenter
                     if (lineCursor <= 16)
                     {
                         TextBox textBox = new TextBox();
+                        textBox.Background = System.Windows.Media.Brushes.Transparent;
                         textBox.Width = 450;
                         textBox.BorderThickness = new Thickness(0);
                         textBox.MaxLines = 1;
@@ -531,6 +533,7 @@ namespace documenter
                 else
                 {
                     TextBox textBox = new TextBox();
+                    textBox.Background = System.Windows.Media.Brushes.Transparent;
                     textBox.Width = 450;
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
@@ -759,6 +762,7 @@ namespace documenter
             newPage.Background = System.Windows.Media.Brushes.White;
             page = newPage;
             TextBox textBox = new TextBox();
+            textBox.Background = System.Windows.Media.Brushes.Transparent;
             newPage.Children.Add(textBox);
             Canvas.SetTop(textBox, 25);
             Canvas.SetLeft(textBox, 50);
@@ -834,6 +838,7 @@ namespace documenter
                     string file_text = File.ReadAllText(file_name);
                     
                     TextBox textBox = new TextBox();
+                    textBox.Background = System.Windows.Media.Brushes.Transparent;
                     textBox.Width = 450;
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
@@ -851,6 +856,82 @@ namespace documenter
                     fontWeightBolder.Text = file_text;
                 }
             }
+        }
+
+        private void colorOfPageHandler(object sender, RoutedEventArgs e)
+        {
+            /*Dialogs.ColorDialog tableDialog = new Dialogs.ColorDialog();
+            tableDialog.Show();*/
+        }
+
+
+        private void colorOfPageHandler(object sender, Syncfusion.Windows.Tools.Controls.SelectedBrushChangedEventArgs e)
+        {
+            page.Background = e.NewBrush;
+        }
+
+        private void noneIntervalBetweenParagraphsHandler(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement paragraph in page.Children)
+            {
+                TextBlock.SetLineHeight((TextBox)paragraph, (double)0);
+            }
+        }
+
+        private void compressedIntervalBetweenParagraphsHandler(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement paragraph in page.Children)
+            {
+                TextBlock.SetLineHeight((TextBox)paragraph, (double)25);
+            }
+        }
+
+        private void narrowIntervalBetweenParagraphsHandler(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement paragraph in page.Children)
+            {
+                TextBlock.SetLineHeight((TextBox)paragraph, (double)15);
+            }
+        }
+
+        private void looseIntervalBetweenParagraphsHandler(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement paragraph in page.Children)
+            {
+                TextBlock.SetLineHeight((TextBox)paragraph, (double)5);
+            }
+        }
+
+        private void freeIntervalBetweenParagraphsHandler(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement paragraph in page.Children)
+            {
+                TextBlock.SetLineHeight((TextBox)paragraph, (double)15);
+            }
+        }
+
+        private void doubleIntervalBetweenParagraphsHandler(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement paragraph in page.Children)
+            {
+                TextBlock.SetLineHeight((TextBox)paragraph, (double)50);
+            }
+        }
+
+        private void toggleAreaOfSelection(object sender, RoutedEventArgs e)
+        {
+            if (areaOfSelection.Visibility == Visibility.Collapsed)
+            {
+                areaOfSelection.Visibility = Visibility.Visible;
+            } else if (areaOfSelection.Visibility == Visibility.Visible)
+            {
+                areaOfSelection.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void moveAreaOfSelectionHandler(object sender, RoutedEventArgs e)
+        {
+            areaOfSelection.Cursor = Cursors.SizeAll;
         }
     }
 }

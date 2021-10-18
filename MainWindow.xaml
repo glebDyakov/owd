@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:documenter"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="Office Ware Documents"
         Height="800"
@@ -176,12 +177,24 @@
                 <MenuItem Header="Темы"></MenuItem>
                 <MenuItem Header="Цвета"></MenuItem>
                 <MenuItem Header="Шрифты"></MenuItem>
-                <MenuItem Header="интервал между абзацами"></MenuItem>
+                <MenuItem Header="интервал между абзацами">
+                    <MenuItem Click="noneIntervalBetweenParagraphsHandler" Header="Отсутствует"></MenuItem>
+                    <MenuItem Click="compressedIntervalBetweenParagraphsHandler" Header="Сжатый"></MenuItem>
+                    <MenuItem Click="narrowIntervalBetweenParagraphsHandler" Header="Узкий"></MenuItem>
+                    <MenuItem Click="looseIntervalBetweenParagraphsHandler" Header="Неплотный"></MenuItem>
+                    <MenuItem Click="freeIntervalBetweenParagraphsHandler" Header="Свободный"></MenuItem>
+                    <MenuItem Click="doubleIntervalBetweenParagraphsHandler" Header="Двойной"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Эффекты"></MenuItem>
                 <MenuItem Header="По умолчанию"></MenuItem>
                 <MenuItem Header="Подложка"></MenuItem>
-                <MenuItem Header="Цвет страниц"></MenuItem>
-                <MenuItem Header="Границы страниц"></MenuItem>
+                <MenuItem Header="Цвет страницы">
+                    <syncfusion:ColorPickerPalette x:Name="colorPickerPalette" 
+                        SelectedBrushChanged="colorOfPageHandler"
+                        Width="60" 
+                        Height="40" />
+                </MenuItem>
+                <MenuItem Header="Границы страницы"></MenuItem>
             </MenuItem>
             <MenuItem Header="Макет">
                 <MenuItem Header="Поля"></MenuItem>
@@ -205,7 +218,7 @@
                 <MenuItem Header="Обтекание текстом"></MenuItem>
                 <MenuItem Header="Переместить вперёд"></MenuItem>
                 <MenuItem Header="Переместить назад"></MenuItem>
-                <MenuItem Header="Область выделения"></MenuItem>
+                <MenuItem Click="toggleAreaOfSelection" Header="Область выделения"></MenuItem>
                 <MenuItem Header="Выровнять"></MenuItem>
                 <MenuItem Header="Группировать"></MenuItem>
                 <MenuItem Header="Повернуть"></MenuItem>
@@ -307,7 +320,7 @@
                 <MenuItem Header="Синхронизированная прокрутка"></MenuItem>
                 <MenuItem Header="Восстановить окно"></MenuItem>
                 <MenuItem MouseEnter="showPossibleWindows" x:Name="goToAnotherWindowMenuItem" Header="Перейти в другое окно">
-                    
+
                 </MenuItem>
                 <MenuItem Header="Макросы"></MenuItem>
                 <MenuItem Header="Свойства"></MenuItem>
@@ -327,15 +340,40 @@
             </MenuItem>
         </Menu>
         <ScrollViewer x:Name="mainScroll"  IsEnabled="True" CanContentScroll="True" Grid.Column="0" Grid.Row="1">
-            <Canvas x:Name="backdrop" Height="800" Background="Lavender">
-                <Viewbox Canvas.Top="25" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
-                    <StackPanel x:Name="pages" Orientation="Vertical">
-                        <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
-                            <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450"/>
-                        </Canvas>
+            <DockPanel>
+                <StackPanel  x:Name="areaOfSelection" Visibility="Collapsed" Orientation="Vertical" Background="AliceBlue" Width="275" DockPanel.Dock="Right">
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <TextBlock Cursor="SizeAll" Margin="10" Text="Выделение" Foreground="DarkBlue" FontSize="20"></TextBlock>
+                        <StackPanel Margin="10" Orientation="Horizontal">
+                            <Button Width="30" Margin="0, 0, 0, 0" Content="˅">
+                                <Button.ContextMenu>
+                                    <ContextMenu Name="cm" StaysOpen="true">
+                                        <MenuItem Click="moveAreaOfSelectionHandler" Header="Переместить"/>
+                                        <MenuItem Header="Изменить размер"/>
+                                        <MenuItem Click="toggleAreaOfSelection" Header="Закрыть"/>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                            </Button>
+                            <Button Click="toggleAreaOfSelection" Width="30" Margin="10, 0, 0, 0" Content="x" />
+                        </StackPanel>
                     </StackPanel>
-                </Viewbox>
-            </Canvas>
+                    <StackPanel Margin="15" Orientation="Horizontal">
+                        <Button Margin="15, 15, 0, 15" Content="Показать все" />
+                        <Button Margin="15, 15, 0, 15" Content="Скрыть все" />
+                        <Button Margin="15, 15, 0, 15" Content="^" />
+                        <Button Margin="15, 15, 0, 15" Content="˅" />
+                    </StackPanel>
+                </StackPanel>
+                <Canvas Panel.ZIndex="-1" DockPanel.Dock="Left" x:Name="backdrop" Height="800" Background="Lavender">
+                    <Viewbox Canvas.Top="25" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
+                        <StackPanel x:Name="pages" Orientation="Vertical">
+                            <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
+                                <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450" Background="Transparent" />
+                            </Canvas>
+                        </StackPanel>
+                    </Viewbox>
+                </Canvas>
+            </DockPanel>
         </ScrollViewer>
     </Grid>
 </Window>
