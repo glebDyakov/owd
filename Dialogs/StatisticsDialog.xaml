@@ -1,0 +1,51 @@
+﻿<Window x:Class="documenter.Dialogs.StatisticsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:documenter.Dialogs"
+        mc:Ignorable="d"
+        Title="Статистка" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Статистка:" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Страниц" />
+                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Слов" />
+                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Знаков (без пробелов)" />
+                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Знаков (с пробелами)" />
+                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Абзацев" />
+                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Строк" />
+                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Checked="refreshStatistics" Unchecked="refreshStatistics" />
+                <TextBlock Margin="25, 0, 0, 0" Text="Учитывать надписи и сноски" />
+            </StackPanel>
+            <Button Content="Закрыть" />
+        </StackPanel>
+    </Grid>
+</Window>

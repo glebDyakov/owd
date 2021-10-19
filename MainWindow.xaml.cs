@@ -35,6 +35,7 @@ namespace documenter
         public bool numberOfStrokes = false;
         public double initialWidth = 0;
         public double initialHeight = 0;
+        public int pageCursor = 1;
         public MainWindow()
         {
             InitializeComponent();
@@ -481,6 +482,9 @@ namespace documenter
         private void changeLineFromCursor(object sender, MouseButtonEventArgs e)
         {
             fontWeightBolder = (TextBox)sender;
+            //pageCursor = pages.Children.IndexOf(page.Children(fontWeightBolder)) + 1;
+            pageCursor = pages.Children.IndexOf((UIElement)fontWeightBolder.Parent);
+            page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)fontWeightBolder.Parent)];
             lineCursor = page.Children.IndexOf(fontWeightBolder) + 1;
             //page.Children[lineCursor - 1].Focus();
         }
@@ -750,6 +754,7 @@ namespace documenter
 
         public void createNewPage() {
 
+            pageCursor++;
             Canvas newPage = new Canvas();
             newPage.Width = 540;
             newPage.Height = 650;
@@ -932,6 +937,39 @@ namespace documenter
         private void moveAreaOfSelectionHandler(object sender, RoutedEventArgs e)
         {
             areaOfSelection.Cursor = Cursors.SizeAll;
+        }
+
+        private void openEmployersAndStickers(object sender, RoutedEventArgs e)
+        {
+            MenuItem selectedMenuItem = (MenuItem)sender;
+            Dialogs.EnvelopesAndStickers envelopesAndStickers = new Dialogs.EnvelopesAndStickers(selectedMenuItem.DataContext.ToString());
+            envelopesAndStickers.Show();
+        }
+
+        private void openStatistics(object sender, RoutedEventArgs e)
+        {
+            int countPages = 0;
+            int words = 0;
+            int charsWithoutSpaces = 0;
+            int charsWithSpaces = 0;
+            int paragraphs = 0;
+            int lines = 0;
+            foreach (Canvas page in pages.Children) {
+                countPages++;
+                foreach (TextBox paragraph in page.Children) {
+                    words += paragraph.Text.Split(new char[] { ' ', '/' }).Length;
+                    foreach (char charWithSpace in paragraph.Text) {
+                        charsWithSpaces++;
+                        if (charWithSpace == ' ') {
+                            charsWithoutSpaces++;
+                        }
+                    }
+                    lines++;
+                    paragraphs++;
+                }
+            }
+            Dialogs.StatisticsDialog statisticsDialog = new Dialogs.StatisticsDialog(countPages, words, charsWithoutSpaces, charsWithSpaces, paragraphs, lines);
+            statisticsDialog.Show();
         }
     }
 }

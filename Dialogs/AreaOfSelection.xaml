@@ -20,7 +20,7 @@
                     <Button Width="30" Margin="0, 0, 0, 0" Content="˅">
                         <Button.ContextMenu>
                             <ContextMenu Name="cm" StaysOpen="true">
-                                <MenuItem Click="moveAreaOfSelectionHandler" Header="Переместить"/>
+                                <MenuItem Header="Переместить"/>
                                 <MenuItem Header="Изменить размер"/>
                                 <MenuItem Click="toggleAreaOfSelection" Header="Закрыть"/>
                             </ContextMenu>

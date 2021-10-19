@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:documenter"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
         Title="Office Ware Documents"
         Height="800"
@@ -249,8 +250,8 @@
                 <MenuItem Header="Обновить таблицу ссылок"></MenuItem>
             </MenuItem>
             <MenuItem Header="Рассылки">
-                <MenuItem Header="Конверты"></MenuItem>
-                <MenuItem Header="Наклейки"></MenuItem>
+                <MenuItem Click="openEmployersAndStickers" DataContext="employers"  Header="Конверты"></MenuItem>
+                <MenuItem Click="openEmployersAndStickers"  DataContext="stickers" Header="Наклейки"></MenuItem>
                 <MenuItem Header="Начать слияние"></MenuItem>
                 <MenuItem Header="Выбрать получателей"></MenuItem>
                 <MenuItem Header="Изменить список получателей"></MenuItem>
@@ -274,7 +275,7 @@
             <MenuItem Header="Рецензирование">
                 <MenuItem Click="grammaticCheck" Header="Правописание"></MenuItem>
                 <MenuItem Header="Тезарус"></MenuItem>
-                <MenuItem Header="Статистика"></MenuItem>
+                <MenuItem Click="openStatistics" Header="Статистика"></MenuItem>
                 <MenuItem Click="TTS" Header="Прочесть вслух"></MenuItem>
                 <MenuItem Header="Проверить читаемость"></MenuItem>
                 <MenuItem Header="Язык"></MenuItem>

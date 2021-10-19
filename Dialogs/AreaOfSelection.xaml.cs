@@ -23,5 +23,16 @@ namespace documenter.Dialogs
         {
             InitializeComponent();
         }
+        private void toggleAreaOfSelection(object sender, RoutedEventArgs e)
+        {
+            if (areaOfSelection.Visibility == Visibility.Collapsed)
+            {
+                areaOfSelection.Visibility = Visibility.Visible;
+            }
+            else if (areaOfSelection.Visibility == Visibility.Visible)
+            {
+                areaOfSelection.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

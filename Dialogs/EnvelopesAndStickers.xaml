@@ -1,0 +1,112 @@
+﻿<Window x:Class="documenter.Dialogs.EnvelopesAndStickers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:documenter.Dialogs"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        Title="Коневерты и наклейки" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="employersAndStickersTabs">
+            <TabItem Header="Конверты">
+                <StackPanel>
+                    <TextBlock Text="Адресс получателя" />
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBox HorizontalAlignment="Left" Height="150" Width="700"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox />
+                        <TextBlock Margin="15, 0, 0, 0" Text="Добавить почтовую марку" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Обратный адрес" />
+                        <CheckBox Margin="125, 0, 0, 0" />
+                        <TextBlock Margin="15, 0, 0, 0" Text="не печатать" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ScrollViewer>
+                            <StackPanel>
+                                <TextBox HorizontalAlignment="Left" Height="150" Width="350"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <StackPanel MouseLeftButtonUp="openEmployerParameters" DataContext="envelope">
+                            <TextBlock Margin="0, 0, 15, 0" Width="200" Text="Образец" />
+                        </StackPanel>
+                        <StackPanel MouseLeftButtonUp="openEmployerParameters" DataContext="print">
+                            <TextBlock Text="Подача" Width="200" />
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Text="Перед печатью проверьте наличие конверта в принтере" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Margin="25, 0, 0, 0" Width="100" Content="Печать" />
+                            <Button Margin="25, 0, 0, 0" Width="100" Content="Добавить" />
+                        </StackPanel>
+                        <StackPanel Margin="250, 0, 0, 0" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button HorizontalAlignment="Right" Margin="25, 0, 0, 0" Width="100" Content="Параметры" />
+                            <Button HorizontalAlignment="Right" Margin="25, 0, 0, 0" Width="100" Content="Свойства марки" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Наклейки">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Адресс" />
+                        <CheckBox Margin="600, 0, 0, 0"/>
+                        <TextBlock Margin="15, 0, 0, 0" Text="Обратный адресс" />
+                    </StackPanel>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBox HorizontalAlignment="Left" Height="150" Width="700"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Width="350" Orientation="Vertical">
+                            <TextBlock Text="Печать" />
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton />
+                                <TextBlock Text="страница с одинаковыми наклейками" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton />
+                                <TextBlock Text="отдельная наклейка" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="строка" />
+                                <wpfTool:IntegerUpDown Margin="15, 0, 15, 0" Width="50" />
+                                <TextBlock Text="столбец" />
+                                <wpfTool:IntegerUpDown Margin="15, 0, 15, 0" Width="50" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel MouseLeftButtonUp="openStickParameters" Width="350" Orientation="Vertical">
+                            <TextBlock Text="Наклейка" />
+                            <TextBlock Text="Office ware, 30 на странице" />
+                            <TextBlock Text="Наклейка с адрессом" />
+                        </StackPanel>
+                    </StackPanel>
+                    <TextBlock Text="Перед печатью проверьте наличие конверта в принтере" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Margin="25, 0, 0, 0" Width="100" Content="Печать" />
+                            <Button Margin="25, 0, 0, 0" Width="100" Content="Добавить" />
+                        </StackPanel>
+                        <StackPanel Margin="250, 0, 0, 0" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button HorizontalAlignment="Right" Margin="25, 0, 0, 0" Width="100" Content="Параметры" />
+                            <Button HorizontalAlignment="Right" Margin="25, 0, 0, 0" Width="100" Content="Свойства марки" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
