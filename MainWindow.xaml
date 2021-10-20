@@ -10,7 +10,9 @@
         Title="Office Ware Documents"
         Height="800"
         Width="640"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        KeyUp="shortcutHotkeyHandler"
+        >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
@@ -131,7 +133,7 @@
                 <MenuItem Header="Word art"></MenuItem>
                 <MenuItem Header="Добавить буквицу"></MenuItem>
                 <MenuItem Header="Добавить строки подписи"></MenuItem>
-                <MenuItem Header="Дата и время"></MenuItem>
+                <MenuItem Click="openDataAndTime" Header="Дата и время"></MenuItem>
                 <MenuItem Header="Объект">
                     <MenuItem Header="Объект"></MenuItem>
                     <MenuItem Click="textFromFileHandler" Header="Текст из файла"></MenuItem>
@@ -369,6 +371,8 @@
                     <Viewbox Canvas.Top="25" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
                         <StackPanel x:Name="pages" Orientation="Vertical">
                             <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
+
+                                
                                 <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450" Background="Transparent" />
                             </Canvas>
                         </StackPanel>

@@ -1,0 +1,91 @@
+﻿<Window x:Class="documenter.Dialogs.FindAndReplace"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:documenter.Dialogs"
+        mc:Ignorable="d"
+        Title="Найти и заменить" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="findAndReplaceTabs">
+            <TabItem Header="Найти">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Height="20"  Orientation="Horizontal">
+                        <TextBlock Text="Найти:" />
+                        <TextBox Margin="50, 0, 0, 0" Height="20" Width="500" Text="" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Click="greatherHandler" Content="Больше >>" />
+                        <Button Margin="50, 0, 0, 0" Click="selectDrivenReadingHandler" Content="Выделение при чтении" />
+                        <Button Margin="50, 0, 0, 0" Click="areaOfSearchHandler" Content="Область поиска" />
+                        <Button Margin="50, 0, 0, 0" Click="findNextHandler" Content="Найти далее" />
+                        <Button Margin="50, 0, 0, 0" Click="closeFindAndReplaceHandler" Content="Отмена" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Заменить">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Height="20"  Orientation="Horizontal">
+                        <TextBlock Text="Найти:" />
+                        <TextBox Margin="50, 0, 0, 0" Height="20" Width="500" Text="" />
+                    </StackPanel>
+                    <StackPanel Margin="0, 20, 0, 0" Height="20"  Orientation="Horizontal">
+                        <TextBlock Text="Заменить на:" />
+                        <TextBox Margin="15, 0, 0, 0" Height="20" Width="500" Text="" />
+                    </StackPanel>
+                    <StackPanel Margin="0, 20, 0, 0" Orientation="Horizontal">
+                        <Button Click="greatherHandler" Content="Больше >>" />
+                        <Button Margin="50, 0, 0, 0" Click="replaceHandler" Content="Заменить" />
+                        <Button Margin="50, 0, 0, 0" Click="replaceAllHandler" Content="Заменить все" />
+                        <Button Margin="50, 0, 0, 0" Click="findNextHandler" Content="Найти далее" />
+                        <Button Margin="50, 0, 0, 0" Click="closeFindAndReplaceHandler" Content="Отмена" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem  Header="Перейти">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="250" Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Объект перехода:" />
+                            <ScrollViewer Height="125">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Страница" />
+                                    <TextBlock Text="Раздел" />
+                                    <TextBlock Text="Строка" />
+                                    <TextBlock Text="Закладка" />
+                                    <TextBlock Text="Примечание" />
+                                    <TextBlock Text="Сноска" />
+                                    <TextBlock Text="Концевая сноска" />
+                                    <TextBlock Text="Поле" />
+                                    <TextBlock Text="Таблица" />
+                                    <TextBlock Text="Рисунок" />
+                                    <TextBlock Text="Уравнение" />
+                                    <TextBlock Text="Объект" />
+                                    <TextBlock Text="Заголовок" />
+                                </StackPanel>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="35, 0, 0, 0" Orientation="Vertical">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Введите номер страницы:" />
+                            <TextBox Margin="15, 0, 0, 0" Height="20" Width="500" Text="" />
+                            <TextBlock Width="390" TextWrapping="Wrap" Text="Для перехода вперёд и назад относительно текущего положения используйте знаки + и -. Пример: +4 соответствует переходу вперёд на четыре элемента (например, страницы)." />
+                        </StackPanel>
+                        <StackPanel Margin="0, 20, 0, 0" Orientation="Horizontal">
+                            <Button Click="greatherHandler" Content="Назад" />
+                            <Button Margin="50, 0, 0, 0" Click="replaceHandler" Content="Далее" />
+                            <Button Margin="50, 0, 0, 0" Click="closeFindAndReplaceHandler" Content="Закрыть" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

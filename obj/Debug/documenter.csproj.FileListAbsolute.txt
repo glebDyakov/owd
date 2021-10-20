@@ -48,3 +48,9 @@ C:\wpfprojects\documenter\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\wpfprojects\documenter\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\wpfprojects\documenter\obj\Debug\Dialogs\StickParameters.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\StickParameters.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\StatisticsDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\StatisticsDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\FindAndReplace.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\FindAndReplace.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\DateAndTimeDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\DateAndTimeDialog.baml

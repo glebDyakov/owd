@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\wpfprojects\documenter\App.xaml
-9-1542324799
+11-1223577959
 
-14762756128
+17-1140859977
 22-1270761069
-Dialogs\AreaOfSelection.xaml;Dialogs\ColorDialog.xaml;Dialogs\EnvelopeParameters.xaml;Dialogs\EnvelopesAndStickers.xaml;Dialogs\Settings.xaml;Dialogs\StatisticsDialog.xaml;Dialogs\StickParameters.xaml;Dialogs\TableDialog.xaml;MainWindow.xaml;
+Dialogs\AreaOfSelection.xaml;Dialogs\ColorDialog.xaml;Dialogs\DateAndTimeDialog.xaml;Dialogs\EnvelopeParameters.xaml;Dialogs\EnvelopesAndStickers.xaml;Dialogs\FindAndReplace.xaml;Dialogs\Settings.xaml;Dialogs\StatisticsDialog.xaml;Dialogs\StickParameters.xaml;Dialogs\TableDialog.xaml;MainWindow.xaml;
 
-True
+False
 

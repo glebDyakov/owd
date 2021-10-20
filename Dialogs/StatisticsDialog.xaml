@@ -19,33 +19,33 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Страниц" />
-                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+                <TextBlock x:Name="pagesCount" Margin="700, 0, 0, 0" Text="1" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Слов" />
-                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+                <TextBlock x:Name="wordsCount" Margin="700, 0, 0, 0" Text="1" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Знаков (без пробелов)" />
-                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+                <TextBlock x:Name="charsWithoutSpacesCount" Margin="600, 0, 0, 0" Text="1" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Знаков (с пробелами)" />
-                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+                <TextBlock  x:Name="charsWithSpacesCount" Margin="600, 0, 0, 0" Text="1" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Абзацев" />
-                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+                <TextBlock  x:Name="paragraphsCount" Margin="700, 0, 0, 0" Text="1" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Строк" />
-                <TextBlock Margin="700, 0, 0, 0" Text="1" />
+                <TextBlock x:Name="linesCount" Margin="700, 0, 0, 0" Text="1" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <CheckBox Checked="refreshStatistics" Unchecked="refreshStatistics" />
                 <TextBlock Margin="25, 0, 0, 0" Text="Учитывать надписи и сноски" />
             </StackPanel>
-            <Button Content="Закрыть" />
+            <Button Click="closeStatisticsDialog" Content="Закрыть" />
         </StackPanel>
     </Grid>
 </Window>

@@ -43,6 +43,8 @@ namespace documenter
             initialWidth = page.Width;
             initialHeight = page.Height;
 
+            fontWeightBolder.Focus();
+
         }
 
         private void fontWeightBolderHandler(object sender, RoutedEventArgs e)
@@ -958,9 +960,9 @@ namespace documenter
                 countPages++;
                 foreach (TextBox paragraph in page.Children) {
                     words += paragraph.Text.Split(new char[] { ' ', '/' }).Length;
-                    foreach (char charWithSpace in paragraph.Text) {
+                    foreach (char charWithSpace in paragraph.Text.ToCharArray()) {
                         charsWithSpaces++;
-                        if (charWithSpace == ' ') {
+                        if (charWithSpace != ' ') {
                             charsWithoutSpaces++;
                         }
                     }
@@ -970,6 +972,31 @@ namespace documenter
             }
             Dialogs.StatisticsDialog statisticsDialog = new Dialogs.StatisticsDialog(countPages, words, charsWithoutSpaces, charsWithSpaces, paragraphs, lines);
             statisticsDialog.Show();
+        }
+
+        private void shortcutHotkeyHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F && (Keyboard.Modifiers & ModifierKeys.Control) > 0)
+            {
+                Dialogs.FindAndReplace findAndReplace = new Dialogs.FindAndReplace("find");
+                findAndReplace.Show();
+            }
+            else if (e.Key == Key.G && (Keyboard.Modifiers & ModifierKeys.Control) > 0)
+            {
+                Dialogs.FindAndReplace findAndReplace = new Dialogs.FindAndReplace("goto");
+                findAndReplace.Show();
+            }
+            else if (e.Key == Key.H && (Keyboard.Modifiers & ModifierKeys.Control) > 0)
+            {
+                Dialogs.FindAndReplace findAndReplace = new Dialogs.FindAndReplace("replace");
+                findAndReplace.Show();
+            }
+        }
+
+        private void openDataAndTime(object sender, RoutedEventArgs e)
+        {
+            Dialogs.DateAndTimeDialog dateAndTimeDialog = new Dialogs.DateAndTimeDialog();
+            dateAndTimeDialog.Show();
         }
     }
 }

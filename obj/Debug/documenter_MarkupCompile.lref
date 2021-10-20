@@ -8,4 +8,7 @@ FC:\wpfprojects\documenter\Dialogs\Settings.xaml;;
 FC:\wpfprojects\documenter\Dialogs\StickParameters.xaml;;
 FC:\wpfprojects\documenter\Dialogs\TableDialog.xaml;;
 FC:\wpfprojects\documenter\MainWindow.xaml;;
+FC:\wpfprojects\documenter\Dialogs\StatisticsDialog.xaml;;
+FC:\wpfprojects\documenter\Dialogs\FindAndReplace.xaml;;
+FC:\wpfprojects\documenter\Dialogs\DateAndTimeDialog.xaml;;
 
