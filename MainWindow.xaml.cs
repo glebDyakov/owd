@@ -415,7 +415,8 @@ namespace documenter
 
         private void sortHandler(object sender, RoutedEventArgs e)
         {
-
+            Dialogs.SortDialog sortDialog = new Dialogs.SortDialog();
+            sortDialog.Show();
         }
 
         private void showAllCharsHandler(object sender, RoutedEventArgs e)
@@ -997,6 +998,90 @@ namespace documenter
         {
             Dialogs.DateAndTimeDialog dateAndTimeDialog = new Dialogs.DateAndTimeDialog();
             dateAndTimeDialog.Show();
+        }
+
+        private void selectHAllHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void selectAllFragmentsHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void acceptCorrections(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Документ не содержит ни примечаний, ни исправлений.", "Office ware Documents", MessageBoxButton.OK);
+        }
+
+        private void rejectAndNextCorrectionHandler(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Документ не содержит ни примечаний, ни исправлений.", "Office ware Documents", MessageBoxButton.OK);
+        }
+
+        private void previousCorrectionHandler(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Документ не содержит ни примечаний, ни исправлений.", "Office ware Documents", MessageBoxButton.OK);
+        }
+
+        private void nextCorrectionHandler(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Документ не содержит ни примечаний, ни исправлений.", "Office ware Documents", MessageBoxButton.OK);
+        }
+
+        private void refreshTableHandler(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("В документе нет оглавления, которое можно было бы обновить. Вы можете вставить его на вкладке ''Ссылки''.", "Office ware Documents", MessageBoxButton.OK);
+        }
+
+        private void levelOneHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.FontSize = 24;
+        }
+
+        private void notIncldeInTableOfContentsHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.FontSize = 14;
+        }
+
+        private void levelTwoHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.FontSize = 18;
+        }
+
+        private void levelThreeHandler(object sender, RoutedEventArgs e)
+        {
+            fontWeightBolder.FontSize = 14;
+        }
+
+        private void openTableOfReferenses(object sender, RoutedEventArgs e)
+        {
+            Dialogs.TableOfReferenses tableOfReferenses = new Dialogs.TableOfReferenses();
+            tableOfReferenses.Show();
+        }
+
+        private void markReferenseHandler(object sender, RoutedEventArgs e)
+        {
+            Dialogs.ReferenseDialog referenseDialog = new Dialogs.ReferenseDialog();
+            referenseDialog.Show();
+        }
+
+        private void crossReferencesHandler(object sender, RoutedEventArgs e)
+        {
+            Dialogs.CrossReferencesDialog crossReferencesDialog = new Dialogs.CrossReferencesDialog();
+            crossReferencesDialog.Show();
+        }
+         private void insertTitleHandler(object sender, RoutedEventArgs e)
+        {
+            Dialogs.TitleDialog titleDialog = new Dialogs.TitleDialog();
+            titleDialog.Show();
+        }
+
+        private void listOfIllustrationsHandler(object sender, RoutedEventArgs e)
+        {
+            Dialogs.ListOfIllustrationsDialog listOfIllustrationsDialog = new Dialogs.ListOfIllustrationsDialog();
+            listOfIllustrationsDialog.Show();
         }
     }
 }

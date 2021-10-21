@@ -1,0 +1,47 @@
+﻿<Window x:Class="documenter.Dialogs.SortParametersDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:documenter.Dialogs"
+        mc:Ignorable="d"
+        Title="Параметры сортировки" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel>    
+            <TextBlock Margin="0, 0, 0, 0" Text="Разделитель полей" />
+            <StackPanel Orientation="Horizontal">
+                <RadioButton IsChecked="true" />
+                <TextBlock Text="знак табуляции" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton IsChecked="true" />
+                <TextBlock Text="точка табуляции" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton IsChecked="true" />
+                <TextBlock Text="другой" />
+                <TextBox Margin="25, 0, 0, 0" Width="25" />
+            </StackPanel>
+            <TextBlock Margin="0, 0, 0, 0" Text="Параметры сортировки" />
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True" />
+                <TextBlock Text="только столбцы" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="True" />
+                <TextBlock Text="учитывать регистр" />
+            </StackPanel>
+            <TextBlock Margin="0, 0, 0, 0" Text="Язык" />
+            <ComboBox SelectedIndex="1" Width="200" HorizontalAlignment="Left">
+                <ComboBoxItem Content="английский (США)" />
+                <ComboBoxItem Content="русский" />
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Window>

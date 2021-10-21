@@ -93,7 +93,12 @@
                 </MenuItem>
                 <MenuItem Click="findHandler" Header="Найти"></MenuItem>
                 <MenuItem Click="replaceHandler" Header="Заменить"></MenuItem>
-                <MenuItem Click="selectHandler" Header="Выделить"></MenuItem>
+                <MenuItem Header="Выделить">
+                    <MenuItem Click="selectHAllHandler" Header="Выделить всё"></MenuItem>
+                    <MenuItem Click="selectHandler" Header="Выбор объектов"></MenuItem>
+                    <MenuItem Click="selectAllFragmentsHandler" Header="Выделить все фрагменты текста с одинаковым форматированием"></MenuItem>
+                    <MenuItem Click="toggleAreaOfSelection" Header="Область выделения"></MenuItem>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Вставка">
                 <MenuItem Header="Страницы">
@@ -123,7 +128,7 @@
                 <MenuItem Header="Ссылки">
                     <MenuItem Click="createLinkHandler" Header="Ссылка"></MenuItem>
                     <MenuItem Click="videoFromInternerHandler" Header="Закладка"></MenuItem>
-                    <MenuItem Click="videoFromInternerHandler" Header="Перекрёстная ссылка"></MenuItem>
+                    <MenuItem Click="crossReferencesHandler" Header="Перекрёстная ссылка"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Примечание"></MenuItem>
                 <MenuItem Header="Верхний колонтитул"></MenuItem>
@@ -229,8 +234,13 @@
             </MenuItem>
             <MenuItem Header="Ссылки">
                 <MenuItem Header="Оглавление"></MenuItem>
-                <MenuItem Header="Добавить текст"></MenuItem>
-                <MenuItem Header="Обновить таблицу"></MenuItem>
+                <MenuItem Header="Добавить текст">
+                    <MenuItem Click="notIncldeInTableOfContentsHandler" Header="Не включать в оглавление"></MenuItem>
+                    <MenuItem Click="levelOneHandler"  Header="Уровень 1"></MenuItem>
+                    <MenuItem Click="levelTwoHandler" Header="Уровень 2"></MenuItem>
+                    <MenuItem Click="levelThreeHandler" Header="Уровень 3"></MenuItem>
+                </MenuItem>
+                <MenuItem Click="refreshTableHandler" Header="Обновить таблицу"></MenuItem>
                 <MenuItem Header="Вставить сноску"></MenuItem>
                 <MenuItem Header="Вставить концевую сноску"></MenuItem>
                 <MenuItem Header="Следующая сноска"></MenuItem>
@@ -240,15 +250,15 @@
                 <MenuItem Header="Управление источниками"></MenuItem>
                 <MenuItem Header="Стиль"></MenuItem>
                 <MenuItem Header="Список литературы"></MenuItem>
-                <MenuItem Header="Вставить название"></MenuItem>
-                <MenuItem Header="Список иллюстраций"></MenuItem>
+                <MenuItem Click="insertTitleHandler" Header="Вставить название"></MenuItem>
+                <MenuItem Click="listOfIllustrationsHandler"  Header="Список иллюстраций"></MenuItem>
                 <MenuItem Header="Обновить таблицу"></MenuItem>
                 <MenuItem Header="Перекрёстная ссылка"></MenuItem>
                 <MenuItem Header="Пометить элемент"></MenuItem>
                 <MenuItem Header="Предметный указатель"></MenuItem>
                 <MenuItem Header="Обновить указатель"></MenuItem>
-                <MenuItem Header="Поместить ссылку"></MenuItem>
-                <MenuItem Header="Таблица ссылок"></MenuItem>
+                <MenuItem Click="markReferenseHandler" Header="Пометить ссылку"></MenuItem>
+                <MenuItem Click="openTableOfReferenses" Header="Таблица ссылок"></MenuItem>
                 <MenuItem Header="Обновить таблицу ссылок"></MenuItem>
             </MenuItem>
             <MenuItem Header="Рассылки">
@@ -287,10 +297,10 @@
                 <MenuItem Header="Следующее"></MenuItem>
                 <MenuItem Header="Показать примечания"></MenuItem>
                 <MenuItem Header="Запись исправлений"></MenuItem>
-                <MenuItem Header="Принять"></MenuItem>
-                <MenuItem Header="Отклонить и перейти к следующему"></MenuItem>
-                <MenuItem Header="Предыдущее исправление"></MenuItem>
-                <MenuItem Header="Следующее исправление"></MenuItem>
+                <MenuItem Click="acceptCorrections" Header="Принять"></MenuItem>
+                <MenuItem Click="rejectAndNextCorrectionHandler" Header="Отклонить и перейти к следующему"></MenuItem>
+                <MenuItem Click="previousCorrectionHandler" Header="Предыдущее исправление"></MenuItem>
+                <MenuItem Click="nextCorrectionHandler" Header="Следующее исправление"></MenuItem>
                 <MenuItem Header="Сравнить"></MenuItem>
                 <MenuItem Header="Защитить"></MenuItem>
                 <MenuItem Header="Скрыть рукописные фрагменты"></MenuItem>
@@ -345,29 +355,29 @@
         <ScrollViewer x:Name="mainScroll"  IsEnabled="True" CanContentScroll="True" Grid.Column="0" Grid.Row="1">
             <DockPanel>
                 <StackPanel  x:Name="areaOfSelection" Visibility="Collapsed" Orientation="Vertical" Background="AliceBlue" Width="275" DockPanel.Dock="Right">
-                    <StackPanel Margin="10" Orientation="Horizontal">
-                        <TextBlock Cursor="SizeAll" Margin="10" Text="Выделение" Foreground="DarkBlue" FontSize="20"></TextBlock>
                         <StackPanel Margin="10" Orientation="Horizontal">
-                            <Button Width="30" Margin="0, 0, 0, 0" Content="˅">
-                                <Button.ContextMenu>
-                                    <ContextMenu Name="cm" StaysOpen="true">
-                                        <MenuItem Click="moveAreaOfSelectionHandler" Header="Переместить"/>
-                                        <MenuItem Header="Изменить размер"/>
-                                        <MenuItem Click="toggleAreaOfSelection" Header="Закрыть"/>
-                                    </ContextMenu>
-                                </Button.ContextMenu>
-                            </Button>
-                            <Button Click="toggleAreaOfSelection" Width="30" Margin="10, 0, 0, 0" Content="x" />
+                            <TextBlock Cursor="SizeAll" Margin="10" Text="Выделение" Foreground="DarkBlue" FontSize="20"></TextBlock>
+                            <StackPanel Margin="10" Orientation="Horizontal">
+                                <Button Width="30" Margin="0, 0, 0, 0" Content="˅">
+                                    <Button.ContextMenu>
+                                        <ContextMenu Name="cm" StaysOpen="true">
+                                            <MenuItem Click="moveAreaOfSelectionHandler" Header="Переместить"/>
+                                            <MenuItem Header="Изменить размер"/>
+                                            <MenuItem Click="toggleAreaOfSelection" Header="Закрыть"/>
+                                        </ContextMenu>
+                                    </Button.ContextMenu>
+                                </Button>
+                                <Button Click="toggleAreaOfSelection" Width="30" Margin="10, 0, 0, 0" Content="x" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="15" Orientation="Horizontal">
+                            <Button Margin="15, 15, 0, 15" Content="Показать все" />
+                            <Button Margin="15, 15, 0, 15" Content="Скрыть все" />
+                            <Button Margin="15, 15, 0, 15" Content="^" />
+                            <Button Margin="15, 15, 0, 15" Content="˅" />
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="15" Orientation="Horizontal">
-                        <Button Margin="15, 15, 0, 15" Content="Показать все" />
-                        <Button Margin="15, 15, 0, 15" Content="Скрыть все" />
-                        <Button Margin="15, 15, 0, 15" Content="^" />
-                        <Button Margin="15, 15, 0, 15" Content="˅" />
-                    </StackPanel>
-                </StackPanel>
-                <Canvas Panel.ZIndex="-1" DockPanel.Dock="Left" x:Name="backdrop" Height="800" Background="Lavender">
+                    <Canvas Panel.ZIndex="-1" DockPanel.Dock="Left" x:Name="backdrop" Height="800" Background="Lavender">
                     <Viewbox Canvas.Top="25" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
                         <StackPanel x:Name="pages" Orientation="Vertical">
                             <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">

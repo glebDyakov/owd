@@ -1,0 +1,143 @@
+﻿<Window x:Class="documenter.Dialogs.TableOfContentsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:documenter.Dialogs"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        Title="TableOfContentsDialog" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl >
+            <TabItem Header="Указатель">
+
+            </TabItem>
+            <TabItem Header="Оглавление">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Образец печатного документа" />
+                            <ScrollViewer>
+                                <StackPanel MaxHeight="200" MinWidth="300" Orientation="Vertical">
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                </StackPanel>
+                            </ScrollViewer>
+                            <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                                <CheckBox IsChecked="True" />
+                                <TextBlock Margin="10, 0, 0, 0" Text="Показать номера страниц" />
+                            </StackPanel>
+                            <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                                <CheckBox IsChecked="True" />
+                                <TextBlock Margin="10, 0, 0, 0" Text="Номера страниц по правому краю" />
+                            </StackPanel>
+                            <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                                <TextBlock Margin="10, 0, 0, 0" Text="Заполнитель" />
+                                <ComboBox Width="150" Margin="10, 0, 0, 0" SelectedIndex="1">
+                                    <ComboBoxItem Content="нет" />
+                                    <ComboBoxItem Content=".........." />
+                                    <ComboBoxItem Content="_ _ _ _ _ " />
+                                    <ComboBoxItem Content="__________" />
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="100, 0, 0, 0" Orientation="Vertical">
+                            <TextBlock Text="Образец веб-документа:" />
+                            <ScrollViewer>
+                                <StackPanel MaxHeight="200" MinWidth="300" Orientation="Vertical">
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                    <TextBlock Text="Преценденты" />
+                                </StackPanel>
+                            </ScrollViewer>
+                            <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                                <CheckBox IsChecked="True" />
+                                <TextBlock Margin="10, 0, 0, 0" Text="Гиперссылки вместо номеров страниц" />
+                            </StackPanel>
+                        </StackPanel>
+
+                    </StackPanel>
+                    <TextBlock Text="Общие" />
+                    <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                        <TextBlock Margin="10, 0, 0, 0" Text="Форматы" />
+                        <ComboBox Width="150" Margin="10, 0, 0, 0" SelectedIndex="1">
+                            <ComboBoxItem Content="Из шаблона" />
+                            <ComboBoxItem Content="Класический" />
+                            <ComboBoxItem Content="Изысканный" />
+                            <ComboBoxItem Content="Центральный" />
+                            <ComboBoxItem Content="Формальный" />
+                            <ComboBoxItem Content="Простой" />
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                        <TextBlock Margin="10, 0, 0, 0" Text="уровни" />
+                        <wpfTool:IntegerUpDown Width="150" Margin="10, 0, 0, 0" />
+                    </StackPanel>
+                    <StackPanel Margin="0, 10, 0, 0" Orientation="Horizontal" >
+                        <CheckBox IsChecked="True" />
+                        <TextBlock Margin="10, 0, 0, 0" Text="Полное название" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Width="125" Margin="0, 0, 20, 0" Content="Параметры" />
+                        <Button Width="125" Margin="0, 0, 20, 0" Content="Изменить" />
+                    </StackPanel>
+                    <StackPanel  Margin="0, 20, 0, 0"  HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Width="125" Margin="0, 0, 20, 0" Content="Ок" />
+                        <Button Width="125" Margin="0, 0, 20, 0" Content="Отмена" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Список иллюстраций">
+                
+            </TabItem>
+            <TabItem Header="Таблица ссылок">
+
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

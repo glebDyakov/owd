@@ -86,6 +86,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\CrossReferencesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\DateAndTimeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,7 +106,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\ListOfIllustrationsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\PointerDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ReferenseDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\SortDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\SortParametersDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,6 +139,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\TableDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\TableOfContentsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\TableOfReferenses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\TitleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +168,9 @@
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\CrossReferencesDialog.xaml.cs">
+      <DependentUpon>CrossReferencesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\DateAndTimeDialog.xaml.cs">
       <DependentUpon>DateAndTimeDialog.xaml</DependentUpon>
     </Compile>
@@ -144,8 +183,23 @@
     <Compile Include="Dialogs\FindAndReplace.xaml.cs">
       <DependentUpon>FindAndReplace.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ListOfIllustrationsDialog.xaml.cs">
+      <DependentUpon>ListOfIllustrationsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PointerDialog.xaml.cs">
+      <DependentUpon>PointerDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ReferenseDialog.xaml.cs">
+      <DependentUpon>ReferenseDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SortDialog.xaml.cs">
+      <DependentUpon>SortDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\SortParametersDialog.xaml.cs">
+      <DependentUpon>SortParametersDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\StatisticsDialog.xaml.cs">
       <DependentUpon>StatisticsDialog.xaml</DependentUpon>
@@ -155,6 +209,15 @@
     </Compile>
     <Compile Include="Dialogs\TableDialog.xaml.cs">
       <DependentUpon>TableDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TableOfContentsDialog.xaml.cs">
+      <DependentUpon>TableOfContentsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TableOfReferenses.xaml.cs">
+      <DependentUpon>TableOfReferenses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TitleDialog.xaml.cs">
+      <DependentUpon>TitleDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -54,3 +54,7 @@ C:\wpfprojects\documenter\obj\Debug\Dialogs\FindAndReplace.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\FindAndReplace.baml
 C:\wpfprojects\documenter\obj\Debug\Dialogs\DateAndTimeDialog.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\DateAndTimeDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\SortDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\SortParametersDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\SortDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\SortParametersDialog.baml
