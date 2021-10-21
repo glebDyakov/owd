@@ -17,24 +17,24 @@
             <StackPanel Width="450" Orientation="Vertical">
                 <TextBlock Text="Форматы:"/>
                 <ScrollViewer Margin="0, 5, 0, 0" Height="350">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="20.10.2021" />
-                        <TextBlock Text="среда, 20 октября 2021 г." />
-                        <TextBlock Text="20 октября 2021 г." />
-                        <TextBlock Text="20.10.21" />
-                        <TextBlock Text="2021-10-20" />
-                        <TextBlock Text="20-окт-21" />
-                        <TextBlock Text="20/10/2021" />
-                        <TextBlock Text="20 окт. 21 г." />
-                        <TextBlock Text="20/10/21" />
-                        <TextBlock Text="октябрь 21" />
-                        <TextBlock Text="окт-21" />
-                        <TextBlock Text="20.10.2021 17:00" />
-                        <TextBlock Text="20.10.2021 17:00:36" />
-                        <TextBlock Text="5:00" />
-                        <TextBlock Text="5:00:36" />
-                        <TextBlock Text="17:00" />
-                        <TextBlock Text="17:00:36" />
+                    <StackPanel x:Name="formats" Orientation="Vertical">
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="0"  Background="AliceBlue" Text="20.10.2021" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="1" Text="среда, 20 октября 2021 г." />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="2" Text="20 октября 2021 г." />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="3" Text="20.10.21" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="4" Text="2021-10-20" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="5" Text="20-окт-21" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="6" Text="20/10/2021" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="7" Text="20 окт. 21 г." />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="8" Text="20/10/21" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="9" Text="октябрь 21" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="10" Text="окт-21" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="11" Text="20.10.2021 17:00" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="12" Text="20.10.2021 17:00:36" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="13" Text="5:00" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="14" Text="5:00:36" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="15" Text="17:00" />
+                        <TextBlock MouseUp="selectFormatHandler" DataContext="16" Text="17:00:36" />
                     </StackPanel>
                 </ScrollViewer>
                 <Button Width="125" HorizontalAlignment="Left" Margin="25, 20, 0, 0" Content="По умолчанию" />
