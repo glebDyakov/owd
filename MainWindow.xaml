@@ -50,8 +50,8 @@
                     <MenuItem Click="fontFamilyChangeToVerdana" Header="Verdana"></MenuItem>
                 </MenuItem>
                 <MenuItem Click="fontSizeHandler"  Header="Размер шрифта"></MenuItem>
-                <MenuItem Click="upperCaseHandler" Header="Верхний регистр"></MenuItem>
-                <MenuItem Click="lowerCaseHandler" Header="Малый регистр"></MenuItem>
+                <MenuItem Click="upperCaseHandler" Header="увеличить размер шрифта"></MenuItem>
+                <MenuItem Click="lowerCaseHandler" Header="уменьшить размер шрифта"></MenuItem>
                 <MenuItem Header="Регистр"></MenuItem>
                 <MenuItem Click="clearStylesHandler" Header="Очистить форматирование"></MenuItem>
                 <MenuItem Click="fontWeightBolderHandler" Header="Жирный текст"></MenuItem>
@@ -378,10 +378,10 @@
                     </StackPanel>
                 </StackPanel>
                 <Canvas Panel.ZIndex="-1" DockPanel.Dock="Right" x:Name="backdrop" Height="800" Background="Lavender">
-                    <Viewbox Canvas.Top="25" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
+                    <Viewbox Canvas.Top="35" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
                         <StackPanel x:Name="pages" Orientation="Vertical">
-                            <Canvas x:Name="page" Canvas.Top="25" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
-                                <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="50" Canvas.Left="50" TextWrapping="Wrap" Width="450" Background="Transparent" />
+                            <Canvas x:Name="page" Canvas.Top="0" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
+                                <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="35" Canvas.Left="50" TextWrapping="Wrap" Width="450" Background="Transparent" />
                             </Canvas>
                         </StackPanel>
                     </Viewbox>

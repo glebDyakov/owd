@@ -84,12 +84,19 @@ namespace documenter
 
         private void upperCaseHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text = fontWeightBolder.Text.ToUpper();
+            //fontWeightBolder.Text = fontWeightBolder.Text.ToUpper();
+            if (fontWeightBolder.FontSize < 72) { 
+                fontWeightBolder.FontSize += 1;
+            }
         }
 
         private void lowerCaseHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text = fontWeightBolder.Text.ToLower();
+            //fontWeightBolder.Text = fontWeightBolder.Text.ToLower();
+            if (fontWeightBolder.FontSize > 10)
+            {
+                fontWeightBolder.FontSize -= 1;
+            }
         }
 
         private void textShadowHandler(object sender, RoutedEventArgs e)
@@ -446,7 +453,7 @@ namespace documenter
 
         public void inputHandler(object sender, TextCompositionEventArgs e)
         {
-            if (fontWeightBolder.Text.Length >= 60)
+            if (fontWeightBolder.Text.Length >= 60 && fontWeightBolder.SelectionStart == 60)
             {
                 
                 /*
@@ -478,8 +485,38 @@ namespace documenter
                 textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                 textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                 textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
-
+                
+            } 
+            else if (fontWeightBolder.Text.Length >= 60 && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length)
+            {
+                TextBox textBox = new TextBox();
+                textBox.Background = System.Windows.Media.Brushes.Transparent;
+                textBox.Width = 450;
+                textBox.BorderThickness = new Thickness(0);
+                textBox.MaxLines = 1;
+                textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                page.Children.Insert(lineCursor, textBox);
+                Canvas.SetTop(textBox, (lineCursor) * 35);
+                Canvas.SetLeft(textBox, 50);
+                textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                int paragraphsCursor = 0;
+                foreach (TextBox paragraph in page.Children)
+                {
+                    paragraphsCursor++;
+                    if (paragraphsCursor > lineCursor)
+                    {
+                        Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 35);
+                    }
+                }
+                ((TextBox)page.Children[lineCursor]).Text += fontWeightBolder.Text.Substring(fontWeightBolder.SelectionStart, fontWeightBolder.Text.Length - fontWeightBolder.SelectionStart);
+                ((TextBox)page.Children[lineCursor - 1]).Text = ((TextBox)page.Children[lineCursor - 1]).Text.Substring(0, ((TextBox)page.Children[lineCursor - 1]).Text.Length - 1);
+                ((TextBox)page.Children[lineCursor - 1]).SelectionStart = ((TextBox)page.Children[lineCursor - 1]).Text.Length;
+                //page.Children[lineCursor].Focus();
+                //fontWeightBolder = (TextBox)page.Children[lineCursor];
             }
+
         }
 
         private void changeLineFromCursor(object sender, MouseButtonEventArgs e)

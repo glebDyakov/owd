@@ -58,3 +58,17 @@ C:\wpfprojects\documenter\obj\Debug\Dialogs\SortDialog.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\SortParametersDialog.g.cs
 C:\wpfprojects\documenter\obj\Debug\Dialogs\SortDialog.baml
 C:\wpfprojects\documenter\obj\Debug\Dialogs\SortParametersDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\CrossReferencesDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\ListOfIllustrationsDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\PointerDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\ReferenseDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TableOfContentsDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TableOfReferenses.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TitleDialog.g.cs
+C:\wpfprojects\documenter\obj\Debug\Dialogs\CrossReferencesDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\ListOfIllustrationsDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\PointerDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\ReferenseDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TableOfContentsDialog.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TableOfReferenses.baml
+C:\wpfprojects\documenter\obj\Debug\Dialogs\TitleDialog.baml
