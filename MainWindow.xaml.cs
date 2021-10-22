@@ -29,6 +29,7 @@ namespace documenter
     public partial class MainWindow : Window
     {
 
+        public int maxCharsInParagraph = 50;
         public Style dropShadowScrollViewerStyle = null;
         public TextBox textBox = null;
         public int lineCursor = 1;
@@ -453,9 +454,9 @@ namespace documenter
 
         public void inputHandler(object sender, TextCompositionEventArgs e)
         {
-            if (fontWeightBolder.Text.Length >= 60 && fontWeightBolder.SelectionStart == 60)
+            if (fontWeightBolder.Text.Length >= maxCharsInParagraph && lineCursor == page.Children.Count)
             {
-                
+
                 /*
                     незаконченная логика добавления новой строки с номером строки  
                     StackPanel paragraph = new StackPanel();
@@ -485,9 +486,16 @@ namespace documenter
                 textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                 textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                 textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
-                
-            } 
-            else if (fontWeightBolder.Text.Length >= 60 && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length)
+
+            }
+            else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
+            {
+                lineCursor++;
+                page.Children[lineCursor - 1].Focus();
+                fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                fontWeightBolder.SelectionStart = 0;
+            }
+            else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length)
             {
                 TextBox textBox = new TextBox();
                 textBox.Background = System.Windows.Media.Brushes.Transparent;
@@ -510,11 +518,10 @@ namespace documenter
                         Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 35);
                     }
                 }
-                ((TextBox)page.Children[lineCursor]).Text += fontWeightBolder.Text.Substring(fontWeightBolder.SelectionStart, fontWeightBolder.Text.Length - fontWeightBolder.SelectionStart);
+                //((TextBox)page.Children[lineCursor]).Text += fontWeightBolder.Text.Substring(fontWeightBolder.SelectionStart, 1);
+                ((TextBox)page.Children[lineCursor]).Text += fontWeightBolder.Text.Substring(fontWeightBolder.SelectionStart, 1);
                 ((TextBox)page.Children[lineCursor - 1]).Text = ((TextBox)page.Children[lineCursor - 1]).Text.Substring(0, ((TextBox)page.Children[lineCursor - 1]).Text.Length - 1);
                 ((TextBox)page.Children[lineCursor - 1]).SelectionStart = ((TextBox)page.Children[lineCursor - 1]).Text.Length;
-                //page.Children[lineCursor].Focus();
-                //fontWeightBolder = (TextBox)page.Children[lineCursor];
             }
 
         }
