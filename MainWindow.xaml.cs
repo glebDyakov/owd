@@ -460,18 +460,20 @@ namespace documenter
 
                 /*
                     незаконченная логика добавления новой строки с номером строки  
-                    StackPanel paragraph = new StackPanel();
-                    paragraph.Orientation = Orientation.Horizontal;
-                    TextBox strokeNumber = new TextBox();
-                    strokeNumber.Text = (lineCursor + 1).ToString();
-                    paragraph.Children.Add(strokeNumber);
-                    paragraph.Children.Add(textBox);
-                    page.Children.Add(paragraph);
-                    Canvas.SetTop(paragraph, 25);
-                    Canvas.SetTop(paragraph, page.Children.Count * 35);
                 */
-
                 TextBox textBox = new TextBox();
+                StackPanel paragraph = new StackPanel();
+                paragraph.Orientation = Orientation.Horizontal;
+                TextBox strokeNumber = new TextBox();
+                strokeNumber.BorderThickness = new Thickness();
+                strokeNumber.Width = 50;
+                strokeNumber.Text = (lineCursor + 1).ToString();
+                paragraph.Children.Add(strokeNumber);
+                paragraph.Children.Add(textBox);
+                page.Children.Add(paragraph);
+                Canvas.SetLeft(paragraph, 50);
+                Canvas.SetTop(paragraph, page.Children.Count * 35);
+                
                 textBox.AcceptsTab = false;
                 textBox.IsTabStop = true;
                 //textBox.TabIndex = 9999;
@@ -480,9 +482,8 @@ namespace documenter
                 textBox.BorderThickness = new Thickness(0);
                 textBox.MaxLines = 1;
                 textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                page.Children.Add(textBox);
-
-                page.Children[lineCursor].Focus();
+                
+                ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                 lineCursor++;
                 Canvas.SetTop(textBox, page.Children.Count * 35);
                 Canvas.SetLeft(textBox, 50);
@@ -495,7 +496,7 @@ namespace documenter
             else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
             {
                 lineCursor++;
-                page.Children[lineCursor - 1].Focus();
+                ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
                 fontWeightBolder.SelectionStart = 0;
             }
@@ -554,23 +555,27 @@ namespace documenter
                 if (fontWeightBolder.SelectionStart <= 0 && lineCursor >= 2)
                 {
                     lineCursor--;
-                    page.Children[lineCursor - 1].Focus();
-                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                    page.Children.Remove((TextBox)page.Children[lineCursor]);
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
+                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    page.Children.Remove((StackPanel)page.Children[lineCursor]);
                     int paragraphCursor = 0;
-                    foreach(TextBox paragraph in page.Children)
+                    foreach(StackPanel paragraphGroup in page.Children)
                     {
-                        paragraphCursor++;
-                        if (paragraphCursor > lineCursor) {
-                            Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) - 35);
+                        foreach (UIElement paragraph in paragraphGroup.Children)
+                        {
+                            paragraphCursor++;
+                            if (paragraphCursor > lineCursor)
+                            {
+                                Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) - 35);
+                            }
                         }
                     }
                 } else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                 {
                     pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
                     page = (Canvas)pages.Children[pages.Children.Count - 1];
-                    fontWeightBolder = (TextBox)page.Children[page.Children.Count - 1];
-                    page.Children[page.Children.Count - 1].Focus();
+                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+                    ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
                     lineCursor = page.Children.Count;
                     backdrop.Height -= 650;
                 }
@@ -582,6 +587,18 @@ namespace documenter
                     if (lineCursor <= countLinesInPage)
                     {
                         TextBox textBox = new TextBox();
+                        StackPanel paragraph = new StackPanel();
+                        paragraph.Orientation = Orientation.Horizontal;
+                        TextBox strokeNumber = new TextBox();
+                        strokeNumber.BorderThickness = new Thickness();
+                        strokeNumber.Width = 50;
+                        strokeNumber.Text = (lineCursor + 1).ToString();
+                        paragraph.Children.Add(strokeNumber);
+                        paragraph.Children.Add(textBox);
+                        page.Children.Add(paragraph);
+                        Canvas.SetLeft(paragraph, 50);
+                        Canvas.SetTop(paragraph, page.Children.Count * 35);
+
                         textBox.AcceptsTab = false;
                         textBox.IsTabStop = true;
                         //textBox.TabIndex = 9999;
@@ -590,8 +607,10 @@ namespace documenter
                         textBox.BorderThickness = new Thickness(0);
                         textBox.MaxLines = 1;
                         textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                        page.Children.Add(textBox);
-                        page.Children[lineCursor].Focus();
+                        
+                        //page.Children.Add(paragraph);
+
+                        ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                         lineCursor++;
                         Canvas.SetTop(textBox, page.Children.Count * 35);
                         Canvas.SetLeft(textBox, 50);
@@ -607,7 +626,18 @@ namespace documenter
                 }
                 else
                 {
+
                     TextBox textBox = new TextBox();
+                    StackPanel paragraph = new StackPanel();
+                    paragraph.Orientation = Orientation.Horizontal;
+                    TextBox strokeNumber = new TextBox();
+                    strokeNumber.Text = (lineCursor + 1).ToString();
+                    paragraph.Children.Add(strokeNumber);
+                    paragraph.Children.Add(textBox);
+                    page.Children.Add(paragraph);
+                    Canvas.SetLeft(paragraph, 50);
+                    Canvas.SetTop(paragraph, page.Children.Count * 35);
+
                     //textBox.TabIndex = 9999;
                     textBox.AcceptsTab = false;
                     textBox.IsTabStop = true;
@@ -621,8 +651,11 @@ namespace documenter
                     fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);
                     textBox.Text = caretText;
                     lineCursor++;
-                    page.Children.Insert(lineCursor - 1, textBox);
-                    page.Children[lineCursor - 1].Focus();
+                    
+                    //page.Children.Insert(lineCursor - 1, textBox);
+                    page.Children.Insert(lineCursor - 1, paragraph);
+
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                     foreach (UIElement child in page.Children)
                     {
                         if (page.Children.IndexOf(child) >= lineCursor - 1)
@@ -642,7 +675,7 @@ namespace documenter
                 if (lineCursor >= 2) {
                     lineCursor--;
                     fontWeightBolder = (TextBox) page.Children[lineCursor - 1];
-                    page.Children[lineCursor - 1].Focus();
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
             else if (e.Key == Key.Down)
@@ -651,7 +684,7 @@ namespace documenter
                 {
                     lineCursor++;
                     fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                    page.Children[lineCursor - 1].Focus();
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
             else if (e.Key == Key.Left)
@@ -660,7 +693,7 @@ namespace documenter
                 {
                     lineCursor--;
                     fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                    page.Children[lineCursor - 1].Focus();
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
             else if (e.Key == Key.Right && fontWeightBolder.SelectionStart > fontWeightBolder.Text.Length - 1)
@@ -669,7 +702,7 @@ namespace documenter
                 {
                     lineCursor++;
                     fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                    page.Children[lineCursor - 1].Focus();
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
         }
@@ -685,7 +718,18 @@ namespace documenter
                 Stream myStream;
                 if ((myStream = ofd.OpenFile()) != null)
                 {
+
                     System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                    StackPanel paragraph = new StackPanel();
+                    paragraph.Orientation = Orientation.Horizontal;
+                    TextBox strokeNumber = new TextBox();
+                    strokeNumber.Text = (lineCursor + 1).ToString();
+                    paragraph.Children.Add(strokeNumber);
+                    paragraph.Children.Add(img);
+                    page.Children.Add(paragraph);
+                    Canvas.SetLeft(paragraph, 50);
+                    Canvas.SetTop(paragraph, page.Children.Count * 35);
+
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
                     //bitmapImage.UriSource = new Uri(ofd.FileName, UriKind.Relative);
@@ -695,7 +739,7 @@ namespace documenter
                     img.Width = 450;
                     img.Height = 450;
                     page.Children.Add(img);
-                    page.Children[lineCursor].Focus();
+                    ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                     lineCursor++;
                     Canvas.SetTop(img, page.Children.Count * 35);
                     Canvas.SetLeft(img, 50);
@@ -718,11 +762,18 @@ namespace documenter
         private void mustNumberOfStrokes(object sender, RoutedEventArgs e)
         {
             numberOfStrokes = true;
+            foreach (StackPanel paragraph in page.Children) {
+                paragraph.Children[0].Visibility = Visibility.Visible;
+            }
         }
 
         private void noneNumberOfStrokes(object sender, RoutedEventArgs e)
         {
             numberOfStrokes = false;
+            foreach (StackPanel paragraph in page.Children)
+            {
+                paragraph.Children[0].Visibility = Visibility.Hidden;
+            }
         }
 
         private void setZoomTwiHandrid(object sender, RoutedEventArgs e)
@@ -805,9 +856,22 @@ namespace documenter
                 handle = bitmap.GetHbitmap();
                 System.Windows.Controls.Image img = new System.Windows.Controls.Image();
                 img.Source = Imaging.CreateBitmapSourceFromHBitmap(handle, IntPtr.Zero, Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
-                page.Children.Add(img);
-                page.Children[lineCursor].Focus();
+                BitmapSizeOptions.FromEmptyOptions());
+
+                StackPanel paragraph = new StackPanel();
+                paragraph.Orientation = Orientation.Horizontal;
+                TextBox strokeNumber = new TextBox();
+                strokeNumber.Text = (lineCursor + 1).ToString();
+                paragraph.Children.Add(strokeNumber);
+                paragraph.Children.Add(img);
+                page.Children.Add(paragraph);
+                Canvas.SetLeft(paragraph, 50);
+                Canvas.SetTop(paragraph, page.Children.Count * 35);
+
+                //page.Children.Add(img);
+                page.Children.Add(paragraph);
+
+                ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                 lineCursor++;
                 Canvas.SetTop(img, page.Children.Count * 35);
                 Canvas.SetLeft(img, 50);
@@ -829,6 +893,17 @@ namespace documenter
 
         public void createNewPage() {
 
+            TextBox textBox = new TextBox();
+            StackPanel paragraph = new StackPanel();
+            paragraph.Orientation = Orientation.Horizontal;
+            TextBox strokeNumber = new TextBox();
+            strokeNumber.BorderThickness = new Thickness();
+            strokeNumber.Width = 50;
+            strokeNumber.Text = (lineCursor + 1).ToString();
+            paragraph.Children.Add(strokeNumber);
+            paragraph.Children.Add(textBox);
+            Canvas.SetLeft(paragraph, 50);
+            
             pageCursor++;
             Canvas newPage = new Canvas();
             newPage.Width = 540;
@@ -841,14 +916,20 @@ namespace documenter
             Canvas.SetLeft(newPage, 40);
             newPage.Background = System.Windows.Media.Brushes.White;
             page = newPage;
-            TextBox textBox = new TextBox();
+
             //textBox.TabIndex = 9999;
             textBox.AcceptsTab = false;
             textBox.IsTabStop = true;
             textBox.Background = System.Windows.Media.Brushes.Transparent;
-            newPage.Children.Add(textBox);
-            Canvas.SetTop(textBox, 25);
-            Canvas.SetLeft(textBox, 50);
+            
+            //newPage.Children.Add(textBox);
+            newPage.Children.Add(paragraph);
+
+            //Canvas.SetTop(textBox, 25);
+            //Canvas.SetLeft(textBox, 50);
+
+            Canvas.SetTop(paragraph, page.Children.Count * 35);
+
             textBox.Width = 450;
             textBox.BorderThickness = new Thickness(0);
             textBox.MaxLines = 1;
@@ -930,7 +1011,7 @@ namespace documenter
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
                     page.Children.Add(textBox);
-                    page.Children[lineCursor].Focus();
+                    ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                     lineCursor++;
                     Canvas.SetTop(textBox, page.Children.Count * 35);
                     Canvas.SetLeft(textBox, 50);
