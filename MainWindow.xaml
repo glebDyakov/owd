@@ -381,7 +381,7 @@
                     <Viewbox Canvas.Top="35" Canvas.Left="40" Stretch="Fill" x:Name="zoom">
                         <StackPanel x:Name="pages" Orientation="Vertical">
                             <Canvas x:Name="page" Canvas.Top="0" Canvas.Left="50" ClipToBounds="True" Width="540" Height="650" Background="White">
-                                <TextBox PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="35" Canvas.Left="50" TextWrapping="Wrap" Width="450" Background="Transparent" />
+                                <TextBox AcceptsTab="False" IsTabStop="True" KeyboardNavigation.TabNavigation="None" PreviewMouseUp="changeLineFromCursor" PreviewKeyDown="specialInputHandler" PreviewTextInput="inputHandler" MaxLines="1" x:Name="fontWeightBolder" BorderThickness="0" BorderBrush="Transparent" Canvas.Top="35" Canvas.Left="50" TextWrapping="Wrap" Width="450" Background="Transparent" />
                             </Canvas>
                         </StackPanel>
                     </Viewbox>

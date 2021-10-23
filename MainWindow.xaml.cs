@@ -471,6 +471,9 @@ namespace documenter
                 */
 
                 TextBox textBox = new TextBox();
+                textBox.AcceptsTab = false;
+                textBox.IsTabStop = true;
+                //textBox.TabIndex = 9999;
                 textBox.Background = System.Windows.Media.Brushes.Transparent;
                 textBox.Width = 450;
                 textBox.BorderThickness = new Thickness(0);
@@ -495,33 +498,40 @@ namespace documenter
                 fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
                 fontWeightBolder.SelectionStart = 0;
             }
-            else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length)
+            else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length && lineCursor < page.Children.Count)
             {
-                TextBox textBox = new TextBox();
-                textBox.Background = System.Windows.Media.Brushes.Transparent;
-                textBox.Width = 450;
-                textBox.BorderThickness = new Thickness(0);
-                textBox.MaxLines = 1;
-                textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                page.Children.Insert(lineCursor, textBox);
-                Canvas.SetTop(textBox, (lineCursor) * 35);
-                Canvas.SetLeft(textBox, 50);
-                textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
-                textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
-                textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
-                int paragraphsCursor = 0;
-                foreach (TextBox paragraph in page.Children)
-                {
-                    paragraphsCursor++;
-                    if (paragraphsCursor > lineCursor)
+                if (((TextBox)page.Children[lineCursor]).Text.Length == maxCharsInParagraph) {
+                    TextBox textBox = new TextBox();
+                    textBox.AcceptsTab = false;
+                    textBox.IsTabStop = true;
+                    //textBox.TabIndex = 9999;
+                    textBox.Background = System.Windows.Media.Brushes.Transparent;
+                    textBox.Width = 450;
+                    textBox.BorderThickness = new Thickness(0);
+                    textBox.MaxLines = 1;
+                    textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    page.Children.Insert(lineCursor, textBox);
+                    Canvas.SetTop(textBox, (lineCursor) * 35);
+                    Canvas.SetLeft(textBox, 50);
+                    textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                    textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                    textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                    int paragraphsCursor = 0;
+                    foreach (TextBox paragraph in page.Children)
                     {
-                        Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 35);
+                        paragraphsCursor++;
+                        if (paragraphsCursor > lineCursor)
+                        {
+                            Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 35);
+                        }
                     }
                 }
-                //((TextBox)page.Children[lineCursor]).Text += fontWeightBolder.Text.Substring(fontWeightBolder.SelectionStart, 1);
-                ((TextBox)page.Children[lineCursor]).Text += fontWeightBolder.Text.Substring(fontWeightBolder.SelectionStart, 1);
+
+                int tempCursotPosition = ((TextBox)page.Children[lineCursor - 1]).SelectionStart;
+
+                ((TextBox)page.Children[lineCursor]).Text = ((TextBox)page.Children[lineCursor]).Text.Insert(0, fontWeightBolder.Text.Substring(fontWeightBolder.Text.Length - 1, 1));
                 ((TextBox)page.Children[lineCursor - 1]).Text = ((TextBox)page.Children[lineCursor - 1]).Text.Substring(0, ((TextBox)page.Children[lineCursor - 1]).Text.Length - 1);
-                ((TextBox)page.Children[lineCursor - 1]).SelectionStart = ((TextBox)page.Children[lineCursor - 1]).Text.Length;
+                ((TextBox)page.Children[lineCursor - 1]).SelectionStart = tempCursotPosition;
             }
 
         }
@@ -558,10 +568,14 @@ namespace documenter
             }
             else if (e.Key == Key.Enter)
             {
-                if (lineCursor == page.Children.Count) {
+                if (lineCursor == page.Children.Count)
+                {
                     if (lineCursor <= 16)
                     {
                         TextBox textBox = new TextBox();
+                        textBox.AcceptsTab = false;
+                        textBox.IsTabStop = true;
+                        //textBox.TabIndex = 9999;
                         textBox.Background = System.Windows.Media.Brushes.Transparent;
                         textBox.Width = 450;
                         textBox.BorderThickness = new Thickness(0);
@@ -576,7 +590,8 @@ namespace documenter
                         textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                         textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                         textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
-                    } else
+                    }
+                    else
                     {
                         createNewPage();
                     }
@@ -584,6 +599,9 @@ namespace documenter
                 else
                 {
                     TextBox textBox = new TextBox();
+                    //textBox.TabIndex = 9999;
+                    textBox.AcceptsTab = false;
+                    textBox.IsTabStop = true;
                     textBox.Background = System.Windows.Media.Brushes.Transparent;
                     textBox.Width = 450;
                     textBox.BorderThickness = new Thickness(0);
@@ -598,8 +616,9 @@ namespace documenter
                     page.Children[lineCursor - 1].Focus();
                     foreach (UIElement child in page.Children)
                     {
-                        if(page.Children.IndexOf(child) >= lineCursor - 1) { 
-                             Canvas.SetTop(child, page.Children.IndexOf(child) * 35);
+                        if (page.Children.IndexOf(child) >= lineCursor - 1)
+                        {
+                            Canvas.SetTop(child, page.Children.IndexOf(child) * 35);
                         }
                     }
                     Canvas.SetLeft(textBox, 50);
@@ -814,6 +833,9 @@ namespace documenter
             newPage.Background = System.Windows.Media.Brushes.White;
             page = newPage;
             TextBox textBox = new TextBox();
+            //textBox.TabIndex = 9999;
+            textBox.AcceptsTab = false;
+            textBox.IsTabStop = true;
             textBox.Background = System.Windows.Media.Brushes.Transparent;
             newPage.Children.Add(textBox);
             Canvas.SetTop(textBox, 25);
@@ -890,6 +912,9 @@ namespace documenter
                     string file_text = File.ReadAllText(file_name);
                     
                     TextBox textBox = new TextBox();
+                    textBox.AcceptsTab = false;
+                    textBox.IsTabStop = true;
+                    //textBox.TabIndex = 9999;
                     textBox.Background = System.Windows.Media.Brushes.Transparent;
                     textBox.Width = 450;
                     textBox.BorderThickness = new Thickness(0);
@@ -1035,6 +1060,14 @@ namespace documenter
             {
                 Dialogs.FindAndReplace findAndReplace = new Dialogs.FindAndReplace("replace");
                 findAndReplace.Show();
+            }
+            else if (e.Key == Key.A && (Keyboard.Modifiers & ModifierKeys.Control) > 0)
+            {
+                foreach (TextBox uiElement in page.Children) {
+                    //uiElement.SelectAll();
+                    uiElement.SelectionStart = 0;
+                    uiElement.SelectionLength = uiElement.Text.Length;
+                }
             }
         }
 
