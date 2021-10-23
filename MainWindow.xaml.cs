@@ -37,6 +37,7 @@ namespace documenter
         public double initialWidth = 0;
         public double initialHeight = 0;
         public int pageCursor = 1;
+        public int countLinesInPage = 16;
         public MainWindow()
         {
             InitializeComponent();
@@ -550,13 +551,21 @@ namespace documenter
         {
             if (e.Key == Key.Back)
             {
-                if (fontWeightBolder.Text.Length <= 0 && lineCursor >= 2)
+                if (fontWeightBolder.SelectionStart <= 0 && lineCursor >= 2)
                 {
                     lineCursor--;
                     page.Children[lineCursor - 1].Focus();
                     fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
                     page.Children.Remove((TextBox)page.Children[lineCursor]);
-                } else if (fontWeightBolder.Text.Length <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
+                    int paragraphCursor = 0;
+                    foreach(TextBox paragraph in page.Children)
+                    {
+                        paragraphCursor++;
+                        if (paragraphCursor > lineCursor) {
+                            Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) - 35);
+                        }
+                    }
+                } else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                 {
                     pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
                     page = (Canvas)pages.Children[pages.Children.Count - 1];
@@ -570,7 +579,7 @@ namespace documenter
             {
                 if (lineCursor == page.Children.Count)
                 {
-                    if (lineCursor <= 16)
+                    if (lineCursor <= countLinesInPage)
                     {
                         TextBox textBox = new TextBox();
                         textBox.AcceptsTab = false;
