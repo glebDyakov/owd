@@ -38,6 +38,8 @@ namespace documenter
         public double initialHeight = 0;
         public int pageCursor = 1;
         public int countLinesInPage = 16;
+        public int currentMargins = 50;
+        public int currentWidth = 450;
         public MainWindow()
         {
             InitializeComponent();
@@ -471,14 +473,14 @@ namespace documenter
                 paragraph.Children.Add(strokeNumber);
                 paragraph.Children.Add(textBox);
                 page.Children.Add(paragraph);
-                Canvas.SetLeft(paragraph, 50);
+                Canvas.SetLeft(paragraph, currentMargins);
                 Canvas.SetTop(paragraph, page.Children.Count * 35);
                 
                 textBox.AcceptsTab = false;
                 textBox.IsTabStop = true;
                 //textBox.TabIndex = 9999;
                 textBox.Background = System.Windows.Media.Brushes.Transparent;
-                textBox.Width = 450;
+                textBox.Width = currentWidth;
                 textBox.BorderThickness = new Thickness(0);
                 textBox.MaxLines = 1;
                 textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
@@ -528,7 +530,7 @@ namespace documenter
                 ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                 lineCursor++;
                 Canvas.SetTop(textBox, page.Children.Count * 35);
-                Canvas.SetLeft(textBox, 50);
+                Canvas.SetLeft(textBox, currentMargins);
                 fontWeightBolder = textBox;
                 textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                 textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
@@ -557,7 +559,7 @@ namespace documenter
                     textBox.IsTabStop = true;
                     //textBox.TabIndex = 9999;
                     textBox.Background = System.Windows.Media.Brushes.Transparent;
-                    textBox.Width = 450;
+                    textBox.Width = currentWidth;
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
@@ -606,7 +608,7 @@ namespace documenter
 
                     page.Children.Insert(lineCursor, textBox);
                     Canvas.SetTop(textBox, (lineCursor) * 35);
-                    Canvas.SetLeft(textBox, 50);
+                    Canvas.SetLeft(textBox, currentMargins);
                     textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                     textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                     textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
@@ -704,14 +706,14 @@ namespace documenter
                         paragraph.Children.Add(strokeNumber);
                         paragraph.Children.Add(textBox);
                         page.Children.Add(paragraph);
-                        Canvas.SetLeft(paragraph, 50);
+                        Canvas.SetLeft(paragraph, currentMargins);
                         Canvas.SetTop(paragraph, page.Children.Count * 35);
 
                         textBox.AcceptsTab = false;
                         textBox.IsTabStop = true;
                         //textBox.TabIndex = 9999;
                         textBox.Background = System.Windows.Media.Brushes.Transparent;
-                        textBox.Width = 450;
+                        textBox.Width = currentWidth;
                         textBox.BorderThickness = new Thickness(0);
                         textBox.MaxLines = 1;
                         textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
@@ -763,7 +765,7 @@ namespace documenter
                         ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                         lineCursor++;
                         Canvas.SetTop(textBox, page.Children.Count * 35);
-                        Canvas.SetLeft(textBox, 50);
+                        Canvas.SetLeft(textBox, currentMargins);
                         fontWeightBolder = textBox;
                         textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                         textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
@@ -787,14 +789,14 @@ namespace documenter
                     paragraph.Children.Add(strokeNumber);
                     paragraph.Children.Add(textBox);
                     //page.Children.Add(paragraph);
-                    Canvas.SetLeft(paragraph, 50);
+                    Canvas.SetLeft(paragraph, currentMargins);
                     Canvas.SetTop(paragraph, page.Children.Count * 35);
 
                     //textBox.TabIndex = 9999;
                     textBox.AcceptsTab = false;
                     textBox.IsTabStop = true;
                     textBox.Background = System.Windows.Media.Brushes.Transparent;
-                    textBox.Width = 450;
+                    textBox.Width = currentWidth;
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
@@ -860,7 +862,7 @@ namespace documenter
                             ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
                         }
                     }
-                    Canvas.SetLeft(textBox, 50);
+                    Canvas.SetLeft(textBox, currentMargins);
                     fontWeightBolder = textBox;
                     textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                     textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
@@ -924,7 +926,7 @@ namespace documenter
                     paragraph.Children.Add(strokeNumber);
                     paragraph.Children.Add(img);
                     page.Children.Add(paragraph);
-                    Canvas.SetLeft(paragraph, 50);
+                    Canvas.SetLeft(paragraph, currentMargins);
                     Canvas.SetTop(paragraph, page.Children.Count * 35);
 
                     BitmapImage bitmapImage = new BitmapImage();
@@ -939,7 +941,7 @@ namespace documenter
                     ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                     lineCursor++;
                     Canvas.SetTop(img, page.Children.Count * 35);
-                    Canvas.SetLeft(img, 50);
+                    Canvas.SetLeft(img, currentMargins);
                 }
             }
         }
@@ -1062,7 +1064,7 @@ namespace documenter
                 paragraph.Children.Add(strokeNumber);
                 paragraph.Children.Add(img);
                 page.Children.Add(paragraph);
-                Canvas.SetLeft(paragraph, 50);
+                Canvas.SetLeft(paragraph, currentMargins);
                 Canvas.SetTop(paragraph, page.Children.Count * 35);
 
                 //page.Children.Add(img);
@@ -1071,7 +1073,7 @@ namespace documenter
                 ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                 lineCursor++;
                 Canvas.SetTop(img, page.Children.Count * 35);
-                Canvas.SetLeft(img, 50);
+                Canvas.SetLeft(img, currentMargins);
                 
                 // сохранение в файл не нужно
                 //bitmap.Save("C:\\officewaredocuments\\captures\\1.jpg");
@@ -1099,7 +1101,7 @@ namespace documenter
             strokeNumber.Text = (lineCursor + 1).ToString();
             paragraph.Children.Add(strokeNumber);
             paragraph.Children.Add(textBox);
-            Canvas.SetLeft(paragraph, 50);
+            Canvas.SetLeft(paragraph, currentMargins);
             
             pageCursor++;
             Canvas newPage = new Canvas();
@@ -1127,7 +1129,7 @@ namespace documenter
 
             Canvas.SetTop(paragraph, page.Children.Count * 35);
 
-            textBox.Width = 450;
+            textBox.Width = currentWidth;
             textBox.BorderThickness = new Thickness(0);
             textBox.MaxLines = 1;
             textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
@@ -1246,7 +1248,7 @@ namespace documenter
                     textBox.IsTabStop = true;
                     //textBox.TabIndex = 9999;
                     textBox.Background = System.Windows.Media.Brushes.Transparent;
-                    textBox.Width = 450;
+                    textBox.Width = currentWidth;
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
@@ -1295,7 +1297,7 @@ namespace documenter
                     ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                     lineCursor++;
                     Canvas.SetTop(textBox, page.Children.Count * 35);
-                    Canvas.SetLeft(textBox, 50);
+                    Canvas.SetLeft(textBox, currentMargins);
                     fontWeightBolder = textBox;
                     textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                     textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
@@ -1535,6 +1537,40 @@ namespace documenter
         private void openParagaphDialog(object sender, RoutedEventArgs e) {
             Dialogs.ParagraphDialog paragraphDialog = new Dialogs.ParagraphDialog();
             paragraphDialog.Show();
+        }
+
+        private void setNormalMarginsHandler(object sender, RoutedEventArgs e)
+        {
+            currentWidth = 450;
+            currentMargins = 450;
+            foreach (Canvas currentPage in pages.Children)
+            {
+                foreach (UIElement paragraph in currentPage.Children)
+                {
+                    ((StackPanel)paragraph).Width = currentWidth;
+                    Canvas.SetLeft(paragraph, currentMargins);
+                }
+            }
+        }
+
+        private void setShrinkMarginsHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void setMiddleMarginsHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void setWeightMarginsHandler(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void setReflectMarginsHandler(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

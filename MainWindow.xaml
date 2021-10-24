@@ -205,7 +205,13 @@
                 <MenuItem Header="Границы страницы"></MenuItem>
             </MenuItem>
             <MenuItem Header="Макет">
-                <MenuItem Header="Поля"></MenuItem>
+                <MenuItem Header="Поля">
+                    <MenuItem Click="setNormalMarginsHandler" Header="Обычные"></MenuItem>
+                    <MenuItem Click="setShrinkMarginsHandler" Header="Узкие"></MenuItem>
+                    <MenuItem Click="setMiddleMarginsHandler" Header="Средние"></MenuItem>
+                    <MenuItem Click="setWeightMarginsHandler" Header="Широкие"></MenuItem>
+                    <MenuItem Click="setReflectMarginsHandler"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Ориентация">
                     <MenuItem Click="setLandscapeOrientation" Header="Книжняя"></MenuItem>
                     <MenuItem Click="setPortraitOrientation" Header="Альбомная"></MenuItem>
