@@ -502,7 +502,7 @@ namespace documenter
                 MenuItem paragraphMenuItem = new MenuItem();
                 paragraphMenuItem.Header = "Абзац";
                 contextMenu.Items.Add(paragraphMenuItem);
-                paragraphMenuItem.Click += goToAnotherWindow;
+                paragraphMenuItem.Click += openParagaphDialog;
                 MenuItem searchMenuItem = new MenuItem();
                 searchMenuItem.Header = "Поиск";
                 contextMenu.Items.Add(searchMenuItem);
@@ -581,7 +581,7 @@ namespace documenter
                     MenuItem paragraphMenuItem = new MenuItem();
                     paragraphMenuItem.Header = "Абзац";
                     contextMenu.Items.Add(paragraphMenuItem);
-                    paragraphMenuItem.Click += goToAnotherWindow;
+                    paragraphMenuItem.Click += openParagaphDialog;
                     MenuItem searchMenuItem = new MenuItem();
                     searchMenuItem.Header = "Поиск";
                     contextMenu.Items.Add(searchMenuItem);
@@ -735,7 +735,7 @@ namespace documenter
                         MenuItem paragraphMenuItem = new MenuItem();
                         paragraphMenuItem.Header = "Абзац";
                         contextMenu.Items.Add(paragraphMenuItem);
-                        paragraphMenuItem.Click += goToAnotherWindow;
+                        paragraphMenuItem.Click += openParagaphDialog;
                         MenuItem searchMenuItem = new MenuItem();
                         searchMenuItem.Header = "Поиск";
                         contextMenu.Items.Add(searchMenuItem);
@@ -781,10 +781,12 @@ namespace documenter
                     StackPanel paragraph = new StackPanel();
                     paragraph.Orientation = Orientation.Horizontal;
                     TextBox strokeNumber = new TextBox();
+                    strokeNumber.BorderThickness = new Thickness();
+                    strokeNumber.Width = 50;
                     strokeNumber.Text = (lineCursor + 1).ToString();
                     paragraph.Children.Add(strokeNumber);
                     paragraph.Children.Add(textBox);
-                    page.Children.Add(paragraph);
+                    //page.Children.Add(paragraph);
                     Canvas.SetLeft(paragraph, 50);
                     Canvas.SetTop(paragraph, page.Children.Count * 35);
 
@@ -817,7 +819,7 @@ namespace documenter
                     MenuItem paragraphMenuItem = new MenuItem();
                     paragraphMenuItem.Header = "Абзац";
                     contextMenu.Items.Add(paragraphMenuItem);
-                    paragraphMenuItem.Click += goToAnotherWindow;
+                    paragraphMenuItem.Click += openParagaphDialog;
                     MenuItem searchMenuItem = new MenuItem();
                     searchMenuItem.Header = "Поиск";
                     contextMenu.Items.Add(searchMenuItem);
@@ -854,7 +856,8 @@ namespace documenter
                     {
                         if (page.Children.IndexOf(child) >= lineCursor - 1)
                         {
-                            Canvas.SetTop(child, page.Children.IndexOf(child) * 35);
+                            Canvas.SetTop(child, (page.Children.IndexOf(child) + 1) * 35);
+                            ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
                         }
                     }
                     Canvas.SetLeft(textBox, 50);
@@ -868,7 +871,7 @@ namespace documenter
             {
                 if (lineCursor >= 2) {
                     lineCursor--;
-                    fontWeightBolder = (TextBox) page.Children[lineCursor - 1];
+                    fontWeightBolder = ((TextBox) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -877,7 +880,7 @@ namespace documenter
                 if (lineCursor < page.Children.Count)
                 {
                     lineCursor++;
-                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -886,7 +889,7 @@ namespace documenter
                 if (lineCursor >= 2 && fontWeightBolder.SelectionStart <= 0)
                 {
                     lineCursor--;
-                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -895,7 +898,7 @@ namespace documenter
                 if (lineCursor < page.Children.Count)
                 {
                     lineCursor++;
-                    fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -1148,7 +1151,7 @@ namespace documenter
             MenuItem paragraphMenuItem = new MenuItem();
             paragraphMenuItem.Header = "Абзац";
             contextMenu.Items.Add(paragraphMenuItem);
-            paragraphMenuItem.Click += goToAnotherWindow;
+            paragraphMenuItem.Click += openParagaphDialog;
             MenuItem searchMenuItem = new MenuItem();
             searchMenuItem.Header = "Поиск";
             contextMenu.Items.Add(searchMenuItem);
@@ -1267,7 +1270,7 @@ namespace documenter
                     MenuItem paragraphMenuItem = new MenuItem();
                     paragraphMenuItem.Header = "Абзац";
                     contextMenu.Items.Add(paragraphMenuItem);
-                    paragraphMenuItem.Click += goToAnotherWindow;
+                    paragraphMenuItem.Click += openParagaphDialog;
                     MenuItem searchMenuItem = new MenuItem();
                     searchMenuItem.Header = "Поиск";
                     contextMenu.Items.Add(searchMenuItem);
@@ -1527,6 +1530,11 @@ namespace documenter
         {
             Dialogs.ListOfIllustrationsDialog listOfIllustrationsDialog = new Dialogs.ListOfIllustrationsDialog();
             listOfIllustrationsDialog.Show();
+        }
+
+        private void openParagaphDialog(object sender, RoutedEventArgs e) {
+            Dialogs.ParagraphDialog paragraphDialog = new Dialogs.ParagraphDialog();
+            paragraphDialog.Show();
         }
     }
 }

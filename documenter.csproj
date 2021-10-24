@@ -110,6 +110,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\ParagraphDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\PointerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +189,9 @@
     </Compile>
     <Compile Include="Dialogs\ListOfIllustrationsDialog.xaml.cs">
       <DependentUpon>ListOfIllustrationsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ParagraphDialog.xaml.cs">
+      <DependentUpon>ParagraphDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\PointerDialog.xaml.cs">
       <DependentUpon>PointerDialog.xaml</DependentUpon>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\wpfprojects\documenter\App.xaml
-20805558340
+21-1697062784
 
-25-135264795
+261476825626
 22-1270761069
-Dialogs\AreaOfSelection.xaml;Dialogs\ColorDialog.xaml;Dialogs\CrossReferencesDialog.xaml;Dialogs\DateAndTimeDialog.xaml;Dialogs\EnvelopeParameters.xaml;Dialogs\EnvelopesAndStickers.xaml;Dialogs\FindAndReplace.xaml;Dialogs\ListOfIllustrationsDialog.xaml;Dialogs\PointerDialog.xaml;Dialogs\ReferenseDialog.xaml;Dialogs\Settings.xaml;Dialogs\SortDialog.xaml;Dialogs\SortParametersDialog.xaml;Dialogs\StatisticsDialog.xaml;Dialogs\StickParameters.xaml;Dialogs\TableDialog.xaml;Dialogs\TableOfContentsDialog.xaml;Dialogs\TableOfReferenses.xaml;Dialogs\TitleDialog.xaml;MainWindow.xaml;
+Dialogs\AreaOfSelection.xaml;Dialogs\ColorDialog.xaml;Dialogs\CrossReferencesDialog.xaml;Dialogs\DateAndTimeDialog.xaml;Dialogs\EnvelopeParameters.xaml;Dialogs\EnvelopesAndStickers.xaml;Dialogs\FindAndReplace.xaml;Dialogs\ListOfIllustrationsDialog.xaml;Dialogs\ParagraphDialog.xaml;Dialogs\PointerDialog.xaml;Dialogs\ReferenseDialog.xaml;Dialogs\Settings.xaml;Dialogs\SortDialog.xaml;Dialogs\SortParametersDialog.xaml;Dialogs\StatisticsDialog.xaml;Dialogs\StickParameters.xaml;Dialogs\TableDialog.xaml;Dialogs\TableOfContentsDialog.xaml;Dialogs\TableOfReferenses.xaml;Dialogs\TitleDialog.xaml;MainWindow.xaml;
 
 False
 
