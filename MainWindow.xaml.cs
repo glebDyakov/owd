@@ -919,15 +919,35 @@ namespace documenter
                 {
 
                     System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+                    
+                    int rightImageYCoord = 0;
+                    foreach (Canvas currentPage in pages.Children)
+                    {
+                        foreach (StackPanel container in currentPage.Children)
+                        {
+                            if (container.Children[1] is TextBox)
+                            {
+                                rightImageYCoord += 35;
+                            }
+                            else if (container.Children[1] is System.Windows.Controls.Image)
+                            {
+                                //rightImageYCoord += (int)img.Height;
+                                rightImageYCoord += 450;
+                            }
+                        }
+                    }
+
                     StackPanel paragraph = new StackPanel();
                     paragraph.Orientation = Orientation.Horizontal;
                     TextBox strokeNumber = new TextBox();
+                    strokeNumber.BorderThickness = new Thickness(0);
+                    strokeNumber.Width = 50;
                     strokeNumber.Text = (lineCursor + 1).ToString();
                     paragraph.Children.Add(strokeNumber);
                     paragraph.Children.Add(img);
                     page.Children.Add(paragraph);
                     Canvas.SetLeft(paragraph, currentMargins);
-                    Canvas.SetTop(paragraph, page.Children.Count * 35);
+                    //Canvas.SetTop(paragraph, page.Children.Count * 35);
 
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -937,7 +957,10 @@ namespace documenter
                     img.Source = bitmapImage;
                     img.Width = 450;
                     img.Height = 450;
-                    page.Children.Add(img);
+
+                    Canvas.SetTop(paragraph, rightImageYCoord);
+
+                    //page.Children.Add(img);
                     ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                     lineCursor++;
                     Canvas.SetTop(img, page.Children.Count * 35);
@@ -1542,7 +1565,7 @@ namespace documenter
         private void setNormalMarginsHandler(object sender, RoutedEventArgs e)
         {
             currentWidth = 450;
-            currentMargins = 450;
+            currentMargins = 50;
             foreach (Canvas currentPage in pages.Children)
             {
                 foreach (UIElement paragraph in currentPage.Children)
@@ -1555,22 +1578,58 @@ namespace documenter
 
         private void setShrinkMarginsHandler(object sender, RoutedEventArgs e)
         {
-
+            currentWidth = 435;
+            currentMargins = 65;
+            foreach (Canvas currentPage in pages.Children)
+            {
+                foreach (UIElement paragraph in currentPage.Children)
+                {
+                    ((StackPanel)paragraph).Width = currentWidth;
+                    Canvas.SetLeft(paragraph, currentMargins);
+                }
+            }
         }
 
         private void setMiddleMarginsHandler(object sender, RoutedEventArgs e)
         {
-
+            currentWidth = 460;
+            currentMargins = 40;
+            foreach (Canvas currentPage in pages.Children)
+            {
+                foreach (UIElement paragraph in currentPage.Children)
+                {
+                    ((StackPanel)paragraph).Width = currentWidth;
+                    Canvas.SetLeft(paragraph, currentMargins);
+                }
+            }
         }
 
         private void setWeightMarginsHandler(object sender, RoutedEventArgs e)
         {
-
+            currentWidth = 465;
+            currentMargins = 35;
+            foreach (Canvas currentPage in pages.Children)
+            {
+                foreach (UIElement paragraph in currentPage.Children)
+                {
+                    ((StackPanel)paragraph).Width = currentWidth;
+                    Canvas.SetLeft(paragraph, currentMargins);
+                }
+            }
         }
 
         private void setReflectMarginsHandler(object sender, RoutedEventArgs e)
         {
-
+            currentWidth = 450;
+            currentMargins = 50;
+            foreach (Canvas currentPage in pages.Children)
+            {
+                foreach (UIElement paragraph in currentPage.Children)
+                {
+                    ((StackPanel)paragraph).Width = currentWidth;
+                    Canvas.SetLeft(paragraph, currentMargins);
+                }
+            }
         }
     }
 }
