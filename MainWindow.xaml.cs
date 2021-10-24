@@ -482,7 +482,49 @@ namespace documenter
                 textBox.BorderThickness = new Thickness(0);
                 textBox.MaxLines = 1;
                 textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem cutMenuItem = new MenuItem();
+                cutMenuItem.Header = "Вырезать";
+                contextMenu.Items.Add(cutMenuItem);
+                cutMenuItem.Click += goToAnotherWindow;
+                MenuItem copyMenuItem = new MenuItem();
+                copyMenuItem.Header = "Копировать";
+                contextMenu.Items.Add(copyMenuItem);
+                copyMenuItem.Click += goToAnotherWindow;
+                MenuItem insertMenuItem = new MenuItem();
+                insertMenuItem.Header = "Вставить";
+                contextMenu.Items.Add(insertMenuItem);
+                insertMenuItem.Click += goToAnotherWindow;
+                MenuItem fontMenuItem = new MenuItem();
+                fontMenuItem.Header = "Шрифт";
+                contextMenu.Items.Add(fontMenuItem);
+                fontMenuItem.Click += goToAnotherWindow;
+                MenuItem paragraphMenuItem = new MenuItem();
+                paragraphMenuItem.Header = "Абзац";
+                contextMenu.Items.Add(paragraphMenuItem);
+                paragraphMenuItem.Click += goToAnotherWindow;
+                MenuItem searchMenuItem = new MenuItem();
+                searchMenuItem.Header = "Поиск";
+                contextMenu.Items.Add(searchMenuItem);
+                searchMenuItem.Click += goToAnotherWindow;
+                MenuItem synonymsMenuItem = new MenuItem();
+                synonymsMenuItem.Header = "Вырезать";
+                contextMenu.Items.Add(synonymsMenuItem);
+                synonymsMenuItem.Click += goToAnotherWindow;
+                MenuItem translateMenuItem = new MenuItem();
+                translateMenuItem.Header = "Перевести";
+                contextMenu.Items.Add(translateMenuItem);
+                translateMenuItem.Click += goToAnotherWindow;
+                MenuItem referenceMenuItem = new MenuItem();
+                referenceMenuItem.Header = "Ссылка";
+                contextMenu.Items.Add(referenceMenuItem);
+                referenceMenuItem.Click += goToAnotherWindow;
+                MenuItem createNoteMenuItem = new MenuItem();
+                createNoteMenuItem.Header = "Создать примечание";
+                contextMenu.Items.Add(createNoteMenuItem);
+                createNoteMenuItem.Click += goToAnotherWindow;
+                textBox.ContextMenu = contextMenu;
+
                 ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                 lineCursor++;
                 Canvas.SetTop(textBox, page.Children.Count * 35);
@@ -496,13 +538,20 @@ namespace documenter
             else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
             {
                 lineCursor++;
-                ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
-                fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+
+                StackPanel paragraph = ((StackPanel)page.Children[lineCursor - 1]);
+                ((TextBox)paragraph.Children[1]).Focus();
+
+                //fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
+                fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                
                 fontWeightBolder.SelectionStart = 0;
             }
             else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length && lineCursor < page.Children.Count)
             {
-                if (((TextBox)page.Children[lineCursor]).Text.Length == maxCharsInParagraph) {
+                //if (((TextBox)page.Children[lineCursor]).Text.Length == maxCharsInParagraph) {
+                if (((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text.Length == maxCharsInParagraph) {
+
                     TextBox textBox = new TextBox();
                     textBox.AcceptsTab = false;
                     textBox.IsTabStop = true;
@@ -512,6 +561,49 @@ namespace documenter
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    ContextMenu contextMenu = new ContextMenu();
+                    MenuItem cutMenuItem = new MenuItem();
+                    cutMenuItem.Header = "Вырезать";
+                    contextMenu.Items.Add(cutMenuItem);
+                    cutMenuItem.Click += goToAnotherWindow;
+                    MenuItem copyMenuItem = new MenuItem();
+                    copyMenuItem.Header = "Копировать";
+                    contextMenu.Items.Add(copyMenuItem);
+                    copyMenuItem.Click += goToAnotherWindow;
+                    MenuItem insertMenuItem = new MenuItem();
+                    insertMenuItem.Header = "Вставить";
+                    contextMenu.Items.Add(insertMenuItem);
+                    insertMenuItem.Click += goToAnotherWindow;
+                    MenuItem fontMenuItem = new MenuItem();
+                    fontMenuItem.Header = "Шрифт";
+                    contextMenu.Items.Add(fontMenuItem);
+                    fontMenuItem.Click += goToAnotherWindow;
+                    MenuItem paragraphMenuItem = new MenuItem();
+                    paragraphMenuItem.Header = "Абзац";
+                    contextMenu.Items.Add(paragraphMenuItem);
+                    paragraphMenuItem.Click += goToAnotherWindow;
+                    MenuItem searchMenuItem = new MenuItem();
+                    searchMenuItem.Header = "Поиск";
+                    contextMenu.Items.Add(searchMenuItem);
+                    searchMenuItem.Click += goToAnotherWindow;
+                    MenuItem synonymsMenuItem = new MenuItem();
+                    synonymsMenuItem.Header = "Вырезать";
+                    contextMenu.Items.Add(synonymsMenuItem);
+                    synonymsMenuItem.Click += goToAnotherWindow;
+                    MenuItem translateMenuItem = new MenuItem();
+                    translateMenuItem.Header = "Перевести";
+                    contextMenu.Items.Add(translateMenuItem);
+                    translateMenuItem.Click += goToAnotherWindow;
+                    MenuItem referenceMenuItem = new MenuItem();
+                    referenceMenuItem.Header = "Ссылка";
+                    contextMenu.Items.Add(referenceMenuItem);
+                    referenceMenuItem.Click += goToAnotherWindow;
+                    MenuItem createNoteMenuItem = new MenuItem();
+                    createNoteMenuItem.Header = "Создать примечание";
+                    contextMenu.Items.Add(createNoteMenuItem);
+                    createNoteMenuItem.Click += goToAnotherWindow;
+                    textBox.ContextMenu = contextMenu;
+
                     page.Children.Insert(lineCursor, textBox);
                     Canvas.SetTop(textBox, (lineCursor) * 35);
                     Canvas.SetLeft(textBox, 50);
@@ -519,7 +611,9 @@ namespace documenter
                     textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                     textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
                     int paragraphsCursor = 0;
-                    foreach (TextBox paragraph in page.Children)
+                    
+                    //foreach (TextBox paragraph in page.Children)
+                    foreach (UIElement paragraph in page.Children)
                     {
                         paragraphsCursor++;
                         if (paragraphsCursor > lineCursor)
@@ -529,11 +623,17 @@ namespace documenter
                     }
                 }
 
-                int tempCursotPosition = ((TextBox)page.Children[lineCursor - 1]).SelectionStart;
+                //int tempCursotPosition = ((TextBox)page.Children[lineCursor - 1]).SelectionStart;
+                int tempCursotPosition = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).SelectionStart;
 
                 ((TextBox)page.Children[lineCursor]).Text = ((TextBox)page.Children[lineCursor]).Text.Insert(0, fontWeightBolder.Text.Substring(fontWeightBolder.Text.Length - 1, 1));
-                ((TextBox)page.Children[lineCursor - 1]).Text = ((TextBox)page.Children[lineCursor - 1]).Text.Substring(0, ((TextBox)page.Children[lineCursor - 1]).Text.Length - 1);
-                ((TextBox)page.Children[lineCursor - 1]).SelectionStart = tempCursotPosition;
+
+                //((TextBox)page.Children[lineCursor - 1]).Text = ((TextBox)page.Children[lineCursor - 1]).Text.Substring(0, ((TextBox)page.Children[lineCursor - 1]).Text.Length - 1);
+                ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text.Substring(0, ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text.Length - 1);
+
+                //((TextBox)page.Children[lineCursor - 1]).SelectionStart = tempCursotPosition;
+                ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).SelectionStart = tempCursotPosition;
+
             }
 
         }
@@ -543,8 +643,14 @@ namespace documenter
             fontWeightBolder = (TextBox)sender;
             //pageCursor = pages.Children.IndexOf(page.Children(fontWeightBolder)) + 1;
             pageCursor = pages.Children.IndexOf((UIElement)fontWeightBolder.Parent);
-            page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)fontWeightBolder.Parent)];
-            lineCursor = page.Children.IndexOf(fontWeightBolder) + 1;
+
+            //page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)fontWeightBolder.Parent)];
+            StackPanel paragraph = ((StackPanel)fontWeightBolder.Parent);
+            page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)paragraph.Parent)];
+
+            //lineCursor = page.Children.IndexOf(fontWeightBolder) + 1;
+            lineCursor = page.Children.IndexOf((UIElement)fontWeightBolder.Parent) + 1;
+
             //page.Children[lineCursor - 1].Focus();
         }
 
@@ -573,7 +679,9 @@ namespace documenter
                 } else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                 {
                     pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
+                    
                     page = (Canvas)pages.Children[pages.Children.Count - 1];
+                    
                     fontWeightBolder = ((TextBox)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
                     ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
                     lineCursor = page.Children.Count;
@@ -607,6 +715,48 @@ namespace documenter
                         textBox.BorderThickness = new Thickness(0);
                         textBox.MaxLines = 1;
                         textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                        ContextMenu contextMenu = new ContextMenu();
+                        MenuItem cutMenuItem = new MenuItem();
+                        cutMenuItem.Header = "Вырезать";
+                        contextMenu.Items.Add(cutMenuItem);
+                        cutMenuItem.Click += goToAnotherWindow;
+                        MenuItem copyMenuItem = new MenuItem();
+                        copyMenuItem.Header = "Копировать";
+                        contextMenu.Items.Add(copyMenuItem);
+                        copyMenuItem.Click += goToAnotherWindow;
+                        MenuItem insertMenuItem = new MenuItem();
+                        insertMenuItem.Header = "Вставить";
+                        contextMenu.Items.Add(insertMenuItem);
+                        insertMenuItem.Click += goToAnotherWindow;
+                        MenuItem fontMenuItem = new MenuItem();
+                        fontMenuItem.Header = "Шрифт";
+                        contextMenu.Items.Add(fontMenuItem);
+                        fontMenuItem.Click += goToAnotherWindow;
+                        MenuItem paragraphMenuItem = new MenuItem();
+                        paragraphMenuItem.Header = "Абзац";
+                        contextMenu.Items.Add(paragraphMenuItem);
+                        paragraphMenuItem.Click += goToAnotherWindow;
+                        MenuItem searchMenuItem = new MenuItem();
+                        searchMenuItem.Header = "Поиск";
+                        contextMenu.Items.Add(searchMenuItem);
+                        searchMenuItem.Click += goToAnotherWindow;
+                        MenuItem synonymsMenuItem = new MenuItem();
+                        synonymsMenuItem.Header = "Вырезать";
+                        contextMenu.Items.Add(synonymsMenuItem);
+                        synonymsMenuItem.Click += goToAnotherWindow;
+                        MenuItem translateMenuItem = new MenuItem();
+                        translateMenuItem.Header = "Перевести";
+                        contextMenu.Items.Add(translateMenuItem);
+                        translateMenuItem.Click += goToAnotherWindow;
+                        MenuItem referenceMenuItem = new MenuItem();
+                        referenceMenuItem.Header = "Ссылка";
+                        contextMenu.Items.Add(referenceMenuItem);
+                        referenceMenuItem.Click += goToAnotherWindow;
+                        MenuItem createNoteMenuItem = new MenuItem();
+                        createNoteMenuItem.Header = "Создать примечание";
+                        contextMenu.Items.Add(createNoteMenuItem);
+                        createNoteMenuItem.Click += goToAnotherWindow;
+                        textBox.ContextMenu = contextMenu;
                         
                         //page.Children.Add(paragraph);
 
@@ -646,6 +796,50 @@ namespace documenter
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    
+                    ContextMenu contextMenu = new ContextMenu();
+                    MenuItem cutMenuItem = new MenuItem();
+                    cutMenuItem.Header = "Вырезать";
+                    contextMenu.Items.Add(cutMenuItem);
+                    cutMenuItem.Click += goToAnotherWindow;
+                    MenuItem copyMenuItem = new MenuItem();
+                    copyMenuItem.Header = "Копировать";
+                    contextMenu.Items.Add(copyMenuItem);
+                    copyMenuItem.Click += goToAnotherWindow;
+                    MenuItem insertMenuItem = new MenuItem();
+                    insertMenuItem.Header = "Вставить";
+                    contextMenu.Items.Add(insertMenuItem);
+                    insertMenuItem.Click += goToAnotherWindow;
+                    MenuItem fontMenuItem = new MenuItem();
+                    fontMenuItem.Header = "Шрифт";
+                    contextMenu.Items.Add(fontMenuItem);
+                    fontMenuItem.Click += goToAnotherWindow;
+                    MenuItem paragraphMenuItem = new MenuItem();
+                    paragraphMenuItem.Header = "Абзац";
+                    contextMenu.Items.Add(paragraphMenuItem);
+                    paragraphMenuItem.Click += goToAnotherWindow;
+                    MenuItem searchMenuItem = new MenuItem();
+                    searchMenuItem.Header = "Поиск";
+                    contextMenu.Items.Add(searchMenuItem);
+                    searchMenuItem.Click += goToAnotherWindow;
+                    MenuItem synonymsMenuItem = new MenuItem();
+                    synonymsMenuItem.Header = "Вырезать";
+                    contextMenu.Items.Add(synonymsMenuItem);
+                    synonymsMenuItem.Click += goToAnotherWindow;
+                    MenuItem translateMenuItem = new MenuItem();
+                    translateMenuItem.Header = "Перевести";
+                    contextMenu.Items.Add(translateMenuItem);
+                    translateMenuItem.Click += goToAnotherWindow;
+                    MenuItem referenceMenuItem = new MenuItem();
+                    referenceMenuItem.Header = "Ссылка";
+                    contextMenu.Items.Add(referenceMenuItem);
+                    referenceMenuItem.Click += goToAnotherWindow;
+                    MenuItem createNoteMenuItem = new MenuItem();
+                    createNoteMenuItem.Header = "Создать примечание";
+                    contextMenu.Items.Add(createNoteMenuItem);
+                    createNoteMenuItem.Click += goToAnotherWindow;
+                    textBox.ContextMenu = contextMenu;
+
                     int caretIndex = fontWeightBolder.SelectionStart;
                     string caretText = fontWeightBolder.Text.Substring(caretIndex, fontWeightBolder.Text.Length - fontWeightBolder.Text.Substring(0, caretIndex).Length);
                     fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);
@@ -934,6 +1128,49 @@ namespace documenter
             textBox.BorderThickness = new Thickness(0);
             textBox.MaxLines = 1;
             textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem cutMenuItem = new MenuItem();
+            cutMenuItem.Header = "Вырезать";
+            contextMenu.Items.Add(cutMenuItem);
+            cutMenuItem.Click += goToAnotherWindow;
+            MenuItem copyMenuItem = new MenuItem();
+            copyMenuItem.Header = "Копировать";
+            contextMenu.Items.Add(copyMenuItem);
+            copyMenuItem.Click += goToAnotherWindow;
+            MenuItem insertMenuItem = new MenuItem();
+            insertMenuItem.Header = "Вставить";
+            contextMenu.Items.Add(insertMenuItem);
+            insertMenuItem.Click += goToAnotherWindow;
+            MenuItem fontMenuItem = new MenuItem();
+            fontMenuItem.Header = "Шрифт";
+            contextMenu.Items.Add(fontMenuItem);
+            fontMenuItem.Click += goToAnotherWindow;
+            MenuItem paragraphMenuItem = new MenuItem();
+            paragraphMenuItem.Header = "Абзац";
+            contextMenu.Items.Add(paragraphMenuItem);
+            paragraphMenuItem.Click += goToAnotherWindow;
+            MenuItem searchMenuItem = new MenuItem();
+            searchMenuItem.Header = "Поиск";
+            contextMenu.Items.Add(searchMenuItem);
+            searchMenuItem.Click += goToAnotherWindow;
+            MenuItem synonymsMenuItem = new MenuItem();
+            synonymsMenuItem.Header = "Вырезать";
+            contextMenu.Items.Add(synonymsMenuItem);
+            synonymsMenuItem.Click += goToAnotherWindow;
+            MenuItem translateMenuItem = new MenuItem();
+            translateMenuItem.Header = "Перевести";
+            contextMenu.Items.Add(translateMenuItem);
+            translateMenuItem.Click += goToAnotherWindow;
+            MenuItem referenceMenuItem = new MenuItem();
+            referenceMenuItem.Header = "Ссылка";
+            contextMenu.Items.Add(referenceMenuItem);
+            referenceMenuItem.Click += goToAnotherWindow;
+            MenuItem createNoteMenuItem = new MenuItem();
+            createNoteMenuItem.Header = "Создать примечание";
+            contextMenu.Items.Add(createNoteMenuItem);
+            createNoteMenuItem.Click += goToAnotherWindow;
+            textBox.ContextMenu = contextMenu;
+
             textBox.Focus();
             fontWeightBolder = textBox;
             textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
@@ -1010,6 +1247,47 @@ namespace documenter
                     textBox.BorderThickness = new Thickness(0);
                     textBox.MaxLines = 1;
                     textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+                    ContextMenu contextMenu = new ContextMenu();
+                    MenuItem cutMenuItem = new MenuItem();
+                    cutMenuItem.Header = "Вырезать";
+                    contextMenu.Items.Add(cutMenuItem);
+                    cutMenuItem.Click += goToAnotherWindow;
+                    MenuItem copyMenuItem = new MenuItem();
+                    copyMenuItem.Header = "Копировать";
+                    contextMenu.Items.Add(copyMenuItem);
+                    copyMenuItem.Click += goToAnotherWindow;
+                    MenuItem insertMenuItem = new MenuItem();
+                    insertMenuItem.Header = "Вставить";
+                    contextMenu.Items.Add(insertMenuItem);
+                    insertMenuItem.Click += goToAnotherWindow;
+                    MenuItem fontMenuItem = new MenuItem();
+                    fontMenuItem.Header = "Шрифт";
+                    contextMenu.Items.Add(fontMenuItem);
+                    fontMenuItem.Click += goToAnotherWindow;
+                    MenuItem paragraphMenuItem = new MenuItem();
+                    paragraphMenuItem.Header = "Абзац";
+                    contextMenu.Items.Add(paragraphMenuItem);
+                    paragraphMenuItem.Click += goToAnotherWindow;
+                    MenuItem searchMenuItem = new MenuItem();
+                    searchMenuItem.Header = "Поиск";
+                    contextMenu.Items.Add(searchMenuItem);
+                    searchMenuItem.Click += goToAnotherWindow;
+                    MenuItem synonymsMenuItem = new MenuItem();
+                    synonymsMenuItem.Header = "Вырезать";
+                    contextMenu.Items.Add(synonymsMenuItem);
+                    synonymsMenuItem.Click += goToAnotherWindow;
+                    MenuItem translateMenuItem = new MenuItem();
+                    translateMenuItem.Header = "Перевести";
+                    contextMenu.Items.Add(translateMenuItem);
+                    translateMenuItem.Click += goToAnotherWindow;
+                    MenuItem referenceMenuItem = new MenuItem();
+                    referenceMenuItem.Header = "Ссылка";
+                    contextMenu.Items.Add(referenceMenuItem);
+                    referenceMenuItem.Click += goToAnotherWindow;
+                    MenuItem createNoteMenuItem = new MenuItem();
+                    createNoteMenuItem.Header = "Создать примечание";
+                    contextMenu.Items.Add(createNoteMenuItem);
+                    createNoteMenuItem.Click += goToAnotherWindow;
                     page.Children.Add(textBox);
                     ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
                     lineCursor++;
