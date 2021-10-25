@@ -133,7 +133,7 @@
                 <MenuItem Header="Примечание"></MenuItem>
                 <MenuItem Header="Верхний колонтитул"></MenuItem>
                 <MenuItem Header="Нижний колонтитул"></MenuItem>
-                <MenuItem Header="Номер страницы"></MenuItem>
+                <MenuItem Click="setNumberOfPageHandler" Header="Номер страницы"></MenuItem>
                 <MenuItem Header="Просмотреть экспресс-блоки"></MenuItem>
                 <MenuItem Header="Word art"></MenuItem>
                 <MenuItem Header="Добавить буквицу"></MenuItem>
@@ -409,6 +409,7 @@
                             </Canvas>
                         </StackPanel>
                     </Viewbox>
+                    <TextBlock Text="1" Canvas.Left="300" Canvas.Top="666" />
                 </Canvas>
             </DockPanel>
         </ScrollViewer>

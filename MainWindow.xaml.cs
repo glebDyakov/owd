@@ -42,6 +42,8 @@ namespace documenter
         public int currentWidth = 450;
         public UIElement currentControl;
         public int wrapHeight = 500;
+        public bool showNumberOfPage = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -49,59 +51,75 @@ namespace documenter
             initialWidth = page.Width;
             initialHeight = page.Height;
 
-            fontWeightBolder.Focus();
-
+            //fontWeightBolder.Focus();
+            currentControl = fontWeightBolder;
+            ((TextBox)currentControl).Focus();
+            
         }
 
         private void fontWeightBolderHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontWeight = FontWeights.Bold;
+            //fontWeightBolder.FontWeight = FontWeights.Bold;
+            ((TextBox)currentControl).FontWeight = FontWeights.Bold;
         }
 
         private void fontStyleItalicHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontStyle = FontStyles.Italic;
+            ((TextBox)currentControl).FontStyle = FontStyles.Italic;
+            //fontWeightBolder.FontStyle = FontStyles.Italic;
         }
 
         private void textDecorationUnderlineHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.TextDecorations = TextDecorations.Underline;
+            ((TextBox)currentControl).TextDecorations = TextDecorations.Underline;
+            //fontWeightBolder.TextDecorations = TextDecorations.Underline;
         }
 
         private void textDecorationStrikethroughHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.TextDecorations = TextDecorations.Strikethrough;
+            ((TextBox)currentControl).TextDecorations = TextDecorations.Strikethrough;
+            //fontWeightBolder.TextDecorations = TextDecorations.Strikethrough;
         }
 
         private void textDecorationBackgroundHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Background = System.Windows.Media.Brushes.Red;
+            ((TextBox)currentControl).Background = System.Windows.Media.Brushes.Red;
+            //fontWeightBolder.Background = System.Windows.Media.Brushes.Red;
         }
 
         private void textDecorationForegroundHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Foreground = System.Windows.Media.Brushes.Red;
+            ((TextBox)currentControl).Foreground = System.Windows.Media.Brushes.Red;
+            //fontWeightBolder.Foreground = System.Windows.Media.Brushes.Red;
         }
 
         private void fontSizeHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontSize = 34;
+            ((TextBox)currentControl).FontSize = 34;
+            //fontWeightBolder.FontSize = 34;
         }
 
         private void upperCaseHandler(object sender, RoutedEventArgs e)
         {
             //fontWeightBolder.Text = fontWeightBolder.Text.ToUpper();
-            if (fontWeightBolder.FontSize < 72) { 
-                fontWeightBolder.FontSize += 1;
+
+            
+            //if (fontWeightBolder.FontSize < 72) {
+            if (((TextBox)currentControl).FontSize < 72) {
+                ((TextBox)currentControl).FontSize += 1;
+                //fontWeightBolder.FontSize += 1;
             }
         }
 
         private void lowerCaseHandler(object sender, RoutedEventArgs e)
         {
             //fontWeightBolder.Text = fontWeightBolder.Text.ToLower();
-            if (fontWeightBolder.FontSize > 10)
+
+            //if (fontWeightBolder.FontSize > 10)
+            if (((TextBox)currentControl).FontSize > 10)
             {
-                fontWeightBolder.FontSize -= 1;
+                //fontWeightBolder.FontSize -= 1;
+                ((TextBox)currentControl).FontSize -= 1;
             }
         }
 
@@ -119,22 +137,27 @@ namespace documenter
             };
             Style dropShadowScrollViewerStyle = new Style(typeof(ScrollViewer));
             dropShadowScrollViewerStyle.Setters.Add(effectSetter);
-            fontWeightBolder.Resources.Add(typeof(ScrollViewer), dropShadowScrollViewerStyle);
+
+            //fontWeightBolder.Resources.Add(typeof(ScrollViewer), dropShadowScrollViewerStyle);
+            ((TextBox)currentControl).Resources.Add(typeof(ScrollViewer), dropShadowScrollViewerStyle);
+
         }
 
         private void textSubscriptHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Typography.Variants = FontVariants.Subscript;
+            //fontWeightBolder.Typography.Variants = FontVariants.Subscript;
+            ((TextBox)currentControl).Typography.Variants = FontVariants.Subscript;
         }
 
         private void textSuperscriptHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Typography.Variants = FontVariants.Superscript;
+            //fontWeightBolder.Typography.Variants = FontVariants.Superscript;
+            ((TextBox)currentControl).Typography.Variants = FontVariants.Superscript;
         }
 
         private void clearStylesHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Typography.Variants = FontVariants.Normal;
+            /*fontWeightBolder.Typography.Variants = FontVariants.Normal;
             fontWeightBolder.FontSize = 14;
             fontWeightBolder.FontWeight = FontWeights.Normal;
             fontWeightBolder.FontStyle = FontStyles.Normal;
@@ -142,28 +165,45 @@ namespace documenter
             fontWeightBolder.Background = System.Windows.Media.Brushes.Transparent;
             fontWeightBolder.Foreground = System.Windows.Media.Brushes.Black;
             fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
-            fontWeightBolder.Resources.Clear();
+            fontWeightBolder.Resources.Clear();*/
 
+            ((TextBox)currentControl).Typography.Variants = FontVariants.Normal;
+            ((TextBox)currentControl).FontSize = 14;
+            ((TextBox)currentControl).FontWeight = FontWeights.Normal;
+            ((TextBox)currentControl).FontStyle = FontStyles.Normal;
+            ((TextBox)currentControl).TextDecorations = null;
+            ((TextBox)currentControl).Background = System.Windows.Media.Brushes.Transparent;
+            ((TextBox)currentControl).Foreground = System.Windows.Media.Brushes.Black;
+            ((TextBox)currentControl).FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
+            ((TextBox)currentControl).Resources.Clear();
+            
         }
 
         private void fontFamilyChangeToTimesNewRoman(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
+            //fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
+            ((TextBox)currentControl).FontFamily = new System.Windows.Media.FontFamily("Times New Roman");
         }
 
         private void fontFamilyChangeToArial(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Arial");
+            //fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Arial");
+            ((TextBox)currentControl).FontFamily = new System.Windows.Media.FontFamily("Arial");
+            
         }
 
         private void fontFamilyChangeToCalibri(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Calibri");
+            //fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Calibri");
+            ((TextBox)currentControl).FontFamily = new System.Windows.Media.FontFamily("Calibri");
+            
         }
 
         private void fontFamilyChangeToVerdana(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Verdana");
+            //fontWeightBolder.FontFamily = new System.Windows.Media.FontFamily("Verdana");
+            ((TextBox)currentControl).FontFamily = new System.Windows.Media.FontFamily("Verdana");
+            
         }
 
         private void drawFigureLine(object sender, RoutedEventArgs e)
@@ -244,94 +284,136 @@ namespace documenter
                 {
                     string file_name = ofd.FileName;
                     string file_text = File.ReadAllText(file_name);
-                    fontWeightBolder.Text = file_text;
+
+                    //fontWeightBolder.Text = file_text;
+                    ((TextBox)currentControl).Text = file_text;
+                    
                 }
             }
         }
 
         private void insertSpecialCharEuro(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "€";
+            //fontWeightBolder.Text += "€";
+            ((TextBox)currentControl).Text += "€";
         }
 
         private void insertSpecialCharPoud(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "£";
+            //fontWeightBolder.Text += "£";
+            ((TextBox)currentControl).Text += "£";
+            
         }
 
         private void insertSpecialCharYen(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "¥";
+            //fontWeightBolder.Text += "¥";
+            ((TextBox)currentControl).Text += "¥";
+            
         }
 
         private void insertSpecialCharCopyright(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "©";
+            //fontWeightBolder.Text += "©";
+            ((TextBox)currentControl).Text += "©";
+            
         }
 
         private void insertSpecialCharRegistered(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "®";
+            //fontWeightBolder.Text += "®";
+            ((TextBox)currentControl).Text += "®";
+            
         }
         private void insertSpecialCharTM(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "™";
+            //fontWeightBolder.Text += "™";
+            ((TextBox)currentControl).Text += "™";
+            
         }
         private void insertSpecialCharPlusOrMinus(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "±";
+            //fontWeightBolder.Text += "±";
+            ((TextBox)currentControl).Text += "±";
+            
         }
         private void insertSpecialCharNotEqual(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "≠";
+            //fontWeightBolder.Text += "≠";
+            ((TextBox)currentControl).Text += "≠";
+            
         }
         private void insertSpecialCharAll(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "∑";
+            //fontWeightBolder.Text += "∑";
+            ((TextBox)currentControl).Text += "∑";
+            
         }
         private void insertSpecialCharBeta(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "β";
+            //fontWeightBolder.Text += "β";
+            ((TextBox)currentControl).Text += "β";
+            
         }
         private void insertSpecialCharPi(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "π";
+            //fontWeightBolder.Text += "π";
+            ((TextBox)currentControl).Text += "π";
+            
         }
         private void insertSpecialCharInfinity(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "∞";
+            //fontWeightBolder.Text += "∞";
+            ((TextBox)currentControl).Text += "∞";
+            
         }
         private void insertSpecialCharLessAndEqual(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "≤";
+            //fontWeightBolder.Text += "≤";
+            ((TextBox)currentControl).Text += "≤";
+            
         }
         private void insertSpecialCharGratherAndEqual(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "≥";
+            //fontWeightBolder.Text += "≥";
+            ((TextBox)currentControl).Text += "≥";
+            
         }
         private void insertSpecialCharAlpha(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "α";
+            //fontWeightBolder.Text += "α";
+            ((TextBox)currentControl).Text += "α";
+            
         }
         private void insertSpecialCharU(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "µ";
+            //fontWeightBolder.Text += "µ";
+            ((TextBox)currentControl).Text += "µ";
+            
         }
         private void insertSpecialCharFrequency(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "Ω";
+            //fontWeightBolder.Text += "Ω";
+            ((TextBox)currentControl).Text += "Ω";
+            
         }
         private void insertSpecialCharMultiply(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "×";
+            //fontWeightBolder.Text += "×";
+            ((TextBox)currentControl).Text += "×";
+            
         }
         private void insertSpecialCharDivide(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "÷";
+            //fontWeightBolder.Text += "÷";
+            ((TextBox)currentControl).Text += "÷";
+            
         }
         private void insertSpecialCharArrow(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.Text += "↑";
+            //fontWeightBolder.Text += "↑";
+            ((TextBox)currentControl).Text += "↑";
+            
         }
 
         private void openSettings(object sender, RoutedEventArgs e)
@@ -342,63 +424,84 @@ namespace documenter
 
         private void alignLeftHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Left;
+            //fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Left;
+            ((TextBox)currentControl).HorizontalAlignment = HorizontalAlignment.Left;
+            
         }
 
         private void alignCenterHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Center;
+            //fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Center;
+            ((TextBox)currentControl).HorizontalAlignment = HorizontalAlignment.Center;
+            
         }
         private void alignRightHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Right;
+            //fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Right;
+            ((TextBox)currentControl).HorizontalAlignment = HorizontalAlignment.Right;
+            
         }
         private void alignJustifyHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Stretch;
+            //fontWeightBolder.HorizontalAlignment = HorizontalAlignment.Stretch;
+            ((TextBox)currentControl).HorizontalAlignment = HorizontalAlignment.Stretch;
         }
 
         private void intervalHandler(object sender, RoutedEventArgs e)
         {
-            TextBlock.SetLineHeight(fontWeightBolder, 25);
+            //TextBlock.SetLineHeight(fontWeightBolder, 25);
+            TextBlock.SetLineHeight(((TextBox)currentControl), 25);
         }
 
         private void allBordersHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.BorderThickness = new Thickness(5.0);
+            ((TextBox)currentControl).BorderThickness = new Thickness(5.0);
+            //fontWeightBolder.BorderThickness = new Thickness(5.0);
         }
 
         private void noneBordersHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.BorderThickness = new Thickness(0);
+            //fontWeightBolder.BorderThickness = new Thickness(0);
+            ((TextBox)currentControl).BorderThickness = new Thickness(0);
         }
 
         private void upBorderHandler(object sender, RoutedEventArgs e)
         {
             Thickness border = new Thickness();
             border.Top = 5;
-            fontWeightBolder.BorderThickness = border;
+
+            //fontWeightBolder.BorderThickness = border;
+            ((TextBox)currentControl).BorderThickness = border;
+
         }
 
         private void downBorderHandler(object sender, RoutedEventArgs e)
         {
             Thickness border = new Thickness();
             border.Bottom = 5;
-            fontWeightBolder.BorderThickness = border;
+
+            //fontWeightBolder.BorderThickness = border;
+            ((TextBox)currentControl).BorderThickness = border;
+
         }
 
         private void leftBorderHandler(object sender, RoutedEventArgs e)
         {
             Thickness border = new Thickness();
             border.Left = 5;
-            fontWeightBolder.BorderThickness = border;
+
+            //fontWeightBolder.BorderThickness = border;
+            ((TextBox)currentControl).BorderThickness = border;
+            
         }
 
         private void rightBorderHandler(object sender, RoutedEventArgs e)
         {
             Thickness border = new Thickness();
             border.Right = 5;
-            fontWeightBolder.BorderThickness = border;
+
+            //fontWeightBolder.BorderThickness = border;
+            ((TextBox)currentControl).BorderThickness = border;
         }
 
         private void markersHandler(object sender, RoutedEventArgs e)
@@ -459,7 +562,8 @@ namespace documenter
 
         public void inputHandler(object sender, TextCompositionEventArgs e)
         {
-            if (fontWeightBolder.Text.Length >= maxCharsInParagraph && lineCursor == page.Children.Count)
+            //if (fontWeightBolder.Text.Length >= maxCharsInParagraph && lineCursor == page.Children.Count)
+            if (((TextBox)currentControl).Text.Length >= maxCharsInParagraph && lineCursor == page.Children.Count)
             {
 
                 /*
@@ -542,19 +646,23 @@ namespace documenter
                 textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
 
             }
-            else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
+            //else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
+            else if (((TextBox)currentControl).Text.Length >= maxCharsInParagraph && ((TextBox)currentControl).SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
             {
                 lineCursor++;
 
                 StackPanel paragraph = ((StackPanel)page.Children[lineCursor - 1]);
                 ((TextBox)paragraph.Children[1]).Focus();
 
-                //fontWeightBolder = (TextBox)page.Children[lineCursor - 1];
-                fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
-                
-                fontWeightBolder.SelectionStart = 0;
+                //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
+                //fontWeightBolder.SelectionStart = 0;
+                ((TextBox)currentControl).SelectionStart = 0;
+
             }
-            else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length && lineCursor < page.Children.Count)
+            //else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart < fontWeightBolder.Text.Length && lineCursor < page.Children.Count)
+            else if (((TextBox)currentControl).Text.Length >= maxCharsInParagraph && ((TextBox)currentControl).SelectionStart < ((TextBox)currentControl).Text.Length && lineCursor < page.Children.Count)
             {
                 //if (((TextBox)page.Children[lineCursor]).Text.Length == maxCharsInParagraph) {
                 if (((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text.Length == maxCharsInParagraph) {
@@ -633,7 +741,9 @@ namespace documenter
                 //int tempCursotPosition = ((TextBox)page.Children[lineCursor - 1]).SelectionStart;
                 int tempCursotPosition = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).SelectionStart;
 
-                ((TextBox)page.Children[lineCursor]).Text = ((TextBox)page.Children[lineCursor]).Text.Insert(0, fontWeightBolder.Text.Substring(fontWeightBolder.Text.Length - 1, 1));
+                
+                //((TextBox)page.Children[lineCursor]).Text = ((TextBox)page.Children[lineCursor]).Text.Insert(0, fontWeightBolder.Text.Substring(fontWeightBolder.Text.Length - 1, 1));
+                ((TextBox)page.Children[lineCursor]).Text = ((TextBox)page.Children[lineCursor]).Text.Insert(0, ((TextBox)currentControl).Text.Substring(((TextBox)currentControl).Text.Length - 1, 1));
 
                 //((TextBox)page.Children[lineCursor - 1]).Text = ((TextBox)page.Children[lineCursor - 1]).Text.Substring(0, ((TextBox)page.Children[lineCursor - 1]).Text.Length - 1);
                 ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text.Substring(0, ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]).Text.Length - 1);
@@ -651,12 +761,18 @@ namespace documenter
             //fontWeightBolder = (TextBox)sender;
             currentControl = (UIElement)sender;
 
-            pageCursor = pages.Children.IndexOf((UIElement)fontWeightBolder.Parent);
-            StackPanel paragraph = ((StackPanel)fontWeightBolder.Parent);
+            //pageCursor = pages.Children.IndexOf((UIElement)fontWeightBolder.Parent);
+            pageCursor = pages.Children.IndexOf((UIElement)((TextBox)currentControl).Parent);
+
+            //StackPanel paragraph = ((StackPanel)fontWeightBolder.Parent);
+            StackPanel paragraph = ((StackPanel)((TextBox)currentControl).Parent);
+
             page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)paragraph.Parent)];
-            lineCursor = page.Children.IndexOf((UIElement)fontWeightBolder.Parent) + 1;
-        
-            if(currentControl is System.Windows.Controls.Image)
+            
+            //lineCursor = page.Children.IndexOf((UIElement)fontWeightBolder.Parent) + 1;
+            lineCursor = page.Children.IndexOf((UIElement)((TextBox)currentControl).Parent) + 1;
+
+            if (currentControl is System.Windows.Controls.Image)
             {
                 foreach (UIElement control in page.Children) {
                     if (control is System.Windows.Controls.Image)
@@ -673,11 +789,15 @@ namespace documenter
         {
             if (e.Key == Key.Back)
             {
-                if (fontWeightBolder.SelectionStart <= 0 && lineCursor >= 2)
+                //if (fontWeightBolder.SelectionStart <= 0 && lineCursor >= 2)
+                if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor >= 2)
                 {
                     lineCursor--;
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
-                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
+                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    currentControl = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
                     page.Children.Remove((StackPanel)page.Children[lineCursor]);
                     int paragraphCursor = 0;
                     foreach(StackPanel paragraphGroup in page.Children)
@@ -691,13 +811,17 @@ namespace documenter
                             }
                         }
                     }
-                } else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
+                }
+                //else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
+                else if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                 {
                     pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
                     
                     page = (Canvas)pages.Children[pages.Children.Count - 1];
-                    
-                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+
+                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+                    currentControl = ((UIElement)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+
                     ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
                     lineCursor = page.Children.Count;
                     backdrop.Height -= 650;
@@ -715,7 +839,19 @@ namespace documenter
                         TextBox strokeNumber = new TextBox();
                         strokeNumber.BorderThickness = new Thickness();
                         strokeNumber.Width = 50;
-                        strokeNumber.Text = (lineCursor + 1).ToString();
+                        //strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + (lineCursor + 1)).ToString();
+                        if (pages.Children.Count <= 1)
+                        {
+                            strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + (lineCursor + 1)).ToString();
+                        }
+                        else if (pages.Children.Count >= 3)
+                        {
+                            strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + (lineCursor + 3)).ToString();
+                        }
+                        else if (pages.Children.Count >= 2)
+                        {
+                            strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + (lineCursor + 2)).ToString();
+                        }
                         paragraph.Children.Add(strokeNumber);
                         paragraph.Children.Add(textBox);
                         page.Children.Add(paragraph);
@@ -806,7 +942,25 @@ namespace documenter
                     paragraph.Children.Add(textBox);
                     //page.Children.Add(paragraph);
                     Canvas.SetLeft(paragraph, currentMargins);
-                    Canvas.SetTop(paragraph, page.Children.Count * 35);
+
+                    int rightImageYCoord = 0;
+                    foreach (StackPanel container in page.Children)
+                    {
+                        if (container.Children[1] is TextBox)
+                        {
+                            rightImageYCoord += 35;
+                        }
+                        else if (container.Children[1] is System.Windows.Controls.Image)
+                        {
+                            rightImageYCoord += 150;
+                        }
+                        else if (container.Children[1] is MediaElement)
+                        {
+                            rightImageYCoord += 200;
+                        }
+                    }
+                    //Canvas.SetTop(paragraph, page.Children.Count * 35);
+                    Canvas.SetTop(paragraph, rightImageYCoord);
 
                     //textBox.TabIndex = 9999;
                     textBox.AcceptsTab = false;
@@ -860,9 +1014,14 @@ namespace documenter
                     createNoteMenuItem.Click += goToAnotherWindow;
                     textBox.ContextMenu = contextMenu;
 
-                    int caretIndex = fontWeightBolder.SelectionStart;
+                    /*int caretIndex = fontWeightBolder.SelectionStart;
                     string caretText = fontWeightBolder.Text.Substring(caretIndex, fontWeightBolder.Text.Length - fontWeightBolder.Text.Substring(0, caretIndex).Length);
-                    fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);
+                    fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);*/
+                    
+                    int caretIndex = ((TextBox)currentControl).SelectionStart;
+                    string caretText = ((TextBox)currentControl).Text.Substring(caretIndex, ((TextBox)currentControl).Text.Length - ((TextBox)currentControl).Text.Substring(0, caretIndex).Length);
+                    ((TextBox)currentControl).Text = ((TextBox)currentControl).Text.Substring(0, caretIndex);
+
                     textBox.Text = caretText;
                     lineCursor++;
                     
@@ -892,7 +1051,10 @@ namespace documenter
             {
                 if (lineCursor >= 2) {
                     lineCursor--;
-                    fontWeightBolder = ((TextBox) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    
+                    //fontWeightBolder = ((TextBox) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    currentControl = ((UIElement) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -901,25 +1063,36 @@ namespace documenter
                 if (lineCursor < page.Children.Count)
                 {
                     lineCursor++;
-                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    
+                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
             else if (e.Key == Key.Left)
             {
-                if (lineCursor >= 2 && fontWeightBolder.SelectionStart <= 0)
+                //if (lineCursor >= 2 && fontWeightBolder.SelectionStart <= 0)
+                if (lineCursor >= 2 && ((TextBox)currentControl).SelectionStart <= 0)
                 {
                     lineCursor--;
-                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    
+                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
-            else if (e.Key == Key.Right && fontWeightBolder.SelectionStart > fontWeightBolder.Text.Length - 1)
+            //else if (e.Key == Key.Right && fontWeightBolder.SelectionStart > fontWeightBolder.Text.Length - 1)
+            else if (e.Key == Key.Right && ((TextBox)currentControl).SelectionStart > ((TextBox)currentControl).Text.Length - 1)
             {
                 if (lineCursor < page.Children.Count)
                 {
                     lineCursor++;
-                    fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
+                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -947,6 +1120,10 @@ namespace documenter
                         else if (container.Children[1] is System.Windows.Controls.Image)
                         {
                             rightImageYCoord += 150;
+                        }
+                        else if (container.Children[1] is MediaElement)
+                        {
+                            rightImageYCoord += 200;
                         }
                     }
                     if (rightImageYCoord >= wrapHeight) {
@@ -1072,12 +1249,16 @@ namespace documenter
         private void TTS(object sender, RoutedEventArgs e)
         {
             SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
-            speechSynthesizer.Speak(fontWeightBolder.Text);
+            
+            //speechSynthesizer.Speak(fontWeightBolder.Text);
+            speechSynthesizer.Speak(((TextBox)currentControl).Text);
+
         }
 
         private void grammaticCheck(object sender, RoutedEventArgs e)
         {
-            SpellCheck.SetIsEnabled(fontWeightBolder, true);
+            //SpellCheck.SetIsEnabled(fontWeightBolder, true);
+            SpellCheck.SetIsEnabled(((TextBox)currentControl), true);
         }
 
         private void screenCaptureHandler(object sender, RoutedEventArgs e)
@@ -1152,7 +1333,16 @@ namespace documenter
                 TextBox strokeNumber = new TextBox();
                 strokeNumber.BorderThickness = new Thickness();
                 strokeNumber.Width = 50;
-                strokeNumber.Text = (lineCursor + 1).ToString();
+                //strokeNumber.Text = (lineCursor + 1).ToString();
+                //strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + 2).ToString();
+                if (pages.Children.Count <= 2)
+                {
+                    strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + 2).ToString();
+                }
+                else if (pages.Children.Count >= 3)
+                {
+                    strokeNumber.Text = ((pages.Children.Count - 1) * countLinesInPage + 3).ToString();
+                }
                 paragraph.Children.Add(strokeNumber);
                 paragraph.Children.Add(textBox);
                 Canvas.SetLeft(paragraph, currentMargins);
@@ -1285,6 +1475,26 @@ namespace documenter
             lineCursor = 1;
             backdrop.Height += newPage.Height;
 
+            if (pages.Children.Count >= 2) {
+            
+                TextBlock pageNumber = new TextBlock();
+                backdrop.Children.Add(pageNumber);
+                int auxOffset = 25;
+                if (pages.Children.Count <= 2)
+                {
+                    auxOffset = 40;
+                }
+                //int pageNumberTop = (auxOffset + (int)margins.Top + (int)newPage.Height) * (pages.Children.Count - 1);
+                //int pageNumberTop = ((int)margins.Top - 3) * (pages.Children.Count - 1) + (int)newPage.Height * (pages.Children.Count - 1);
+                int pageNumberTop = ((int)margins.Top - 3) * (pages.Children.Count) + (int)newPage.Height * (pages.Children.Count);
+
+                Canvas.SetTop(pageNumber, pageNumberTop);
+            
+                Canvas.SetLeft(pageNumber, 300);
+            
+                pageNumber.Text = pages.Children.Count.ToString();
+                //pageNumber.Text = (pages.Children.Count - 1).ToString();
+            }
         }
 
         private void videoFromInternerHandler(object sender, RoutedEventArgs e)
@@ -1445,7 +1655,10 @@ namespace documenter
                     textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                     textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
 
-                    fontWeightBolder.Text = file_text;
+                    //fontWeightBolder.Text = file_text;
+                    ((TextBox)currentControl).Text = file_text;
+                    
+
                 }
             }
         }
@@ -1629,22 +1842,30 @@ namespace documenter
 
         private void levelOneHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontSize = 24;
+            //fontWeightBolder.FontSize = 24;
+            ((TextBox)currentControl).FontSize = 24;
+            
         }
 
         private void notIncldeInTableOfContentsHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontSize = 14;
+            //fontWeightBolder.FontSize = 14;
+            ((TextBox)currentControl).FontSize = 14;
+            
         }
 
         private void levelTwoHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontSize = 18;
+            //fontWeightBolder.FontSize = 18;
+            ((TextBox)currentControl).FontSize = 18;
+            
         }
 
         private void levelThreeHandler(object sender, RoutedEventArgs e)
         {
-            fontWeightBolder.FontSize = 14;
+            //fontWeightBolder.FontSize = 14;
+            ((TextBox)currentControl).FontSize = 14;
+            
         }
 
         private void openTableOfReferenses(object sender, RoutedEventArgs e)
@@ -1747,6 +1968,28 @@ namespace documenter
                 {
                     ((StackPanel)paragraph).Width = currentWidth;
                     Canvas.SetLeft(paragraph, currentMargins);
+                }
+            }
+        }
+
+        private void setNumberOfPageHandler(object sender, RoutedEventArgs e)
+        {
+            showNumberOfPage = !showNumberOfPage;
+            if (!showNumberOfPage) {
+                foreach (UIElement possilbleNumberOfPage in backdrop.Children) {
+                    if (possilbleNumberOfPage is TextBlock)
+                    {
+                        possilbleNumberOfPage.Visibility = Visibility.Hidden;
+                    }
+                }
+            } else
+            {
+                foreach (UIElement possilbleNumberOfPage in backdrop.Children)
+                {
+                    if (possilbleNumberOfPage is TextBlock)
+                    {
+                        possilbleNumberOfPage.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }
