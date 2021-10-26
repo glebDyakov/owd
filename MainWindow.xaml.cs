@@ -1111,19 +1111,23 @@ namespace documenter
                 {
                     System.Windows.Controls.Image img = new System.Windows.Controls.Image();
                     int rightImageYCoord = 0;
+                    int paragraphsCursor = 0;
                     foreach (StackPanel container in page.Children)
                     {
-                        if (container.Children[1] is TextBox)
-                        {
-                            rightImageYCoord += 35;
-                        }
-                        else if (container.Children[1] is System.Windows.Controls.Image)
-                        {
-                            rightImageYCoord += 150;
-                        }
-                        else if (container.Children[1] is MediaElement)
-                        {
-                            rightImageYCoord += 200;
+                        paragraphsCursor++;
+                        if (paragraphsCursor <= lineCursor) {
+                            if (container.Children[1] is TextBox)
+                            {
+                                rightImageYCoord += 35;
+                            }
+                            else if (container.Children[1] is System.Windows.Controls.Image)
+                            {
+                                rightImageYCoord += 150;
+                            }
+                            else if (container.Children[1] is MediaElement)
+                            {
+                                rightImageYCoord += 200;
+                            }
                         }
                     }
                     if (rightImageYCoord >= wrapHeight) {
@@ -1157,6 +1161,16 @@ namespace documenter
 
                         img.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                         img.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+
+                        int elementCursor = 0;
+                        foreach (StackPanel container in page.Children)
+                        {
+                            elementCursor++;
+                            if (elementCursor > lineCursor)
+                            {
+                                Canvas.SetTop(container, Canvas.GetTop(container) + 150);
+                            }
+                        }
 
                     }
                     
@@ -1515,19 +1529,24 @@ namespace documenter
                     mediaElement.Source = new Uri("file:///C:/Users/%D0%A1%D0%95%D0%A0%D0%93%D0%95%D0%99/Documents/Bandicam/metaplatform(activeTab).mp4");
 
                     int rightImageYCoord = 0;
+                    int paragraphsCursor = 0;
                     foreach (StackPanel container in page.Children)
                     {
-                        if (container.Children[1] is TextBox)
+                        paragraphsCursor++;
+                        if (paragraphsCursor < lineCursor)
                         {
-                            rightImageYCoord += 35;
-                        }
-                        else if (container.Children[1] is System.Windows.Controls.Image)
-                        {
-                            rightImageYCoord += 150;
-                        }
-                        else if (container.Children[1] is System.Windows.Controls.MediaElement)
-                        {
-                            rightImageYCoord += 200;
+                            if (container.Children[1] is TextBox)
+                            {
+                                rightImageYCoord += 35;
+                            }
+                            else if (container.Children[1] is System.Windows.Controls.Image)
+                            {
+                                rightImageYCoord += 150;
+                            }
+                            else if (container.Children[1] is System.Windows.Controls.MediaElement)
+                            {
+                                rightImageYCoord += 200;
+                            }
                         }
                     }
 
@@ -1549,11 +1568,18 @@ namespace documenter
                         page.Children.Add(paragraph);
                         Canvas.SetLeft(paragraph, currentMargins);
 
-                        //page.Children.Add(mediaElement);
-
-                        //Canvas.SetTop(mediaElement, page.Children.Count * 35);
-
                         Canvas.SetTop(paragraph, rightImageYCoord);
+
+                        int elementCursor = 0;
+                        foreach (StackPanel container in page.Children)
+                        {
+                            elementCursor++;
+                            if (elementCursor > lineCursor)
+                            {
+                                Canvas.SetTop(container, Canvas.GetTop(container) + 200);
+                            }
+                        }
+
                     }
                     break;
                 case MessageBoxResult.Cancel:
