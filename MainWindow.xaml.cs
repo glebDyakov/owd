@@ -43,6 +43,7 @@ namespace documenter
         public UIElement currentControl;
         public int wrapHeight = 500;
         public bool showNumberOfPage = true;
+        public SpeechSynthesizer speechSynthesizer;
 
         public MainWindow()
         {
@@ -54,7 +55,9 @@ namespace documenter
             //fontWeightBolder.Focus();
             currentControl = fontWeightBolder;
             ((TextBox)currentControl).Focus();
-            
+
+            speechSynthesizer = new SpeechSynthesizer();
+
         }
 
         private void fontWeightBolderHandler(object sender, RoutedEventArgs e)
@@ -758,19 +761,23 @@ namespace documenter
         private void changeLineFromCursor(object sender, MouseButtonEventArgs e)
         {
 
-            //fontWeightBolder = (TextBox)sender;
             currentControl = (UIElement)sender;
+            if (sender is TextBox)
+            {
+                pageCursor = pages.Children.IndexOf((UIElement)((TextBox)currentControl).Parent);
+                StackPanel paragraph = ((StackPanel)((TextBox)currentControl).Parent);
+                page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)paragraph.Parent)];
+                lineCursor = page.Children.IndexOf((UIElement)((TextBox)currentControl).Parent) + 1;
+            }
+            else if (sender is System.Windows.Controls.Image)
+            {
+                pageCursor = pages.Children.IndexOf((UIElement)((System.Windows.Controls.Image)currentControl).Parent);
+                StackPanel paragraph = ((StackPanel)((System.Windows.Controls.Image)currentControl).Parent);
+                page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)paragraph.Parent)];
+                lineCursor = page.Children.IndexOf((UIElement)((System.Windows.Controls.Image)currentControl).Parent) + 1;
+            }
 
-            //pageCursor = pages.Children.IndexOf((UIElement)fontWeightBolder.Parent);
-            pageCursor = pages.Children.IndexOf((UIElement)((TextBox)currentControl).Parent);
-
-            //StackPanel paragraph = ((StackPanel)fontWeightBolder.Parent);
-            StackPanel paragraph = ((StackPanel)((TextBox)currentControl).Parent);
-
-            page = (Canvas)pages.Children[pages.Children.IndexOf((UIElement)paragraph.Parent)];
             
-            //lineCursor = page.Children.IndexOf((UIElement)fontWeightBolder.Parent) + 1;
-            lineCursor = page.Children.IndexOf((UIElement)((TextBox)currentControl).Parent) + 1;
 
             if (currentControl is System.Windows.Controls.Image)
             {
@@ -1143,7 +1150,9 @@ namespace documenter
                         strokeNumber.Text = (lineCursor + 1).ToString();
                         paragraph.Children.Add(strokeNumber);
                         paragraph.Children.Add(img);
-                        page.Children.Add(paragraph);
+                        
+                        //page.Children.Add(paragraph);
+
                         Canvas.SetLeft(paragraph, currentMargins);
                         BitmapImage bitmapImage = new BitmapImage();
                         bitmapImage.BeginInit();
@@ -1162,15 +1171,27 @@ namespace documenter
                         img.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                         img.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
 
+                        if (lineCursor >= page.Children.Count)
+                        {
+                            page.Children.Add(paragraph);
+                        }
+                        else
+                        {
+                            page.Children.Insert(lineCursor, paragraph);
+                        }
+
                         int elementCursor = 0;
+                        speechSynthesizer.Speak(lineCursor.ToString());
                         foreach (StackPanel container in page.Children)
                         {
                             elementCursor++;
-                            if (elementCursor > lineCursor)
+                            if (elementCursor > lineCursor + 1)
                             {
-                                Canvas.SetTop(container, Canvas.GetTop(container) + 150);
+                                Canvas.SetTop(container, Canvas.GetTop(container) + 75);
                             }
                         }
+
+                        //Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 25);
 
                     }
                     
@@ -1262,11 +1283,8 @@ namespace documenter
 
         private void TTS(object sender, RoutedEventArgs e)
         {
-            SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
-            
             //speechSynthesizer.Speak(fontWeightBolder.Text);
             speechSynthesizer.Speak(((TextBox)currentControl).Text);
-
         }
 
         private void grammaticCheck(object sender, RoutedEventArgs e)
@@ -1565,7 +1583,17 @@ namespace documenter
                         strokeNumber.Text = (lineCursor + 1).ToString();
                         paragraph.Children.Add(strokeNumber);
                         paragraph.Children.Add(mediaElement);
-                        page.Children.Add(paragraph);
+
+                        //page.Children.Add(paragraph);
+                        if (lineCursor >= page.Children.Count)
+                        {
+                            page.Children.Add(paragraph);
+                        }
+                        else
+                        {
+                            page.Children.Insert(lineCursor, paragraph);
+                        }
+
                         Canvas.SetLeft(paragraph, currentMargins);
 
                         Canvas.SetTop(paragraph, rightImageYCoord);
@@ -1574,7 +1602,7 @@ namespace documenter
                         foreach (StackPanel container in page.Children)
                         {
                             elementCursor++;
-                            if (elementCursor > lineCursor)
+                            if (elementCursor > lineCursor + 1)
                             {
                                 Canvas.SetTop(container, Canvas.GetTop(container) + 200);
                             }
