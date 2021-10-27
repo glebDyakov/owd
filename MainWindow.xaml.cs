@@ -779,19 +779,6 @@ namespace documenter
                 lineCursor = page.Children.IndexOf((UIElement)((System.Windows.Controls.Image)currentControl).Parent) + 1;
             }
 
-            
-
-            if (currentControl is System.Windows.Controls.Image)
-            {
-                foreach (UIElement control in page.Children) {
-                    if (control is System.Windows.Controls.Image)
-                    {
-                        ((System.Windows.Controls.Image)control).Opacity = 255;
-                    }
-                }
-                ((System.Windows.Controls.Image)currentControl).Opacity = 0.5;
-            }
-
             if (sender is TextBox || sender is System.Windows.Controls.Image)
             {
                 foreach (StackPanel container in page.Children)
@@ -831,20 +818,26 @@ namespace documenter
         {
             if (e.Key == Key.Back)
             {
-                //if (fontWeightBolder.SelectionStart <= 0 && lineCursor >= 2)
-                if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor >= 2)
+                if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is TextBox)
                 {
-                    lineCursor--;
-                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
-
-                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
-                    currentControl = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
-
-                    page.Children.Remove((StackPanel)page.Children[lineCursor]);
-                    int paragraphCursor = 0;
-                    foreach(StackPanel paragraphGroup in page.Children)
+                    if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor >= 2)
                     {
-                        foreach (UIElement paragraph in paragraphGroup.Children)
+                        lineCursor--;
+                        ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
+
+                        if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is System.Windows.Controls.Image)
+                        {
+                            currentControl = ((System.Windows.Controls.Image)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                        }
+                        else if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is TextBox)
+                        {
+                            currentControl = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                        }
+
+                        page.Children.Remove((StackPanel)page.Children[lineCursor]);
+
+                        int paragraphCursor = 0;
+                        foreach (UIElement paragraph in page.Children)
                         {
                             paragraphCursor++;
                             if (paragraphCursor > lineCursor)
@@ -852,23 +845,82 @@ namespace documenter
                                 Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) - 35);
                             }
                         }
-                    }
-                    e.Handled = true;
-                }
-                //else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
-                else if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
-                {
-                    pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
-                    
-                    page = (Canvas)pages.Children[pages.Children.Count - 1];
 
-                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+                        /*foreach (StackPanel paragraphGroup in page.Children)
+                        {
+                            foreach (UIElement paragraph in paragraphGroup.Children)
+                            {
+                                paragraphCursor++;
+                                if (paragraphCursor > lineCursor)
+                                {
+                                    Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) - 35);
+                                }
+                            }
+                        }*/
+
+                        foreach (UIElement child in page.Children)
+                        {
+                            if (page.Children.IndexOf(child) >= lineCursor - 1)
+                            {
+                                ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
+                            }
+                        }
+
+                        e.Handled = true;
+                    }
+                    //else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
+                    else if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
+                    {
+                        pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
+
+                        page = (Canvas)pages.Children[pages.Children.Count - 1];
+
+                        currentControl = ((UIElement)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+
+                        ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
+                        lineCursor = page.Children.Count;
+                        backdrop.Height -= 650;
+                    }
+                }
+                else if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is System.Windows.Controls.Image)
+                {
+                    lineCursor--;
+                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
+                    if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is System.Windows.Controls.Image)
+                    {
+                        currentControl = ((System.Windows.Controls.Image)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    }
+                    else if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is TextBox)
+                    {
+                        currentControl = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+                    }
+
+                    page.Children.Remove((StackPanel)page.Children[lineCursor]);
+
+                    int paragraphCursor = 0;
+                    foreach (UIElement paragraph in page.Children)
+                    {
+                        paragraphCursor++;
+                        if (paragraphCursor > lineCursor)
+                        {
+                            Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) - 150);
+                        }
+                    }
+
+                    foreach (UIElement child in page.Children)
+                    {
+                        if (page.Children.IndexOf(child) >= lineCursor - 1)
+                        {
+                            ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
+                        }
+                    }
+
                     currentControl = ((UIElement)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
 
-                    ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
-                    lineCursor = page.Children.Count;
-                    backdrop.Height -= 650;
+                    e.Handled = true;
+
                 }
+
             }
             else if (e.Key == Key.Enter)
             {
@@ -968,6 +1020,7 @@ namespace documenter
                         textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                         textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
                         strokeNumber.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+
                     }
                     else
                     {
@@ -992,22 +1045,24 @@ namespace documenter
                     int rightImageYCoord = 0;
                     foreach (StackPanel container in page.Children)
                     {
-                        if (container.Children[1] is TextBox)
-                        {
-                            rightImageYCoord += 35;
-                        }
-                        else if (container.Children[1] is System.Windows.Controls.Image)
-                        {
-                            rightImageYCoord += 150;
-                        }
-                        else if (container.Children[1] is MediaElement)
-                        {
-                            rightImageYCoord += 200;
+                        if (page.Children.IndexOf(container) < lineCursor) {
+                            if (container.Children[1] is TextBox)
+                            {
+                                rightImageYCoord += 35;
+                            }
+                            else if (container.Children[1] is System.Windows.Controls.Image)
+                            {
+                                rightImageYCoord += 150;
+                            }
+                            else if (container.Children[1] is MediaElement)
+                            {
+                                rightImageYCoord += 200;
+                            }
                         }
                     }
-                    //Canvas.SetTop(paragraph, page.Children.Count * 35);
-                    Canvas.SetTop(paragraph, rightImageYCoord);
 
+                    Canvas.SetTop(paragraph, rightImageYCoord);
+                    
                     //textBox.TabIndex = 9999;
                     textBox.AcceptsTab = false;
                     textBox.IsTabStop = true;
@@ -1060,10 +1115,6 @@ namespace documenter
                     createNoteMenuItem.Click += goToAnotherWindow;
                     textBox.ContextMenu = contextMenu;
 
-                    /*int caretIndex = fontWeightBolder.SelectionStart;
-                    string caretText = fontWeightBolder.Text.Substring(caretIndex, fontWeightBolder.Text.Length - fontWeightBolder.Text.Substring(0, caretIndex).Length);
-                    fontWeightBolder.Text = fontWeightBolder.Text.Substring(0, caretIndex);*/
-                    
                     int caretIndex = ((TextBox)currentControl).SelectionStart;
                     string caretText = ((TextBox)currentControl).Text.Substring(caretIndex, ((TextBox)currentControl).Text.Length - ((TextBox)currentControl).Text.Substring(0, caretIndex).Length);
                     ((TextBox)currentControl).Text = ((TextBox)currentControl).Text.Substring(0, caretIndex);
@@ -1071,7 +1122,6 @@ namespace documenter
                     textBox.Text = caretText;
                     lineCursor++;
                     
-                    //page.Children.Insert(lineCursor - 1, textBox);
                     page.Children.Insert(lineCursor - 1, paragraph);
 
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
@@ -1079,18 +1129,47 @@ namespace documenter
                     {
                         if (page.Children.IndexOf(child) >= lineCursor - 1)
                         {
-                            Canvas.SetTop(child, (page.Children.IndexOf(child) + 1) * 35);
+                            if (((StackPanel)child).Children[1] is TextBox)
+                            {
+                                //Canvas.SetTop(child, (page.Children.IndexOf(child) + 1) * 35);
+                                Canvas.SetTop(child, Canvas.GetTop(child) + 35);
+                            }
+                            else if (((StackPanel)child).Children[1] is System.Windows.Controls.Image)
+                            {
+                                Canvas.SetTop(child, Canvas.GetTop(child) + 35);
+                            }
                             ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
                         }
                     }
                     Canvas.SetLeft(textBox, currentMargins);
 
-                    //fontWeightBolder = textBox;
                     currentControl = textBox;
 
                     textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                     textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                     textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+
+                    int totalHeightOfPage = 0;
+                    foreach (StackPanel container in page.Children)
+                    {
+                        if (container.Children[1] is TextBox)
+                        {
+                            totalHeightOfPage += 35;
+                        }
+                        else if (container.Children[1] is System.Windows.Controls.Image)
+                        {
+                            totalHeightOfPage += 150;
+                        }
+                        else if (container.Children[1] is MediaElement)
+                        {
+                            totalHeightOfPage += 200;
+                        }
+                    }
+                    if (totalHeightOfPage >= wrapHeight)
+                    {
+                        createNewPage("paragraph", null, null, 0);
+                    }
+
                 }
             }
             else if (e.Key == Key.Up)
@@ -1201,7 +1280,7 @@ namespace documenter
                         img.Width = 150;
                         img.Height = 150;
                         Canvas.SetTop(paragraph, rightImageYCoord);
-                        ((StackPanel)page.Children[lineCursor]).Children[1].Focus();
+                        
                         lineCursor++;
 
                         /*Canvas.SetTop(img, page.Children.Count * 35);
@@ -1216,7 +1295,7 @@ namespace documenter
                         }
                         else
                         {
-                            page.Children.Insert(lineCursor, paragraph);
+                            page.Children.Insert(lineCursor - 1, paragraph);
                         }
 
                         int elementCursor = 0;
@@ -1224,18 +1303,27 @@ namespace documenter
                         foreach (StackPanel container in page.Children)
                         {
                             elementCursor++;
-                            if (elementCursor > lineCursor + 1)
+                            if (elementCursor > lineCursor)
                             {
-                                Canvas.SetTop(container, Canvas.GetTop(container) + 75);
+                                Canvas.SetTop(container, Canvas.GetTop(container) + 150);
+                                
+                                ((TextBox)((StackPanel)container).Children[0]).Text = (page.Children.IndexOf(container) + 1).ToString(); 
                             }
                         }
 
                         Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 25);
 
+                        img.Loaded += Img_Loaded;
+                        img.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
                     }
                     
                 }
             }
+        }
+
+        private void Img_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((UIElement)sender).Focus();
         }
 
         private void setPortraitOrientation(object sender, RoutedEventArgs e)
