@@ -44,6 +44,7 @@ namespace documenter
         public int wrapHeight = 500;
         public bool showNumberOfPage = true;
         public SpeechSynthesizer speechSynthesizer;
+        public MediaPlayer audio;
 
         public MainWindow()
         {
@@ -57,6 +58,7 @@ namespace documenter
             ((TextBox)currentControl).Focus();
 
             speechSynthesizer = new SpeechSynthesizer();
+            audio = new MediaPlayer();
 
         }
 
@@ -789,7 +791,40 @@ namespace documenter
                 }
                 ((System.Windows.Controls.Image)currentControl).Opacity = 0.5;
             }
-        
+
+            if (sender is TextBox || sender is System.Windows.Controls.Image)
+            {
+                foreach (StackPanel container in page.Children)
+                {
+                    container.Background = System.Windows.Media.Brushes.Transparent;
+                }
+                if (sender is TextBox)
+                {
+                    ((StackPanel)((TextBox)sender).Parent).Background = System.Windows.Media.Brushes.Aquamarine;
+                }
+                else if (sender is System.Windows.Controls.Image)
+                {
+                    ((StackPanel)((System.Windows.Controls.Image)sender).Parent).Background = System.Windows.Media.Brushes.Aquamarine;
+                }
+            }
+
+            /*if (sender is TextBox || sender is System.Windows.Controls.Image)
+            {
+                foreach (StackPanel container in page.Children)
+                {
+                    container.Background = System.Windows.Media.Brushes.Transparent;
+                }
+                if (sender is TextBox)
+                {
+                    ((StackPanel)((TextBox)sender).Parent).Background = System.Windows.Media.Brushes.Aquamarine;
+                }
+                else if (sender is System.Windows.Controls.Image)
+                {
+                    ((StackPanel)((System.Windows.Controls.Image)sender).Parent).Background = System.Windows.Media.Brushes.Aquamarine;
+                }
+            }*/
+
+
         }
 
         private void specialInputHandler(object sender, KeyEventArgs e)
@@ -818,6 +853,7 @@ namespace documenter
                             }
                         }
                     }
+                    e.Handled = true;
                 }
                 //else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                 else if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
@@ -862,7 +898,9 @@ namespace documenter
                         paragraph.Children.Add(strokeNumber);
                         paragraph.Children.Add(textBox);
                         page.Children.Add(paragraph);
+
                         Canvas.SetLeft(paragraph, currentMargins);
+                        
                         Canvas.SetTop(paragraph, page.Children.Count * 35);
 
                         textBox.AcceptsTab = false;
@@ -929,6 +967,7 @@ namespace documenter
                         textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
                         textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                         textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+                        strokeNumber.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                     }
                     else
                     {
@@ -1191,7 +1230,7 @@ namespace documenter
                             }
                         }
 
-                        //Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 25);
+                        Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 25);
 
                     }
                     
