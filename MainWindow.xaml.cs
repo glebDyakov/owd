@@ -567,13 +567,9 @@ namespace documenter
 
         public void inputHandler(object sender, TextCompositionEventArgs e)
         {
-            //if (fontWeightBolder.Text.Length >= maxCharsInParagraph && lineCursor == page.Children.Count)
             if (((TextBox)currentControl).Text.Length >= maxCharsInParagraph && lineCursor == page.Children.Count)
             {
 
-                /*
-                    незаконченная логика добавления новой строки с номером строки  
-                */
                 TextBox textBox = new TextBox();
                 StackPanel paragraph = new StackPanel();
                 paragraph.Orientation = Orientation.Horizontal;
@@ -651,7 +647,6 @@ namespace documenter
                 textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
 
             }
-            //else if (fontWeightBolder.Text.Length >= maxCharsInParagraph && fontWeightBolder.SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
             else if (((TextBox)currentControl).Text.Length >= maxCharsInParagraph && ((TextBox)currentControl).SelectionStart == maxCharsInParagraph && lineCursor < page.Children.Count)
             {
                 lineCursor++;
@@ -868,18 +863,27 @@ namespace documenter
 
                         e.Handled = true;
                     }
-                    //else if (fontWeightBolder.SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                     else if (((TextBox)currentControl).SelectionStart <= 0 && lineCursor == 1 && pages.Children.Count >= 2)
                     {
-                        pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
+                        if (page.Children.Count == 1)
+                        {
+                            pages.Children.Remove((Canvas)pages.Children[pages.Children.Count - 1]);
 
-                        page = (Canvas)pages.Children[pages.Children.Count - 1];
+                            page = (Canvas)pages.Children[pages.Children.Count - 1];
 
-                        currentControl = ((UIElement)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
+                            currentControl = ((UIElement)((StackPanel)page.Children[page.Children.Count - 1]).Children[1]);
 
-                        ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
-                        lineCursor = page.Children.Count;
-                        backdrop.Height -= 650;
+                            ((StackPanel)page.Children[page.Children.Count - 1]).Children[1].Focus();
+                            lineCursor = page.Children.Count;
+                            backdrop.Height -= 650;
+                        }
+                        else if (page.Children.Count >= 2) {
+                            page = ((Canvas)pages.Children[pages.Children.IndexOf(page) - 1]);
+                            Keyboard.ClearFocus();
+                            currentControl = ((StackPanel)page.Children[page.Children.Count - 1]).Children[1];
+                            lineCursor = page.Children.Count;
+                            currentControl.Focus();
+                        }
                     }
                 }
                 else if (((StackPanel)page.Children[lineCursor - 1]).Children[1] is System.Windows.Controls.Image)
@@ -1177,9 +1181,9 @@ namespace documenter
                 if (lineCursor >= 2) {
                     lineCursor--;
                     
-                    //fontWeightBolder = ((TextBox) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
                     currentControl = ((UIElement) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
-                    
+
+                    Keyboard.ClearFocus();
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -1189,9 +1193,9 @@ namespace documenter
                 {
                     lineCursor++;
                     
-                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
                     currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
 
+                    Keyboard.ClearFocus();
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
             }
@@ -1234,6 +1238,7 @@ namespace documenter
                 Stream myStream;
                 if ((myStream = ofd.OpenFile()) != null)
                 {
+                    Keyboard.ClearFocus();
                     System.Windows.Controls.Image img = new System.Windows.Controls.Image();
                     int rightImageYCoord = 0;
                     int paragraphsCursor = 0;
@@ -1286,9 +1291,6 @@ namespace documenter
                         /*Canvas.SetTop(img, page.Children.Count * 35);
                         Canvas.SetLeft(img, currentMargins);*/
 
-                        img.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
-                        img.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
-
                         if (lineCursor >= page.Children.Count)
                         {
                             page.Children.Add(paragraph);
@@ -1314,6 +1316,9 @@ namespace documenter
                         Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 25);
 
                         img.Loaded += Img_Loaded;
+
+                        //img.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                        img.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                         img.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
                     }
                     
@@ -1628,6 +1633,7 @@ namespace documenter
                 Canvas.SetTop(paragraph, 35);
                 ((StackPanel)page.Children[0]).Children[1].Focus();
 
+                img.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                 img.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
                 img.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
             }
