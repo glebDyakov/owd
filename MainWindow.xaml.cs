@@ -1034,125 +1034,6 @@ namespace documenter
                 else
                 {
 
-                    TextBox textBox = new TextBox();
-                    StackPanel paragraph = new StackPanel();
-                    paragraph.Orientation = Orientation.Horizontal;
-                    TextBox strokeNumber = new TextBox();
-                    strokeNumber.BorderThickness = new Thickness();
-                    strokeNumber.Width = 50;
-                    strokeNumber.Text = (lineCursor + 1).ToString();
-                    paragraph.Children.Add(strokeNumber);
-                    paragraph.Children.Add(textBox);
-                    //page.Children.Add(paragraph);
-                    Canvas.SetLeft(paragraph, currentMargins);
-
-                    int rightImageYCoord = 0;
-                    foreach (StackPanel container in page.Children)
-                    {
-                        if (page.Children.IndexOf(container) < lineCursor) {
-                            if (container.Children[1] is TextBox)
-                            {
-                                rightImageYCoord += 35;
-                            }
-                            else if (container.Children[1] is System.Windows.Controls.Image)
-                            {
-                                rightImageYCoord += 150;
-                            }
-                            else if (container.Children[1] is MediaElement)
-                            {
-                                rightImageYCoord += 200;
-                            }
-                        }
-                    }
-
-                    Canvas.SetTop(paragraph, rightImageYCoord);
-                    
-                    //textBox.TabIndex = 9999;
-                    textBox.AcceptsTab = false;
-                    textBox.IsTabStop = true;
-                    textBox.Background = System.Windows.Media.Brushes.Transparent;
-                    textBox.Width = currentWidth;
-                    textBox.BorderThickness = new Thickness(0);
-                    textBox.MaxLines = 1;
-                    textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
-                    
-                    ContextMenu contextMenu = new ContextMenu();
-                    MenuItem cutMenuItem = new MenuItem();
-                    cutMenuItem.Header = "Вырезать";
-                    contextMenu.Items.Add(cutMenuItem);
-                    cutMenuItem.Click += goToAnotherWindow;
-                    MenuItem copyMenuItem = new MenuItem();
-                    copyMenuItem.Header = "Копировать";
-                    contextMenu.Items.Add(copyMenuItem);
-                    copyMenuItem.Click += goToAnotherWindow;
-                    MenuItem insertMenuItem = new MenuItem();
-                    insertMenuItem.Header = "Вставить";
-                    contextMenu.Items.Add(insertMenuItem);
-                    insertMenuItem.Click += goToAnotherWindow;
-                    MenuItem fontMenuItem = new MenuItem();
-                    fontMenuItem.Header = "Шрифт";
-                    contextMenu.Items.Add(fontMenuItem);
-                    fontMenuItem.Click += goToAnotherWindow;
-                    MenuItem paragraphMenuItem = new MenuItem();
-                    paragraphMenuItem.Header = "Абзац";
-                    contextMenu.Items.Add(paragraphMenuItem);
-                    paragraphMenuItem.Click += openParagaphDialog;
-                    MenuItem searchMenuItem = new MenuItem();
-                    searchMenuItem.Header = "Поиск";
-                    contextMenu.Items.Add(searchMenuItem);
-                    searchMenuItem.Click += goToAnotherWindow;
-                    MenuItem synonymsMenuItem = new MenuItem();
-                    synonymsMenuItem.Header = "Вырезать";
-                    contextMenu.Items.Add(synonymsMenuItem);
-                    synonymsMenuItem.Click += goToAnotherWindow;
-                    MenuItem translateMenuItem = new MenuItem();
-                    translateMenuItem.Header = "Перевести";
-                    contextMenu.Items.Add(translateMenuItem);
-                    translateMenuItem.Click += goToAnotherWindow;
-                    MenuItem referenceMenuItem = new MenuItem();
-                    referenceMenuItem.Header = "Ссылка";
-                    contextMenu.Items.Add(referenceMenuItem);
-                    referenceMenuItem.Click += goToAnotherWindow;
-                    MenuItem createNoteMenuItem = new MenuItem();
-                    createNoteMenuItem.Header = "Создать примечание";
-                    contextMenu.Items.Add(createNoteMenuItem);
-                    createNoteMenuItem.Click += goToAnotherWindow;
-                    textBox.ContextMenu = contextMenu;
-
-                    int caretIndex = ((TextBox)currentControl).SelectionStart;
-                    string caretText = ((TextBox)currentControl).Text.Substring(caretIndex, ((TextBox)currentControl).Text.Length - ((TextBox)currentControl).Text.Substring(0, caretIndex).Length);
-                    ((TextBox)currentControl).Text = ((TextBox)currentControl).Text.Substring(0, caretIndex);
-
-                    textBox.Text = caretText;
-                    lineCursor++;
-                    
-                    page.Children.Insert(lineCursor - 1, paragraph);
-
-                    ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
-                    foreach (UIElement child in page.Children)
-                    {
-                        if (page.Children.IndexOf(child) >= lineCursor - 1)
-                        {
-                            if (((StackPanel)child).Children[1] is TextBox)
-                            {
-                                //Canvas.SetTop(child, (page.Children.IndexOf(child) + 1) * 35);
-                                Canvas.SetTop(child, Canvas.GetTop(child) + 35);
-                            }
-                            else if (((StackPanel)child).Children[1] is System.Windows.Controls.Image)
-                            {
-                                Canvas.SetTop(child, Canvas.GetTop(child) + 35);
-                            }
-                            ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
-                        }
-                    }
-                    Canvas.SetLeft(textBox, currentMargins);
-
-                    currentControl = textBox;
-
-                    textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
-                    textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
-                    textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
-
                     int totalHeightOfPage = 0;
                     foreach (StackPanel container in page.Children)
                     {
@@ -1172,6 +1053,129 @@ namespace documenter
                     if (totalHeightOfPage >= wrapHeight)
                     {
                         createNewPage("paragraph", null, null, 0);
+                    } 
+                    else
+                    {
+                        TextBox textBox = new TextBox();
+                        StackPanel paragraph = new StackPanel();
+                        paragraph.Orientation = Orientation.Horizontal;
+                        TextBox strokeNumber = new TextBox();
+                        strokeNumber.BorderThickness = new Thickness();
+                        strokeNumber.Width = 50;
+                        strokeNumber.Text = (lineCursor + 1).ToString();
+                        paragraph.Children.Add(strokeNumber);
+                        paragraph.Children.Add(textBox);
+                        //page.Children.Add(paragraph);
+                        Canvas.SetLeft(paragraph, currentMargins);
+
+                        int rightImageYCoord = 0;
+                        foreach (StackPanel container in page.Children)
+                        {
+                            if (page.Children.IndexOf(container) < lineCursor)
+                            {
+                                if (container.Children[1] is TextBox)
+                                {
+                                    rightImageYCoord += 35;
+                                }
+                                else if (container.Children[1] is System.Windows.Controls.Image)
+                                {
+                                    rightImageYCoord += 150;
+                                }
+                                else if (container.Children[1] is MediaElement)
+                                {
+                                    rightImageYCoord += 200;
+                                }
+                            }
+                        }
+
+                        Canvas.SetTop(paragraph, rightImageYCoord);
+
+                        //textBox.TabIndex = 9999;
+                        textBox.AcceptsTab = false;
+                        textBox.IsTabStop = true;
+                        textBox.Background = System.Windows.Media.Brushes.Transparent;
+                        textBox.Width = currentWidth;
+                        textBox.BorderThickness = new Thickness(0);
+                        textBox.MaxLines = 1;
+                        textBox.BorderBrush = System.Windows.Media.Brushes.Transparent;
+
+                        ContextMenu contextMenu = new ContextMenu();
+                        MenuItem cutMenuItem = new MenuItem();
+                        cutMenuItem.Header = "Вырезать";
+                        contextMenu.Items.Add(cutMenuItem);
+                        cutMenuItem.Click += goToAnotherWindow;
+                        MenuItem copyMenuItem = new MenuItem();
+                        copyMenuItem.Header = "Копировать";
+                        contextMenu.Items.Add(copyMenuItem);
+                        copyMenuItem.Click += goToAnotherWindow;
+                        MenuItem insertMenuItem = new MenuItem();
+                        insertMenuItem.Header = "Вставить";
+                        contextMenu.Items.Add(insertMenuItem);
+                        insertMenuItem.Click += goToAnotherWindow;
+                        MenuItem fontMenuItem = new MenuItem();
+                        fontMenuItem.Header = "Шрифт";
+                        contextMenu.Items.Add(fontMenuItem);
+                        fontMenuItem.Click += goToAnotherWindow;
+                        MenuItem paragraphMenuItem = new MenuItem();
+                        paragraphMenuItem.Header = "Абзац";
+                        contextMenu.Items.Add(paragraphMenuItem);
+                        paragraphMenuItem.Click += openParagaphDialog;
+                        MenuItem searchMenuItem = new MenuItem();
+                        searchMenuItem.Header = "Поиск";
+                        contextMenu.Items.Add(searchMenuItem);
+                        searchMenuItem.Click += goToAnotherWindow;
+                        MenuItem synonymsMenuItem = new MenuItem();
+                        synonymsMenuItem.Header = "Вырезать";
+                        contextMenu.Items.Add(synonymsMenuItem);
+                        synonymsMenuItem.Click += goToAnotherWindow;
+                        MenuItem translateMenuItem = new MenuItem();
+                        translateMenuItem.Header = "Перевести";
+                        contextMenu.Items.Add(translateMenuItem);
+                        translateMenuItem.Click += goToAnotherWindow;
+                        MenuItem referenceMenuItem = new MenuItem();
+                        referenceMenuItem.Header = "Ссылка";
+                        contextMenu.Items.Add(referenceMenuItem);
+                        referenceMenuItem.Click += goToAnotherWindow;
+                        MenuItem createNoteMenuItem = new MenuItem();
+                        createNoteMenuItem.Header = "Создать примечание";
+                        contextMenu.Items.Add(createNoteMenuItem);
+                        createNoteMenuItem.Click += goToAnotherWindow;
+                        textBox.ContextMenu = contextMenu;
+
+                        int caretIndex = ((TextBox)currentControl).SelectionStart;
+                        string caretText = ((TextBox)currentControl).Text.Substring(caretIndex, ((TextBox)currentControl).Text.Length - ((TextBox)currentControl).Text.Substring(0, caretIndex).Length);
+                        ((TextBox)currentControl).Text = ((TextBox)currentControl).Text.Substring(0, caretIndex);
+
+                        textBox.Text = caretText;
+                        lineCursor++;
+
+                        page.Children.Insert(lineCursor - 1, paragraph);
+
+                        ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
+                        foreach (UIElement child in page.Children)
+                        {
+                            if (page.Children.IndexOf(child) >= lineCursor - 1)
+                            {
+                                if (((StackPanel)child).Children[1] is TextBox)
+                                {
+                                    //Canvas.SetTop(child, (page.Children.IndexOf(child) + 1) * 35);
+                                    Canvas.SetTop(child, Canvas.GetTop(child) + 35);
+                                }
+                                else if (((StackPanel)child).Children[1] is System.Windows.Controls.Image)
+                                {
+                                    Canvas.SetTop(child, Canvas.GetTop(child) + 35);
+                                }
+                                ((TextBox)((StackPanel)child).Children[0]).Text = (page.Children.IndexOf(child) + 1).ToString();
+                            }
+                        }
+                        Canvas.SetLeft(textBox, currentMargins);
+
+                        currentControl = textBox;
+
+                        textBox.PreviewTextInput += new TextCompositionEventHandler(inputHandler);
+                        textBox.PreviewMouseUp += new MouseButtonEventHandler(changeLineFromCursor);
+                        textBox.PreviewKeyDown += new KeyEventHandler(specialInputHandler);
+
                     }
 
                 }
@@ -1180,16 +1184,31 @@ namespace documenter
             {
                 if (lineCursor >= 2) {
                     lineCursor--;
-                    
-                    currentControl = ((UIElement) ((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
+                    currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
 
                     Keyboard.ClearFocus();
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
+                }
+                else if (lineCursor == 1 && pages.Children.IndexOf(page) + 1 >= 2) {
+                    Keyboard.ClearFocus();
+                    page = ((Canvas)pages.Children[pages.Children.IndexOf(page) - 1]);
+                    lineCursor = page.Children.Count;
+                    currentControl = ((StackPanel)page.Children[page.Children.Count - 1]).Children[1];
+                    currentControl.Focus();
                 }
             }
             else if (e.Key == Key.Down)
             {
-                if (lineCursor < page.Children.Count)
+                if (lineCursor == page.Children.Count && pages.Children.IndexOf(page) + 1 < pages.Children.Count)
+                {
+                    Keyboard.ClearFocus();
+                    page = ((Canvas)pages.Children[pages.Children.IndexOf(page) + 1]);
+                    lineCursor = 1;
+                    currentControl = ((StackPanel)page.Children[0]).Children[1];
+                    currentControl.Focus();
+                }
+                else if (lineCursor < page.Children.Count)
                 {
                     lineCursor++;
                     
@@ -1198,24 +1217,29 @@ namespace documenter
                     Keyboard.ClearFocus();
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
+
             }
             else if (e.Key == Key.Left)
             {
-                //if (lineCursor >= 2 && fontWeightBolder.SelectionStart <= 0)
                 if (lineCursor >= 2 && ((TextBox)currentControl).SelectionStart <= 0)
                 {
                     lineCursor--;
-                    
-                    //fontWeightBolder = ((TextBox)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
+
                     currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
 
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
                 }
+                else if (lineCursor == 1 && pages.Children.IndexOf(page) + 1 >= 2 && ((TextBox)currentControl).SelectionStart <= 0) { 
+                    Keyboard.ClearFocus();
+                    page = ((Canvas)pages.Children[pages.Children.IndexOf(page) - 1]);
+                    lineCursor = page.Children.Count;
+                    currentControl = ((StackPanel)page.Children[page.Children.Count - 1]).Children[1];
+                    (currentControl).Focus();
+                }
             }
-            //else if (e.Key == Key.Right && fontWeightBolder.SelectionStart > fontWeightBolder.Text.Length - 1)
-            else if (e.Key == Key.Right && ((TextBox)currentControl).SelectionStart > ((TextBox)currentControl).Text.Length - 1)
+            else if (e.Key == Key.Right)
             {
-                if (lineCursor < page.Children.Count)
+                if (lineCursor < page.Children.Count && ((TextBox)currentControl).SelectionStart > ((TextBox)currentControl).Text.Length - 1)
                 {
                     lineCursor++;
 
@@ -1223,6 +1247,14 @@ namespace documenter
                     currentControl = ((UIElement)((StackPanel)page.Children[lineCursor - 1]).Children[1]);
 
                     ((StackPanel)page.Children[lineCursor - 1]).Children[1].Focus();
+                }
+                else if (lineCursor == page.Children.Count && ((TextBox)currentControl).SelectionStart > ((TextBox)currentControl).Text.Length - 1 && pages.Children.IndexOf(page) + 1 < pages.Children.Count)
+                {
+                    Keyboard.ClearFocus();
+                    page = ((Canvas)pages.Children[pages.Children.IndexOf(page) + 1]);
+                    lineCursor = 1;
+                    currentControl = ((StackPanel)page.Children[0]).Children[1];
+                    currentControl.Focus();
                 }
             }
         }
