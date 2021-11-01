@@ -30,12 +30,19 @@
                 <MenuItem Header="Сохранить"></MenuItem>
                 <MenuItem Header="Сохранить как"></MenuItem>
                 <MenuItem Header="Журнал"></MenuItem>
-                <MenuItem Header="Печать"></MenuItem>
+                <MenuItem Click="showPrintDialog" Header="Печать"></MenuItem>
                 <MenuItem Header="Общий доступ"></MenuItem>
-                <MenuItem Header="Экспорт"></MenuItem>
+                <MenuItem Header="Экспорт">
+                    <MenuItem Click="generatePDF" Header="Создать документ PDF/XPS"></MenuItem>
+                    <MenuItem Click="generatePDF" Header="Изменить тип файла"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="Закрыть"></MenuItem>
                 <MenuItem Header="Учетная запись"></MenuItem>
-                <MenuItem Header="Отзывы и предложения"></MenuItem>
+                <MenuItem Header="Отзывы и предложения">
+                    <MenuItem DataContext="good" Click="sendFeedback" Header="Мне что-то нравится"></MenuItem>
+                    <MenuItem DataContext="bad" Click="sendFeedback" Header="Мне что-то не нравится"></MenuItem>
+                    <MenuItem DataContext="request" Click="sendFeedback" Header="У меня есть предложение"></MenuItem>
+                </MenuItem>
                 <MenuItem Click="openSettings" Header="Параметры"></MenuItem>
             </MenuItem>
             <MenuItem Header="Главная">

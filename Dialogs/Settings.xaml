@@ -14,18 +14,18 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <TextBlock Text="Общие"></TextBlock>
-            <TextBlock Text="Отображение"></TextBlock>
-            <TextBlock Text="Правописание"></TextBlock>
-            <TextBlock Text="Сохранение"></TextBlock>
-            <TextBlock Text="Язык"></TextBlock>
-            <TextBlock Text="Специальные возможности"></TextBlock>
-            <TextBlock Text="Дополнительно"></TextBlock>
-            <TextBlock Text="Натсроить ленту"></TextBlock>
-            <TextBlock Text="Панель быстрого доступа"></TextBlock>
-            <TextBlock Text="Надстройки"></TextBlock>
-            <TextBlock Text="Центр управления безопасностью"></TextBlock>
+        <StackPanel x:Name="tabs" Grid.Column="0" Grid.Row="0">
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Общие"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Отображение"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Правописание"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Сохранение"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Язык"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Специальные возможности"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Дополнительно"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Натсроить ленту"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Панель быстрого доступа"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Надстройки"></TextBlock>
+            <TextBlock Padding="10, 3, 0, 0" MouseUp="activateTab" MouseEnter="applyEffect" MouseLeave="resetEffect" Height="25" Text="Центр управления безопасностью"></TextBlock>
         </StackPanel>
         <ScrollViewer Grid.Column="1" Grid.Row="0">
             <StackPanel>

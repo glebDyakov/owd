@@ -1052,7 +1052,37 @@ namespace documenter
                     }
                     if (totalHeightOfPage >= wrapHeight)
                     {
-                        createNewPage("paragraph", null, null, 0);
+                        foreach (Canvas currentPage in pages.Children) { 
+                            foreach(StackPanel paragraph in currentPage.Children)
+                            {
+                                //if(currentPage.Children.IndexOf(paragraph) + 1 > lineCursor)
+                                //{
+                                    if (pages.Children.IndexOf(page) == pages.Children.IndexOf(currentPage) && page.Children.Count >= countLinesInPage && currentPage.Children.IndexOf(paragraph) + 1 > lineCursor) {
+                                        Canvas nextPage = ((Canvas)pages.Children[pages.Children.IndexOf(page) + 1]);
+                                        //page.Children.Remove(paragraph);
+                                        TextBox textBox = new TextBox();
+                                        StackPanel newParagraph = new StackPanel();
+                                        nextPage.Children.Insert(0, newParagraph);
+                                        newParagraph.Orientation = Orientation.Horizontal;
+                                        TextBox strokeNumber = new TextBox();
+                                        strokeNumber.BorderThickness = new Thickness();
+                                        strokeNumber.Width = 50;
+                                        strokeNumber.Text = (lineCursor + 1).ToString();
+                                        newParagraph.Children.Add(strokeNumber);
+                                        newParagraph.Children.Add(textBox);
+                                        Canvas.SetLeft(newParagraph, currentMargins);
+                                        //page.Children.Insert(page.Children.Count - 1, page.Children.IndexOf((()((TextBox)currentControl).Parent)) + 1);
+                                        //Canvas.SetTop(paragraph, 35);
+                                        Canvas.SetTop(paragraph, 50);
+                                    }
+                                    else if ((pages.Children.IndexOf(page) < pages.Children.IndexOf(currentPage)) || (pages.Children.IndexOf(page) == pages.Children.IndexOf(currentPage) && currentPage.Children.IndexOf(paragraph) >= lineCursor))
+                                    {
+                                        Canvas.SetTop(paragraph, Canvas.GetTop(paragraph) + 35);
+                                    }
+                                }
+                            }
+                        //}
+                        //createNewPage("paragraph", null, null, 0);
                     } 
                     else
                     {
@@ -2210,6 +2240,25 @@ namespace documenter
                         possilbleNumberOfPage.Visibility = Visibility.Visible;
                     }
                 }
+            }
+        }
+
+        private void sendFeedback(object sender, RoutedEventArgs e)
+        {
+            // запрос в бд
+        }
+
+        private void generatePDF(object sender, RoutedEventArgs e)
+        {
+            // экспорт в pdf
+        }
+
+        private void showPrintDialog(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                //printDialog.PrintVisual(canvas, "Распечатываем элемент Canvas");
             }
         }
     }
